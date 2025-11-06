@@ -115,4 +115,15 @@ body {
     transform: translateY(0);
     opacity: 1;
   }
+
+  .hero-image-container {
+    background-image: url('/assets/images/AdobeStock_443104754_Cropped.jpeg');
+    display: inline-block;
+  }
+
+  .app-screenshot-section-bg {
+    background-image: linear-gradient(to bottom, rgba(248, 250, 251, 1) 0%, rgba(248, 250, 251, 0) 20%), linear-gradient(to top, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 20%), url('/assets/images/AdobeStock_443104754_Cropped.jpeg');
+    background-size: cover;
+    background-position: center;
+  }
 }

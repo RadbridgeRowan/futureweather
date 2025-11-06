@@ -62,72 +62,6 @@
       --promo-text: #6B7280;
     }
     
-    /* OPTION 2: Slate & Mint (Modern & Technical) */
-    /*
-    :root {
-      --nav-bg: #1E293B;
-      --nav-text: #F8FAFC;
-      --nav-text-hover: #CBD5E1;
-      --hero-bg: #F9FAFB;
-      --hero-heading: #0F172A;
-      --hero-text: #475569;
-      --btn-primary-bg: #14B8A6;
-      --btn-primary-hover: #0D9488;
-      --btn-primary-text: #FFFFFF;
-      --btn-secondary-bg: #FFFFFF;
-      --btn-secondary-text: #14B8A6;
-      --btn-secondary-border: #14B8A6;
-      --btn-secondary-hover-bg: #14B8A6;
-      --btn-secondary-hover-text: #FFFFFF;
-      --promo-icon: #64748B;
-      --promo-text: #64748B;
-    }
-    */
-    
-    /* OPTION 3: Charcoal & Amber (Grounded & Warm) */
-    /*
-    :root {
-      --nav-bg: #2C2C2C;
-      --nav-text: #FFFFFF;
-      --nav-text-hover: #E5E5E5;
-      --hero-bg: #FAFAF9;
-      --hero-heading: #1C1C1C;
-      --hero-text: #525252;
-      --btn-primary-bg: #D97706;
-      --btn-primary-hover: #B45309;
-      --btn-primary-text: #FFFFFF;
-      --btn-secondary-bg: #FFFFFF;
-      --btn-secondary-text: #D97706;
-      --btn-secondary-border: #D97706;
-      --btn-secondary-hover-bg: #D97706;
-      --btn-secondary-hover-text: #FFFFFF;
-      --promo-icon: #737373;
-      --promo-text: #737373;
-    }
-    */
-    
-    /* OPTION 4: Monochrome Refined (Ultra-Minimal) */
-    /*
-    :root {
-      --nav-bg: #000000;
-      --nav-text: #FFFFFF;
-      --nav-text-hover: #D4D4D4;
-      --hero-bg: #FFFFFF;
-      --hero-heading: #000000;
-      --hero-text: #525252;
-      --btn-primary-bg: #000000;
-      --btn-primary-hover: #262626;
-      --btn-primary-text: #FFFFFF;
-      --btn-secondary-bg: #FFFFFF;
-      --btn-secondary-text: #000000;
-      --btn-secondary-border: #000000;
-      --btn-secondary-hover-bg: #000000;
-      --btn-secondary-hover-text: #FFFFFF;
-      --promo-icon: #737373;
-      --promo-text: #737373;
-    }
-    */
-    
     /* Button hover states using CSS */
     .btn-primary-themed {
       background-color: var(--btn-primary-bg);
@@ -164,7 +98,7 @@
           </a>
         </div>
         <div class="flex items-center space-x-4">
-          <a href="https://app.futureweather.co/" target="_blank" rel="noopener" class="flex items-center gap-2 rounded px-3 py-2 font-semibold text-sm transition duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 bg-btn-primary-bg text-btn-primary-text hover:bg-btn-primary-hover">
+          <a href="https://app.futureweather.co/" target="_blank" class="flex items-center gap-2 rounded px-3 py-2 font-semibold text-sm transition duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 bg-btn-primary-bg text-btn-primary-text hover:bg-btn-primary-hover">
             <svg class="w-4 h-4 text-btn-primary-text" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 4.5v15m7.5-7.5h-15"/></svg>
             <span>Try it Free</span>
           </a>
@@ -177,54 +111,40 @@
       </div>
     </header>
     <!-- Hero Section -->
-    <section class="relative overflow-hidden bg-hero-bg">
-      <div class="lg:flex lg:items-stretch">
-        <div class="lg:w-1/2 relative">
-          <div class="container-custom pt-12 pb-8 lg:py-16 h-full flex flex-col justify-center">
-            <div class="text-center lg:text-left">
-              <h1 class="text-3xl lg:text-5xl mb-4 mt-2 leading-tight font-medium font-open-sans text-hero-heading">
-                  Generate <span class="text-btn-primary-bg font-semibold">Future</span> Weather Files
-              </h1>
-              <p class="text-lg mb-6 leading-relaxed font-open-sans text-hero-text">
-                Generate future EPW and DDY files for building, solar, and data center modeling in seconds. Any future period, climate scenario, and climate models. Validated method & API-ready.
-              </p>
-    
-              <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                <a href="https://app.futureweather.co/" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-2 font-semibold px-5 py-2 rounded transition duration-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 bg-btn-primary-bg text-btn-primary-text hover:bg-btn-primary-hover">
-                  <svg class="w-4 h-4 text-btn-primary-text" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 4.5v15m7.5-7.5h-15"/></svg>
-                  <span>Try it Free</span>
-                </a>
-                <a href="#overview" class="inline-flex items-center justify-center font-medium px-5 py-2 rounded border transition duration-200 focus:outline-none focus:ring-1 focus:ring-offset-2 bg-btn-secondary-bg text-btn-secondary-text border-btn-secondary-border hover:bg-btn-secondary-hover-bg hover:text-btn-secondary-hover-text">
-                  Learn More
-                  <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-                  </svg>
-                </a>
-              </div>
-                        <!-- Promotional Message -->
-                        <div class="mt-4 flex items-center justify-center lg:justify-start gap-2">
-                          <svg class="w-4 h-4 text-promo-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-                          </svg>
-                          <span class="text-sm text-promo-text">Get 1 free job credit when you sign up</span>
-                        </div>
-            </div>
-          </div>
-        </div>
-        <div class="lg:w-1/2 relative">
-           <img src="assets/images/AdobeStock_1561329698 - Copy.jpeg" alt="Stylized representation of weather data" class="h-64 w-full object-cover lg:h-full mt-4">
-           <div class="absolute inset-0" style="background-image: linear-gradient(to right, rgba(248, 250, 251, 1) 0%, rgba(248, 250, 251, 0) 15%), linear-gradient(to top, rgba(248, 250, 251, 1) 0%, rgba(248, 250, 251, 0) 20%)"></div>
-        </div>
-      </div>
-    </section>
+    <section class="relative overflow-hidden pt-12 lg:pt-16 bg-hero-bg">
+      <div class="relative container-custom pb-12">
+        <div class="w-full lg:w-2/3 mx-auto text-center">
 
-    <!-- App Screenshot Section -->
-    <section class="py-8 app-screenshot-section-bg">
-      <div class="container-custom text-center">
-        <div class="lg:w-3/4 mx-auto">
-          <div class="rounded-lg shadow-2xl overflow-hidden border border-gray-200">
-            <img src="assets/images/appScreenshot.png" alt="Future Weather app screenshot" class="w-full">
+          <h1 class="text-3xl lg:text-5xl mb-4 mt-2 leading-tight font-medium font-open-sans text-hero-heading">
+              Design for Future Weather
+          </h1>
+          <p class="text-lg mb-6 leading-relaxed mx-32 font-open-sans text-hero-text">
+            Generate future EPW and DDY files for building, solar, and data center modeling in seconds. Any future period, climate scenario, and climate models. Validated method & API-ready.
+          </p>
+
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="https://app.futureweather.co/" target="_blank" class="inline-flex items-center justify-center gap-2 font-semibold px-5 py-2 rounded transition duration-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 bg-btn-primary-bg text-btn-primary-text hover:bg-btn-primary-hover">
+              <svg class="w-4 h-4 text-btn-primary-text" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 4.5v15m7.5-7.5h-15"/></svg>
+              <span>Try it Free</span>
+            </a>
+            <a href="#overview" class="inline-flex items-center justify-center font-medium px-5 py-2 rounded border transition duration-200 focus:outline-none focus:ring-1 focus:ring-offset-2 bg-btn-secondary-bg text-btn-secondary-text border-btn-secondary-border hover:bg-btn-secondary-hover-bg hover:text-btn-secondary-hover-text">
+              Learn More
+              <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+              </svg>
+            </a>
           </div>
+                    <!-- Promotional Message -->
+                    <div class="mt-4 flex items-center justify-center gap-2">
+                      <svg class="w-4 h-4 text-promo-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                      </svg>
+                      <span class="text-sm text-promo-text">Get 1 free job credit when you sign up</span>
+                    </div>
+
+                    <div class="mt-12">
+                      <img src="assets/images/appScreenshot.png" alt="Future Weather app screenshot" class="rounded-lg border border-gray-300 shadow-xl mx-auto">
+                    </div>
         </div>
       </div>
     </section>

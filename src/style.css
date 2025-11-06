@@ -3,6 +3,24 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'FuturaLT';
+  src: url('/assets/fonts/FuturaLT.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'FuturaLT-Book';
+  src: url('/assets/fonts/FuturaLT-Book.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  font-family: 'Public Sans', sans-serif;
+}
+
 @layer components {
   .hero-bg {
     background: linear-gradient(135deg, rgba(74, 107, 124, 0.8), rgba(74, 107, 124, 0.6));

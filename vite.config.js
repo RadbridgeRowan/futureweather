@@ -8,11 +8,6 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: resolve(__dirname, 'index.html'),
-        about: resolve(__dirname, 'about.html'),
-        services: resolve(__dirname, 'services.html'),
-        projects: resolve(__dirname, 'projects.html'),
-        tools: resolve(__dirname, 'tools.html'),
-        parkbeat: resolve(__dirname, 'parkbeat.html'),
       },
     },
   },

@@ -150,6 +150,9 @@
       background-color: var(--btn-secondary-hover-bg);
       color: var(--btn-secondary-hover-text);
     }
+    /* Icon utility colors mapped to theme variables */
+    .text-promo-icon { color: var(--promo-icon); }
+    .text-promo-text { color: var(--promo-text); }
   </style>
 </head>
 <body class="font-ibm">
@@ -157,7 +160,7 @@
   <div class="bg-white">
     <!-- Header -->
     <header class="sticky top-0 left-0 right-0 z-30 shadow-md bg-nav-bg">
-      <div class="w-full mx-auto px-4 flex items-center justify-between py-4">
+      <div class="container-custom flex items-center justify-between py-4">
         <div>
           <a href="/">
             <img src="assets/images/LogoWhite.png" alt="Future Weather Logo" class="h-8">
@@ -165,11 +168,11 @@
         </div>
         <div class="flex items-center space-x-4">
           <a href="https://app.futureweather.co/" target="_blank" rel="noopener" class="flex items-center gap-2 rounded px-3 py-2 font-semibold text-sm transition duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 bg-btn-primary-bg text-btn-primary-text hover:bg-btn-primary-hover">
-            <svg class="w-4 h-4 text-btn-primary-text" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 4.5v15m7.5-7.5h-15"/></svg>
+            <i class="fas fa-rocket text-base text-btn-primary-text"></i>
             <span>Try it Free</span>
           </a>
           <a href="#" class="inline-flex items-center justify-center text-sm font-medium px-4 py-2 rounded border transition duration-300 bg-btn-secondary-bg text-btn-secondary-text border-btn-secondary-border hover:bg-btn-secondary-hover-bg hover:text-btn-secondary-hover-text">
-            <i class="fas fa-book mr-2"></i>
+            <i class="fas fa-book-open text-base mr-2"></i>
             API Docs
           </a>
           
@@ -182,30 +185,26 @@
         <div class="lg:w-1/2 relative">
           <div class="container-custom pt-12 pb-8 lg:py-16 h-full flex flex-col justify-center">
             <div class="text-center lg:text-left">
-              <h1 class="text-3xl lg:text-5xl mb-4 mt-2 leading-tight font-medium font-open-sans text-hero-heading">
-                  Generate <span class="text-btn-primary-bg font-semibold">Future</span> Weather Files
+              <h1 class="text-3xl lg:text-5xl mb-4 mt-2 leading-snug font-medium font-open-sans text-hero-heading">
+                  Generate <span class="text-btn-primary-bg font-semibold">Future</span> Weather Files, <span class="text-[#f7982e] font-semibold">Fast</span>
               </h1>
-              <p class="text-lg mb-6 leading-relaxed font-open-sans text-hero-text">
+              <p class="text-lg mb-6 leading-snug font-open-sans text-hero-text">
                 Generate future EPW and DDY files for building, solar, and data center modeling in seconds. Any future period, climate scenario, and climate models. Validated method & API-ready.
               </p>
     
               <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
                 <a href="https://app.futureweather.co/" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-2 font-semibold px-5 py-2 rounded transition duration-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 bg-btn-primary-bg text-btn-primary-text hover:bg-btn-primary-hover">
-                  <svg class="w-4 h-4 text-btn-primary-text" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 4.5v15m7.5-7.5h-15"/></svg>
+                  <i class="fas fa-rocket text-lg text-btn-primary-text"></i>
                   <span>Try it Free</span>
                 </a>
                 <a href="#overview" class="inline-flex items-center justify-center font-medium px-5 py-2 rounded border transition duration-200 focus:outline-none focus:ring-1 focus:ring-offset-2 bg-btn-secondary-bg text-btn-secondary-text border-btn-secondary-border hover:bg-btn-secondary-hover-bg hover:text-btn-secondary-hover-text">
                   Learn More
-                  <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-                  </svg>
+                  <i class="fas fa-chevron-down text-lg ml-2"></i>
                 </a>
               </div>
                         <!-- Promotional Message -->
                         <div class="mt-4 flex items-center justify-center lg:justify-start gap-2">
-                          <svg class="w-4 h-4 text-promo-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-                          </svg>
+                          <i class="fas fa-gift text-base text-promo-icon"></i>
                           <span class="text-sm text-promo-text">Get 1 free job credit when you sign up</span>
                         </div>
             </div>
@@ -213,7 +212,7 @@
         </div>
         <div class="lg:w-1/2 relative">
            <img src="assets/images/AdobeStock_1561329698 - Copy.jpeg" alt="Stylized representation of weather data" class="h-64 w-full object-cover lg:h-full mt-4">
-           <div class="absolute inset-0" style="background-image: linear-gradient(to right, rgba(248, 250, 251, 1) 0%, rgba(248, 250, 251, 0) 15%), linear-gradient(to top, rgba(248, 250, 251, 1) 0%, rgba(248, 250, 251, 0) 20%)"></div>
+           <div class="absolute inset-0" style="background-image: linear-gradient(to right, rgba(248, 250, 251, 1) 0%, rgba(248, 250, 251, 0) 15%), linear-gradient(to top, rgba(239, 246, 252, 1) 0%, rgba(239, 246, 252, 0) 20%)"></div>
         </div>
       </div>
     </section>
@@ -261,27 +260,17 @@
           <h2 class="page-section-heading mb-8">Benefits</h2>
           <div class="grid md:grid-cols-3 gap-12">
             <div class="text-center md:text-left">
-              <svg class="w-12 h-12 mb-4 mx-auto md:mx-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="9"></circle>
-                <path d="M12 7v5l3 2"></path>
-              </svg>
+              <i class="fas fa-bolt text-5xl mb-4 mx-auto md:mx-0"></i>
               <h3 class="text-lg font-semibold text-gray-900 mb-3">Quick and easy</h3>
               <p class="text-gray-600 leading-relaxed">Create climate‑adjusted EPW, DDY, and STAT files in under a minute for any location, climate scenario, and future period, using a full ensemble of 23 climate models or a combination of your choice.</p>
             </div>
             <div class="text-center md:text-left">
-              <svg class="w-12 h-12 mb-4 mx-auto md:mx-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M12 22s-7-4-7-10V6l7-3 7 3v6c0 6-7 10-7 10z"></path>
-                  <path d="M9 12l2 2 4-4"></path>
-              </svg>
+              <i class="fas fa-shield-alt text-5xl mb-4 mx-auto md:mx-0"></i>
               <h3 class="text-lg font-semibold text-gray-900 mb-3">Validated and transparent</h3>
               <p class="text-gray-600 leading-relaxed">Built in partnership with Dr. Eugénio Rodrigues, creator of the original Future Weather Generator, which is described in a published <a href="https://www.sciencedirect.com/science/article/pii/S0360132323001312" class="text-radbridge-blue hover:underline">paper <svg class="w-3 h-3 inline-block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a> with more than 145 citations.</p>
             </div>
             <div class="text-center md:text-left">
-              <svg class="w-12 h-12 mb-4 mx-auto md:mx-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M9 9l-3 3 3 3"></path>
-                  <path d="M15 9l3 3-3 3"></path>
-                  <path d="M12 8v8"></path>
-              </svg>
+              <i class="fas fa-plug text-5xl mb-4 mx-auto md:mx-0"></i>
               <h3 class="text-lg font-semibold text-gray-900 mb-3">API Ready</h3>
               <p class="text-gray-600 leading-relaxed">Built with a modern API-centric architecture and webhook support, ready for integration with simulation software, enterprise workflows, or batch jobs.</p>
             </div>
@@ -293,39 +282,19 @@
           <h2 class="page-section-heading mb-8">How it works</h2>
           <div class="grid md:grid-cols-3 gap-12">
             <div class="text-center md:text-left">
-              <svg class="w-12 h-12 mb-4 mx-auto md:mx-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-                <circle cx="12" cy="10" r="3"/>
-              </svg>
+              <i class="fas fa-map-marker-alt text-5xl mb-4 mx-auto md:mx-0"></i>
               <h3 class="text-lg font-semibold text-gray-900 mb-3">1. Choose location and scenario</h3>
               <p class="text-gray-600 leading-relaxed">Select a location, upload your EPW file, pick a future period, climate scenario, and climate model(s).</p>
             </div>
             <div class="text-center md:text-left">
-              <svg class="w-12 h-12 mb-4 mx-auto md:mx-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                  <rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect>
-                  <rect x="9" y="9" width="6" height="6"></rect>
-                  <line x1="9" y1="1" x2="9" y2="4"></line>
-                  <line x1="15" y1="1" x2="15" y2="4"></line>
-                  <line x1="9" y1="20" x2="9" y2="23"></line>
-                  <line x1="15" y1="20" x2="15" y2="23"></line>
-                  <line x1="20" y1="9" x2="23" y2="9"></line>
-                  <line x1="20" y1="14" x2="23" y2="14"></line>
-                  <line x1="1" y1="9" x2="4" y2="9"></line>
-                  <line x1="1" y1="14" x2="4" y2="14"></line>
-              </svg>
+              <i class="fas fa-cogs text-5xl mb-4 mx-auto md:mx-0"></i>
               <h3 class="text-lg font-semibold text-gray-900 mb-3">2. Generate future weather file</h3>
               <p class="text-gray-600 leading-relaxed">We run your EPW file through our morphing pipeline and incorporate climate data to adjust each variable.</p>
             </div>
             <div class="text-center md:text-left">
-              <svg class="w-12 h-12 mb-4 mx-auto md:mx-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                  <polyline points="14 2 14 8 20 8"></polyline>
-                  <line x1="16" y1="13" x2="8" y2="13"></line>
-                  <line x1="16" y1="17" x2="8" y2="17"></line>
-                  <polyline points="10 9 9 9 8 9"></polyline>
-              </svg>
+              <i class="fas fa-download text-5xl mb-4 mx-auto md:mx-0"></i>
               <h3 class="text-lg font-semibold text-gray-900 mb-3">3. Download, store, or integrate</h3>
-              <p class="text-gray-600 leading-relaxed">Download EPW (and optional DDY/STAT) immediately or come back and download it later.</p>
+              <p class="text-gray-600 leading-relaxed">Download your files (EPW/DDY/STAT) immediately or come back and download them later.</p>
             </div>
           </div>
         </section>
@@ -337,27 +306,25 @@
             <!-- TL: Building Design & Analysis -->
             <div class="pricing-card-new h-full">
               <div class="pricing-card-header !border-b-0">
-                <svg class="pricing-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 6.75h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6h1.5m-1.5 3h1.5m-1.5 3h1.5M9 21v-3.375c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V21" />
-                </svg>
+                <i class="fas fa-building pricing-card-icon"></i>
                 <div class="pricing-card-name">Building Design & Analysis</div>
                 <div class="pricing-card-description">Climate‑aware sizing, simulations, resiliency checks, and code compliance.</div>
               </div>
               <div class="pricing-features-list">
                 <div class="pricing-feature-item">
-                  <svg class="pricing-feature-check" viewBox="0 0 14 14" fill="none"><path d="M11.5 4L5.5 10L2.5 7" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  <i class="fas fa-check pricing-feature-check"></i>
                   <span>HVAC sizing with future DDY files (TRACE 3D Plus, Carrier HAP)</span>
                 </div>
                 <div class="pricing-feature-item">
-                  <svg class="pricing-feature-check" viewBox="0 0 14 14" fill="none"><path d="M11.5 4L5.5 10L2.5 7" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  <i class="fas fa-check pricing-feature-check"></i>
                   <span>Future energy simulations in EnergyPlus, IES‑VE, eQUEST</span>
                 </div>
                 <div class="pricing-feature-item">
-                  <svg class="pricing-feature-check" viewBox="0 0 14 14" fill="none"><path d="M11.5 4L5.5 10L2.5 7" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  <i class="fas fa-check pricing-feature-check"></i>
                   <span>Resiliency testing (hot‑year EPWs, high‑humidity stress cases)</span>
                 </div>
                 <div class="pricing-feature-item">
-                  <svg class="pricing-feature-check" viewBox="0 0 14 14" fill="none"><path d="M11.5 4L5.5 10L2.5 7" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  <i class="fas fa-check pricing-feature-check"></i>
                   <span>Building code compliance under future climate scenarios</span>
                 </div>
               </div>
@@ -366,23 +333,21 @@
             <!-- TR: Renewable Energy -->
             <div class="pricing-card-new h-full">
               <div class="pricing-card-header !border-b-0">
-                <svg class="pricing-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
-                </svg>
+                <i class="fas fa-solar-panel pricing-card-icon"></i>
                 <div class="pricing-card-name">Renewable Energy</div>
                 <div class="pricing-card-description">Plan PV, wind, and solar thermal with projected resources and temperatures.</div>
               </div>
               <div class="pricing-features-list">
                 <div class="pricing-feature-item">
-                  <svg class="pricing-feature-check" viewBox="0 0 14 14" fill="none"><path d="M11.5 4L5.5 10L2.5 7" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  <i class="fas fa-check pricing-feature-check"></i>
                   <span>PV modeling in HelioScope or SAM with future irradiance & temperature</span>
                 </div>
                 <div class="pricing-feature-item">
-                  <svg class="pricing-feature-check" viewBox="0 0 14 14" fill="none"><path d="M11.5 4L5.5 10L2.5 7" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  <i class="fas fa-check pricing-feature-check"></i>
                   <span>Wind resource assessment with projected wind patterns</span>
                 </div>
                 <div class="pricing-feature-item">
-                  <svg class="pricing-feature-check" viewBox="0 0 14 14" fill="none"><path d="M11.5 4L5.5 10L2.5 7" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  <i class="fas fa-check pricing-feature-check"></i>
                   <span>Solar thermal system design under changing climate conditions</span>
                 </div>
               </div>
@@ -391,23 +356,21 @@
             <!-- BL: Research & Planning -->
             <div class="pricing-card-new h-full">
               <div class="pricing-card-header !border-b-0">
-                <svg class="pricing-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" />
-                </svg>
+                <i class="fas fa-chart-line pricing-card-icon"></i>
                 <div class="pricing-card-name">Research & Planning</div>
                 <div class="pricing-card-description">Standardized datasets for adaptation, comparison, and resilient design.</div>
               </div>
               <div class="pricing-features-list">
                 <div class="pricing-feature-item">
-                  <svg class="pricing-feature-check" viewBox="0 0 14 14" fill="none"><path d="M11.5 4L5.5 10L2.5 7" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  <i class="fas fa-check pricing-feature-check"></i>
                   <span>Climate adaptation studies using standardized future weather data</span>
                 </div>
                 <div class="pricing-feature-item">
-                  <svg class="pricing-feature-check" viewBox="0 0 14 14" fill="none"><path d="M11.5 4L5.5 10L2.5 7" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  <i class="fas fa-check pricing-feature-check"></i>
                   <span>Baseline vs. future performance comparisons</span>
                 </div>
                 <div class="pricing-feature-item">
-                  <svg class="pricing-feature-check" viewBox="0 0 14 14" fill="none"><path d="M11.5 4L5.5 10L2.5 7" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  <i class="fas fa-check pricing-feature-check"></i>
                   <span>Design optimization for long‑term climate resilience</span>
                 </div>
               </div>
@@ -416,27 +379,25 @@
             <!-- BR: Data Center Modeling -->
             <div class="pricing-card-new h-full">
               <div class="pricing-card-header !border-b-0">
-                <svg class="pricing-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 7.5l3 2.25-3 2.25m4.5 0h3m-9 8.25h13.5A2.25 2.25 0 0021 18V6a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 6v12a2.25 2.25 0 002.25 2.25z" />
-                </svg>
+                <i class="fas fa-server pricing-card-icon"></i>
                 <div class="pricing-card-name">Data Center Modeling</div>
                 <div class="pricing-card-description">Size and stress‑test cooling under future wet‑bulb and humidity; quantify free‑cooling.</div>
               </div>
               <div class="pricing-features-list">
                 <div class="pricing-feature-item">
-                  <svg class="pricing-feature-check" viewBox="0 0 14 14" fill="none"><path d="M11.5 4L5.5 10L2.5 7" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  <i class="fas fa-check pricing-feature-check"></i>
                   <span>Quantify 2040–2060 free‑cooling potential by site and scenario</span>
                 </div>
                 <div class="pricing-feature-item">
-                  <svg class="pricing-feature-check" viewBox="0 0 14 14" fill="none"><path d="M11.5 4L5.5 10L2.5 7" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  <i class="fas fa-check pricing-feature-check"></i>
                   <span>Size chillers/evaps for p99–p99.9 wet‑bulb thresholds</span>
                 </div>
                 <div class="pricing-feature-item">
-                  <svg class="pricing-feature-check" viewBox="0 0 14 14" fill="none"><path d="M11.5 4L5.5 10L2.5 7" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  <i class="fas fa-check pricing-feature-check"></i>
                   <span>Stress‑test against clustered heatwaves and humidity spikes</span>
                 </div>
                 <div class="pricing-feature-item">
-                  <svg class="pricing-feature-check" viewBox="0 0 14 14" fill="none"><path d="M11.5 4L5.5 10L2.5 7" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  <i class="fas fa-check pricing-feature-check"></i>
                   <span>Outputs: EPW/DDY + CSVs (wet‑bulb, rolling 24–72h max, free‑cooling hours)</span>
                 </div>
               </div>
@@ -488,11 +449,10 @@
             }
 
             .pricing-card-icon {
-              width: 36px;
-              height: 36px;
+              font-size: 36px;
+              line-height: 1;
               margin-bottom: 16px;
-              stroke: #333;
-              stroke-width: 1.5;
+              color: #333;
             }
 
             .pricing-card-name {
@@ -514,7 +474,7 @@
             }
 
             .pricing-card-price {
-              font-size: 36px;
+              font-size: 42px;
               font-weight: 400;
               color: #000;
               line-height: 1;
@@ -529,8 +489,8 @@
 
             .pricing-card-billing {
               color: #666;
-              font-size: 13px;
-              min-height: 20px;
+              font-size: 12px;
+              min-height: 18px;
             }
 
             .pricing-card-button {
@@ -580,13 +540,11 @@
             }
 
             .pricing-feature-check {
-              width: 16px;
-              height: 16px;
+              font-size: 16px;
               margin-right: 10px;
               flex-shrink: 0;
               margin-top: 2px;
-              stroke: #000;
-              stroke-width: 2;
+              color: #000;
             }
 
             .pricing-note {
@@ -629,18 +587,38 @@
             }
 
             /* Bundle option rows inside the Bundles card */
-            .bundle-options { display: grid; grid-template-columns: 1fr; gap: 8px; margin-bottom: 8px; }
+            .bundle-options { display: grid; grid-template-columns: 1fr; gap: 8px; margin-bottom: 28px; }
             .bundle-option {
-              display: flex;
-              align-items: center;
-              justify-content: space-between;
-              padding: 10px 12px;
+              display: block;
+              padding: 12px 14px;
               border: 1px solid #eee;
-              border-radius: 8px;
+              border-radius: 10px;
+              background: #f5f5f5;
+              transition: border-color 0.2s, background 0.2s, transform 0.2s;
             }
-            .bundle-name { font-weight: 600; }
-            .bundle-meta { color: #333; font-size: 13px; }
-            .bundle-total { color: #666; font-size: 12px; }
+            .bundle-option:hover { border-color: #000; background: #f5f5f5; transform: translateY(-1px); }
+            .bundle-name { font-weight: 700; margin-bottom: 4px; }
+            .bundle-price-details {
+              display: flex;
+              justify-content: space-between;
+              align-items: baseline;
+            }
+            .bundle-option.popular {
+              position: relative;
+              border-color: #000;
+            }
+            .bundle-badge {
+              position: absolute;
+              top: -10px;
+              right: 10px;
+              background: #000;
+              color: #fff;
+              padding: 2px 8px;
+              border-radius: 10px;
+              font-size: 10px;
+              font-weight: 700;
+              letter-spacing: 0.3px;
+            }
           </style>
 
           <h2 class="page-section-heading mb-4">Pricing</h2>
@@ -650,7 +628,7 @@
           <div class="flex justify-start mb-8">
             <div class="pricing-toggle" role="tablist" aria-label="Pricing view">
               <button id="pricing-toggle-individual" class="active" role="tab" aria-selected="true" aria-controls="pricing-individual" onclick="setPricingView('individual')">Individual</button>
-              <button id="pricing-toggle-enterprise" role="tab" aria-selected="false" aria-controls="pricing-enterprise" onclick="setPricingView('enterprise')">Enterprise</button>
+              <button id="pricing-toggle-enterprise" role="tab" aria-selected="false" aria-controls="pricing-enterprise" onclick="setPricingView('enterprise')">Enterprise & Partners</button>
             </div>
           </div>
 
@@ -660,94 +638,119 @@
               <!-- Single Job -->
               <div class="pricing-card-new">
                 <div class="pricing-card-header">
-                  <svg class="pricing-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path></svg>
+                  <i class="fas fa-file pricing-card-icon"></i>
                   <div class="pricing-card-name">Single job</div>
                   <div class="pricing-card-description">Pay as you go</div>
                 </div>
-                <div class="pricing-price-section">
-                  <div class="pricing-card-price"><span class="currency">$</span>29</div>
-                  <div class="pricing-card-billing">per job</div>
-                </div>
                 <div class="pricing-features-list">
                   <div class="pricing-feature-item">
-                    <svg class="pricing-feature-check" viewBox="0 0 14 14" fill="none"><path d="M11.5 4L5.5 10L2.5 7" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                    <span>Generate one climate‑adjusted EPW</span>
+                    <i class="fas fa-check pricing-feature-check"></i>
+                    <span>Great for one‑off analysis or trial; ready in under 1 minute</span>
                   </div>
                   <div class="pricing-feature-item">
-                    <svg class="pricing-feature-check" viewBox="0 0 14 14" fill="none"><path d="M11.5 4L5.5 10L2.5 7" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                    <span>Instant download • validated method</span>
-                  </div>
-                  <div class="pricing-feature-item">
-                    <svg class="pricing-feature-check" viewBox="0 0 14 14" fill="none"><path d="M11.5 4L5.5 10L2.5 7" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                    <span>Works with EnergyPlus/OpenStudio</span>
+                    <i class="fas fa-check pricing-feature-check"></i>
+                    <span>API‑friendly; optional DDY/STAT add‑ons</span>
                   </div>
                 </div>
+                <div class="bundle-options">
+                  <div class="bundle-option">
+                    <div class="bundle-name">1 credit</div>
+                    <div class="bundle-price-details">
+                      <div class="pricing-card-price"><span class="currency">$</span>25</div>
+                      <div class="pricing-card-billing">per job</div>
+                    </div>
+                  </div>
+                  <div class="bundle-option" aria-hidden="true" style="visibility: hidden; pointer-events: none;">
+                    <div class="bundle-name">placeholder</div>
+                    <div class="bundle-price-details">
+                      <div class="pricing-card-price"><span class="currency">$</span>00</div>
+                      <div class="pricing-card-billing">per job</div>
+                    </div>
+                  </div>
+                </div>
+                <a href="https://app.futureweather.co/" target="_blank" rel="noopener" class="w-full mt-auto inline-flex items-center justify-center gap-2 font-semibold px-5 py-2 rounded bg-btn-primary-bg text-btn-primary-text hover:bg-btn-primary-hover transition duration-300">
+                  <i class="fas fa-rocket text-lg text-btn-primary-text"></i>
+                  <span>Get Started</span>
+                </a>
               </div>
 
               <!-- Bundles (recommended) -->
               <div class="pricing-card-new recommended">
-                <div class="pricing-recommended-badge">Great value</div>
+                <div class="pricing-recommended-badge">Most Popular</div>
                 <div class="pricing-card-header">
-                  <svg class="pricing-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 20V10m-6 10V4M6 20v-4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  <i class="fas fa-layer-group pricing-card-icon"></i>
                   <div class="pricing-card-name">Bundles</div>
                   <div class="pricing-card-description">Save with 4‑ or 8‑packs</div>
                 </div>
-                <div class="bundle-options">
-                  <div class="bundle-option">
-                    <div>
-                      <div class="bundle-name">4 credit bundle</div>
-                      <div class="bundle-meta">$19.75/credit <span class="bundle-total">• Total $79</span></div>
-                    </div>
-                  </div>
-                  <div class="bundle-option">
-                    <div>
-                      <div class="bundle-name">8 credit bundle</div>
-                      <div class="bundle-meta">$14.88/credit <span class="bundle-total">• Total $119</span></div>
-                    </div>
-                  </div>
-                </div>
                 <div class="pricing-features-list">
                   <div class="pricing-feature-item">
-                    <svg class="pricing-feature-check" viewBox="0 0 14 14" fill="none"><path d="M11.5 4L5.5 10L2.5 7" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                    <span>Best value for small projects</span>
+                    <i class="fas fa-check pricing-feature-check"></i>
+                    <span>Great for multi‑scenario analysis on one facility (4‑pack: 2 periods × 2 scenarios)</span>
                   </div>
                   <div class="pricing-feature-item">
-                    <svg class="pricing-feature-check" viewBox="0 0 14 14" fill="none"><path d="M11.5 4L5.5 10L2.5 7" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                    <span>Use across projects and teammates</span>
-                  </div>
-                  <div class="pricing-feature-item">
-                    <svg class="pricing-feature-check" viewBox="0 0 14 14" fill="none"><path d="M11.5 4L5.5 10L2.5 7" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                    <span>Optional DDY/STAT add‑ons</span>
+                    <i class="fas fa-check pricing-feature-check"></i>
+                    <span>Ideal for deep‑dive or multi‑site analysis with the 8‑pack</span>
                   </div>
                 </div>
+                <div class="bundle-options">
+                  <div class="bundle-option">
+                    <div class="bundle-name">4 credits</div>
+                    <div class="bundle-price-details">
+                      <div class="pricing-card-price"><span class="currency">$</span>80</div>
+                      <div class="pricing-card-billing">$20 per job</div>
+                    </div>
+                  </div>
+                  <div class="bundle-option">
+                    <div class="bundle-name">8 credits</div>
+                    <div class="bundle-price-details">
+                      <div class="pricing-card-price"><span class="currency">$</span>140</div>
+                      <div class="pricing-card-billing">$17.50 per job</div>
+                    </div>
+                  </div>
+                </div>
+                <a href="https://app.futureweather.co/" target="_blank" rel="noopener" class="w-full mt-auto inline-flex items-center justify-center gap-2 font-semibold px-5 py-2 rounded bg-btn-primary-bg text-btn-primary-text hover:bg-btn-primary-hover transition duration-300">
+                  <i class="fas fa-rocket text-lg text-btn-primary-text"></i>
+                  <span>Get Started</span>
+                </a>
               </div>
 
               <!-- Bulk (10+) -->
               <div class="pricing-card-new">
                 <div class="pricing-card-header">
-                  <svg class="pricing-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path></svg>
+                  <i class="fas fa-boxes pricing-card-icon"></i>
                   <div class="pricing-card-name">Bulk pricing (10+ jobs)</div>
                   <div class="pricing-card-description">Best per‑job pricing for teams</div>
                 </div>
-                <div class="pricing-price-section">
-                  <div class="pricing-card-price"><span class="currency">$</span>12.50</div>
-                  <div class="pricing-card-billing">per job for 10+ jobs</div>
-                </div>
-                <button onclick="openContactModal()" class="pricing-card-button">Contact sales</button>
                 <div class="pricing-features-list">
                   <div class="pricing-feature-item">
-                    <svg class="pricing-feature-check" viewBox="0 0 14 14" fill="none"><path d="M11.5 4L5.5 10L2.5 7" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                    <span>Volume discounts and team billing</span>
+                    <i class="fas fa-check pricing-feature-check"></i>
+                    <span>Great for portfolios and batch generation; best per‑job pricing</span>
                   </div>
                   <div class="pricing-feature-item">
-                    <svg class="pricing-feature-check" viewBox="0 0 14 14" fill="none"><path d="M11.5 4L5.5 10L2.5 7" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                    <span>Priority support</span>
-                  </div>
-                  <div class="pricing-feature-item">
-                    <svg class="pricing-feature-check" viewBox="0 0 14 14" fill="none"><path d="M11.5 4L5.5 10L2.5 7" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                    <span>API integration available</span>
+                    <i class="fas fa-check pricing-feature-check"></i>
+                    <span>API and webhook friendly; volume discounts</span>
                   </div>
                 </div>
+                <div class="bundle-options">
+                  <div class="bundle-option">
+                    <div class="bundle-name">10+ credits</div>
+                    <div class="bundle-price-details">
+                      <div class="pricing-card-price"><span class="currency">$</span>15</div>
+                      <div class="pricing-card-billing">per job for 10+ jobs</div>
+                    </div>
+                  </div>
+                  <div class="bundle-option" aria-hidden="true" style="visibility: hidden; pointer-events: none;">
+                    <div class="bundle-name">placeholder</div>
+                    <div class="bundle-price-details">
+                      <div class="pricing-card-price"><span class="currency">$</span>00</div>
+                      <div class="pricing-card-billing">per job</div>
+                    </div>
+                  </div>
+                </div>
+                <a href="https://app.futureweather.co/" target="_blank" rel="noopener" class="w-full mt-auto inline-flex items-center justify-center gap-2 font-semibold px-5 py-2 rounded bg-btn-primary-bg text-btn-primary-text hover:bg-btn-primary-hover transition duration-300">
+                  <i class="fas fa-rocket text-lg text-btn-primary-text"></i>
+                  <span>Get Started</span>
+                </a>
               </div>
             </div>
           </div>
@@ -757,29 +760,29 @@
             <div class="grid md:grid-cols-2 gap-6 mb-8">
               <div class="pricing-card-new">
                 <div class="pricing-card-header">
-                  <svg class="pricing-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path></svg>
+                  <i class="fas fa-people-group pricing-card-icon"></i>
                   <div class="pricing-card-name">Enterprise</div>
                   <div class="pricing-card-description">For larger organizations with ongoing or programmatic needs</div>
                 </div>
-                <button onclick="openContactModal()" class="pricing-card-button inline">Contact sales</button>
                 <div class="pricing-features-list">
-                  <div class="pricing-feature-item"><svg class="pricing-feature-check" viewBox="0 0 14 14" fill="none"><path d="M11.5 4L5.5 10L2.5 7"/></svg><span>SLA & priority support</span></div>
-                  <div class="pricing-feature-item"><svg class="pricing-feature-check" viewBox="0 0 14 14" fill="none"><path d="M11.5 4L5.5 10L2.5 7"/></svg><span>Seats, SSO, and permissions</span></div>
-                  <div class="pricing-feature-item"><svg class="pricing-feature-check" viewBox="0 0 14 14" fill="none"><path d="M11.5 4L5.5 10L2.5 7"/></svg><span>Custom endpoints & higher limits</span></div>
+                  <div class="pricing-feature-item"><i class="fas fa-check pricing-feature-check"></i><span>SLA & priority support</span></div>
+                  <div class="pricing-feature-item"><i class="fas fa-check pricing-feature-check"></i><span>API + webhook support; higher limits available</span></div>
+                  <div class="pricing-feature-item"><i class="fas fa-check pricing-feature-check"></i><span>Volume discounts</span></div>
                 </div>
+                <button onclick="document.getElementById('contact-subject').value='Future weather generator enterprise customer inquiry'; openContactModal()" class="w-full mt-auto font-semibold px-5 py-2 rounded bg-btn-primary-bg text-btn-primary-text hover:bg-btn-primary-hover transition duration-300">Contact us</button>
               </div>
               <div class="pricing-card-new">
                 <div class="pricing-card-header">
-                  <svg class="pricing-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 20V10m-6 10V4M6 20v-4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  <i class="fas fa-handshake pricing-card-icon"></i>
                   <div class="pricing-card-name">Partners & integrators</div>
                   <div class="pricing-card-description">Embed future weather into planning tools and workflows</div>
                 </div>
-                <button onclick="openContactModal()" class="pricing-card-button inline">Talk to partnerships</button>
                 <div class="pricing-features-list">
-                  <div class="pricing-feature-item"><svg class="pricing-feature-check" viewBox="0 0 14 14" fill="none"><path d="M11.5 4L5.5 10L2.5 7"/></svg><span>SDK & API documentation</span></div>
-                  <div class="pricing-feature-item"><svg class="pricing-feature-check" viewBox="0 0 14 14" fill="none"><path d="M11.5 4L5.5 10L2.5 7"/></svg><span>Sandbox access</span></div>
-                  <div class="pricing-feature-item"><svg class="pricing-feature-check" viewBox="0 0 14 14" fill="none"><path d="M11.5 4L5.5 10L2.5 7"/></svg><span>Joint integration support</span></div>
+                  <div class="pricing-feature-item"><i class="fas fa-check pricing-feature-check"></i><span>API integration with joint integration support</span></div>
+                  <div class="pricing-feature-item"><i class="fas fa-check pricing-feature-check"></i><span>Volume discounts</span></div>
+                  <div class="pricing-feature-item"><i class="fas fa-check pricing-feature-check"></i><span>Revenue‑share options</span></div>
                 </div>
+                <button onclick="document.getElementById('contact-subject').value='Future weather generator partnership inquiry'; openContactModal()" class="w-full mt-auto font-semibold px-5 py-2 rounded bg-btn-primary-bg text-btn-primary-text hover:bg-btn-primary-hover transition duration-300 mt-16">Contact us</button>
               </div>
             </div>
           </div>
@@ -821,7 +824,7 @@
                 <div class="text-sm text-gray-600">Product Development & Operations</div>
               </div>
               <p class="text-gray-700 leading-relaxed">
-                Radbridge develops and operates the Future Weather SaaS platform—product design, engineering, API, and customer operations.
+                Radbridge Incorporated, headquartered in Southern California, is dedicated to advancing community resilience and economic prosperity across the United States. By combining data, technology, and domain-specific expertise, we aim to empower government agencies and the communities they serve to make informed decisions, optimize resource allocation, and effectively pursue economic development and resilience strategies. Our services include outdoor recreation visitation and economic impact analysis, benefit-cost analysis, grant application support, and custom software solutions. Radbridge develops and operates the Future Weather SaaS platform—product design, engineering, API, and customer operations.
               </p>
               <div class="flex items-center gap-4 mt-6">
                 <img src="assets/images/Headshot_Rowan.jpg" alt="Rowan Schmidt" class="w-16 h-16 rounded-full object-cover border border-gray-200">
@@ -835,17 +838,17 @@
             <!-- University of Coimbra -->
             <div class="rounded-lg border border-gray-200 p-6 bg-white">
               <div class="mb-3">
-                <h3 class="text-xl font-semibold text-gray-900">University of Coimbra</h3>
+                <h3 class="text-xl font-semibold text-gray-900">CURA Lab, University of Coimbra</h3>
                 <div class="text-sm text-gray-600">Technical Advisors</div>
               </div>
               <p class="text-gray-700 leading-relaxed">
-                The University of Coimbra advises on methodology and validation, drawing on the original Future Weather Generator research.
+                The <a href="https://cura-lab.adai.pt/" class="text-radbridge-blue hover:underline" target="_blank" rel="noopener">CURA Lab</a> team, led by Eugénio Rodrigues, brings together a multidisciplinary group of researchers and graduate students with backgrounds in architecture, urban planning, civil engineering, and mechanical engineering. This diversity of expertise enables us to address the complex challenges of climate change, urban resilience, and the urban heat island effect from multiple perspectives, integrating technical, design, and policy-oriented approaches. The team is further supported by an international advisory panel of leading scholars.
               </p>
               <div class="flex items-center gap-4 mt-6">
-                <img src="assets/images/Headshot_Johnny.jpg" alt="Johnny Mojica" class="w-16 h-16 rounded-full object-cover border border-gray-200">
+                <img src="assets/images/EugenioRodrigues.png" alt="Eugenio Rodrigues" class="w-16 h-16 rounded-full object-cover border border-gray-200">
                 <div>
                   <div class="font-semibold text-gray-900">Dr. Eugénio Rodrigues</div>
-                  <div class="text-sm text-gray-600">Technical Advisor and Developer of the Original Future Weather Generator</div>
+                  <div class="text-sm text-gray-600">Head of CURA Lab, University of Coimbra</div>
                 </div>
               </div>
             </div>
@@ -860,9 +863,7 @@
             <div class="border-b border-gray-200 py-6">
               <button onclick="toggleFaq(1)" class="w-full text-left flex justify-between items-center gap-4">
                 <span class="font-medium text-gray-900">What scenarios and models do you use?</span>
-                <svg class="w-4 h-4 text-gray-700 transition-transform transform flex-shrink-0" id="faq-icon-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line>
-                </svg>
+                <i class="fas fa-plus text-lg text-gray-700 transition-transform transform flex-shrink-0" id="faq-icon-1"></i>
               </button>
               <div id="faq-content-1" class="hidden pt-4">
                 <p class="text-gray-600 leading-relaxed">We use IPCC AR6 (CMIP6) projections and support common scenarios such as SSP2‑4.5 and SSP5‑8.5. You can select single GCMs or an ensemble depending on your QA preferences.</p>
@@ -871,9 +872,7 @@
             <div class="border-b border-gray-200 py-6">
               <button onclick="toggleFaq(2)" class="w-full text-left flex justify-between items-center gap-4">
                 <span class="font-medium text-gray-900">How are the files validated?</span>
-                <svg class="w-4 h-4 text-gray-700 transition-transform transform flex-shrink-0" id="faq-icon-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line>
-                </svg>
+                <i class="fas fa-plus text-lg text-gray-700 transition-transform transform flex-shrink-0" id="faq-icon-2"></i>
               </button>
               <div id="faq-content-2" class="hidden pt-4">
                 <p class="text-gray-600 leading-relaxed">The method is developed with the academic creator of the original Future Weather Generator. We perform side‑by‑side checks against legacy outputs and automated QA on variable ranges and metadata.</p>
@@ -882,9 +881,7 @@
             <div class="border-b border-gray-200 py-6">
               <button onclick="toggleFaq(3)" class="w-full text-left flex justify-between items-center gap-4">
                 <span class="font-medium text-gray-900">What outputs are available?</span>
-                <svg class="w-4 h-4 text-gray-700 transition-transform transform flex-shrink-0" id="faq-icon-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line>
-                </svg>
+                <i class="fas fa-plus text-lg text-gray-700 transition-transform transform flex-shrink-0" id="faq-icon-3"></i>
               </button>
               <div id="faq-content-3" class="hidden pt-4">
                 <p class="text-gray-600 leading-relaxed">EPW is standard. Optional DDY and STAT files are available. We also support batch generation and an API for partners.</p>
@@ -893,9 +890,7 @@
             <div class="border-b border-gray-200 py-6">
               <button onclick="toggleFaq(4)" class="w-full text-left flex justify-between items-center gap-4">
                 <span class="font-medium text-gray-900">Will this work with my simulation tool?</span>
-                <svg class="w-4 h-4 text-gray-700 transition-transform transform flex-shrink-0" id="faq-icon-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line>
-                </svg>
+                <i class="fas fa-plus text-lg text-gray-700 transition-transform transform flex-shrink-0" id="faq-icon-4"></i>
               </button>
               <div id="faq-content-4" class="hidden pt-4">
                 <p class="text-gray-600 leading-relaxed">Yes. EPW and DDY are widely supported (EnergyPlus, OpenStudio, IES‑VE, TRACE 3D Plus, and others). If you need a custom format, contact us.</p>
@@ -904,9 +899,7 @@
             <div class="border-b border-gray-200 py-6">
               <button onclick="toggleFaq(5)" class="w-full text-left flex justify-between items-center gap-4">
                 <span class="font-medium text-gray-900">How fast is delivery?</span>
-                <svg class="w-4 h-4 text-gray-700 transition-transform transform flex-shrink-0" id="faq-icon-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line>
-                </svg>
+                <i class="fas fa-plus text-lg text-gray-700 transition-transform transform flex-shrink-0" id="faq-icon-5"></i>
               </button>
               <div id="faq-content-5" class="hidden pt-4">
                 <p class="text-gray-600 leading-relaxed">Most files generate in minutes. Batch jobs and API requests are queued automatically; we’ll notify you when they’re ready.</p>
@@ -926,10 +919,11 @@
       <div class="flex justify-between items-center mb-6">
         <h3 class="text-2xl font-bold text-radbridge-blue">Contact Us</h3>
         <button onclick="closeContactModal()" class="text-gray-500 hover:text-gray-700" aria-label="Close contact form">
-          <i class="fas fa-times w-6 h-6"></i>
+          <i class="fas fa-times text-xl"></i>
         </button>
       </div>
       <form action="https://formspree.io/f/xwpbkgyo" method="POST" class="space-y-4">
+        <input type="hidden" name="_subject" id="contact-subject" value="">
         <div>
           <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
           <input type="text" name="name" id="name" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-radbridge-blue focus:ring-radbridge-blue">
@@ -978,7 +972,7 @@
       <div class="flex justify-between items-center mb-6">
         <h3 class="text-2xl font-bold text-radbridge-blue">Submit Request</h3>
         <button onclick="closeRequestModal()" class="text-gray-500 hover:text-gray-700" aria-label="Close request form">
-          <i class="fas fa-times w-6 h-6"></i>
+          <i class="fas fa-times text-xl"></i>
         </button>
       </div>
       <form action="https://formspree.io/f/xwpbkgyo" method="POST" enctype="multipart/form-data">
@@ -1054,8 +1048,8 @@
   <footer class="bg-gray-900 text-white py-12">
     <div class="container-custom">
       <div class="text-center mb-8">
-        <a href="/">
-          <img src="assets/images/Radbridge_logo_white_PNG.png" alt="Radbridge Logo" class="h-10 mx-auto">
+        <a href="https://radbridge.com" target="_blank" rel="noopener">
+          <img src="assets\images\Radbridge_logo_white_PNG.png" alt="Radbridge Logo" class="h-10 mx-auto">
         </a>
       </div>
       <div class="text-center text-gray-400">

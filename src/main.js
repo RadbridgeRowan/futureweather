@@ -190,9 +190,11 @@ window.toggleFaq = (id) => {
   
   if (content.classList.contains('hidden')) {
     content.classList.remove('hidden');
-    icon.style.transform = 'rotate(45deg)';
+    icon.classList.remove('fa-plus');
+    icon.classList.add('fa-minus');
   } else {
     content.classList.add('hidden');
-    icon.style.transform = 'rotate(0deg)';
+    icon.classList.remove('fa-minus');
+    icon.classList.add('fa-plus');
   }
 };

@@ -558,13 +558,14 @@
               border: 1px solid #eee;
               border-radius: 8px;
             }
+            .bundle-option.placeholder { visibility: hidden; pointer-events: none; }
             .bundle-name { font-weight: 600; }
             .bundle-meta { color: #333; font-size: 13px; }
             .bundle-total { color: #666; font-size: 12px; }
           </style>
 
           <h2 class="page-section-heading mb-4">Pricing</h2>
-          <p class="text-lg text-gray-600 leading-relaxed mb-8">Simple per‑job pricing for climate‑adjusted weather files. Save with bundles, or contact us about bulk and enterprise integrations.</p>
+          <p class="text-lg text-gray-600 leading-relaxed mb-8">Straightforward credit-based pricing for climate-adjusted weather files. Save with bundles, or contact us about bulk and enterprise integrations.</p>
           
           <!-- Individual / Enterprise Toggle -->
           <div class="flex justify-start mb-8">
@@ -577,29 +578,35 @@
           <!-- Individual view -->
           <div id="pricing-individual">
             <div class="grid md:grid-cols-3 gap-6 mb-8">
-              <!-- Single Job -->
+              <!-- Single Credit -->
               <div class="pricing-card-new">
                 <div class="pricing-card-header">
                   <svg class="pricing-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path></svg>
-                  <div class="pricing-card-name">Single job</div>
+                  <div class="pricing-card-name">1 credit</div>
                   <div class="pricing-card-description">Pay as you go</div>
-                </div>
-                <div class="pricing-price-section">
-                  <div class="pricing-card-price"><span class="currency">$</span>29</div>
-                  <div class="pricing-card-billing">per job</div>
                 </div>
                 <div class="pricing-features-list">
                   <div class="pricing-feature-item">
                     <svg class="pricing-feature-check" viewBox="0 0 14 14" fill="none"><path d="M11.5 4L5.5 10L2.5 7" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                    <span>Generate one climate‑adjusted EPW</span>
+                    <span>Ideal for one-off analysis or trial runs</span>
                   </div>
                   <div class="pricing-feature-item">
                     <svg class="pricing-feature-check" viewBox="0 0 14 14" fill="none"><path d="M11.5 4L5.5 10L2.5 7" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                    <span>Instant download • validated method</span>
+                    <span>Includes a future EPW file with optional DDY/STAT outputs</span>
                   </div>
-                  <div class="pricing-feature-item">
-                    <svg class="pricing-feature-check" viewBox="0 0 14 14" fill="none"><path d="M11.5 4L5.5 10L2.5 7" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                    <span>Works with EnergyPlus/OpenStudio</span>
+                </div>
+                <div class="bundle-options">
+                  <div class="bundle-option">
+                    <div>
+                      <div class="bundle-name">1 credit</div>
+                      <div class="bundle-meta">$50.00/credit</div>
+                    </div>
+                  </div>
+                  <div class="bundle-option placeholder" aria-hidden="true">
+                    <div>
+                      <div class="bundle-name">placeholder</div>
+                      <div class="bundle-meta">$0.00/credit</div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -609,31 +616,31 @@
                 <div class="pricing-recommended-badge">Great value</div>
                 <div class="pricing-card-header">
                   <svg class="pricing-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 20V10m-6 10V4M6 20v-4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                  <div class="pricing-card-name">Bundles</div>
-                  <div class="pricing-card-description">Save with 4‑ or 8‑packs</div>
+                  <div class="pricing-card-name">Credit bundles</div>
+                  <div class="pricing-card-description">Save with 4- or 8-credit bundles</div>
                 </div>
                 <div class="bundle-options">
                   <div class="bundle-option">
                     <div>
                       <div class="bundle-name">4 credit bundle</div>
-                      <div class="bundle-meta">$19.75/credit <span class="bundle-total">• Total $79</span></div>
+                      <div class="bundle-meta">$25.00/credit <span class="bundle-total">• Total $100</span></div>
                     </div>
                   </div>
                   <div class="bundle-option">
                     <div>
                       <div class="bundle-name">8 credit bundle</div>
-                      <div class="bundle-meta">$14.88/credit <span class="bundle-total">• Total $119</span></div>
+                      <div class="bundle-meta">$20.00/credit <span class="bundle-total">• Total $160</span></div>
                     </div>
                   </div>
                 </div>
                 <div class="pricing-features-list">
                   <div class="pricing-feature-item">
                     <svg class="pricing-feature-check" viewBox="0 0 14 14" fill="none"><path d="M11.5 4L5.5 10L2.5 7" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                    <span>Best value for small projects</span>
+                    <span>Best fit for comparing multiple future years, scenarios, or models</span>
                   </div>
                   <div class="pricing-feature-item">
                     <svg class="pricing-feature-check" viewBox="0 0 14 14" fill="none"><path d="M11.5 4L5.5 10L2.5 7" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                    <span>Use across projects and teammates</span>
+                    <span>Credits can be used across projects and teammates</span>
                   </div>
                   <div class="pricing-feature-item">
                     <svg class="pricing-feature-check" viewBox="0 0 14 14" fill="none"><path d="M11.5 4L5.5 10L2.5 7" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -646,29 +653,39 @@
               <div class="pricing-card-new">
                 <div class="pricing-card-header">
                   <svg class="pricing-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path></svg>
-                  <div class="pricing-card-name">Bulk pricing (10+ jobs)</div>
-                  <div class="pricing-card-description">Best per‑job pricing for teams</div>
+                  <div class="pricing-card-name">10+ credits</div>
+                  <div class="pricing-card-description">Best per-credit pricing for teams</div>
                 </div>
-                <div class="pricing-price-section">
-                  <div class="pricing-card-price"><span class="currency">$</span>12.50</div>
-                  <div class="pricing-card-billing">per job for 10+ jobs</div>
+                <div class="bundle-options">
+                  <div class="bundle-option">
+                    <div>
+                      <div class="bundle-name">10+ credits</div>
+                      <div class="bundle-meta">$17.00/credit</div>
+                    </div>
+                  </div>
+                  <div class="bundle-option placeholder" aria-hidden="true">
+                    <div>
+                      <div class="bundle-name">placeholder</div>
+                      <div class="bundle-meta">$0.00/credit</div>
+                    </div>
+                  </div>
                 </div>
-                <button onclick="openContactModal()" class="pricing-card-button">Contact sales</button>
                 <div class="pricing-features-list">
                   <div class="pricing-feature-item">
                     <svg class="pricing-feature-check" viewBox="0 0 14 14" fill="none"><path d="M11.5 4L5.5 10L2.5 7" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                    <span>Volume discounts and team billing</span>
+                    <span>Best fit for portfolios, batch generation, and team workflows</span>
                   </div>
                   <div class="pricing-feature-item">
                     <svg class="pricing-feature-check" viewBox="0 0 14 14" fill="none"><path d="M11.5 4L5.5 10L2.5 7" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                    <span>Priority support</span>
-                  </div>
-                  <div class="pricing-feature-item">
-                    <svg class="pricing-feature-check" viewBox="0 0 14 14" fill="none"><path d="M11.5 4L5.5 10L2.5 7" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                    <span>API integration available</span>
+                    <span>Volume-friendly purchasing with lower unit cost</span>
                   </div>
                 </div>
               </div>
+            </div>
+            <div class="pricing-note">
+              <strong>How pricing works</strong><br>
+              1 credit = 1 job for any combination of future year, climate scenario and climate model(s).<br>
+              Outputs include a future EPW file + optional DDY/STAT files.
             </div>
           </div>
 

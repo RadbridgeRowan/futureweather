@@ -221,8 +221,68 @@
     <section class="py-8 app-screenshot-section-bg">
       <div class="container-custom text-center">
         <div class="lg:w-3/4 mx-auto">
-          <div class="rounded-lg shadow-2xl overflow-hidden border border-gray-200">
-            <img src="assets/images/appScreenshot.png" alt="Future Weather app screenshot" class="w-full">
+          <div
+            class="rounded-lg shadow-2xl overflow-hidden border border-gray-200 bg-white"
+            id="app-screenshot-gallery"
+            data-slides='[
+              {"src":"assets/images/appAnalytics.png","alt":"Future Weather analytics screen","label":"Analytics"},
+              {"src":"assets/images/appNewJob.png","alt":"Future Weather new job screen","label":"New Job"},
+              {"src":"assets/images/appSavedJobs.png","alt":"Future Weather saved jobs screen","label":"Saved Jobs"}
+            ]'
+          >
+            <div class="relative">
+              <img
+                id="app-screenshot-image"
+                src="assets/images/appAnalytics.png"
+                alt="Future Weather analytics screen"
+                class="w-full transition-opacity duration-700 ease-in-out opacity-100"
+              >
+              <button
+                type="button"
+                id="app-screenshot-prev"
+                class="absolute left-4 top-1/2 -translate-y-1/2 rounded-full bg-white/90 px-3 py-2 text-gray-700 shadow transition hover:bg-white"
+                aria-label="Show previous app screenshot"
+              >
+                <i class="fas fa-chevron-left"></i>
+              </button>
+              <button
+                type="button"
+                id="app-screenshot-next"
+                class="absolute right-4 top-1/2 -translate-y-1/2 rounded-full bg-white/90 px-3 py-2 text-gray-700 shadow transition hover:bg-white"
+                aria-label="Show next app screenshot"
+              >
+                <i class="fas fa-chevron-right"></i>
+              </button>
+            </div>
+            <div class="flex flex-wrap items-center justify-center gap-3 border-t border-gray-200 bg-gray-50 px-4 py-4">
+              <button
+                type="button"
+                class="app-screenshot-dot rounded-full px-4 py-2 text-sm font-medium transition bg-radbridge-blue text-white"
+                data-slide-index="0"
+                aria-label="Show analytics screenshot"
+                aria-pressed="true"
+              >
+                Analytics
+              </button>
+              <button
+                type="button"
+                class="app-screenshot-dot rounded-full px-4 py-2 text-sm font-medium transition bg-white text-gray-700 border border-gray-300 hover:border-gray-400"
+                data-slide-index="1"
+                aria-label="Show new job screenshot"
+                aria-pressed="false"
+              >
+                New Job
+              </button>
+              <button
+                type="button"
+                class="app-screenshot-dot rounded-full px-4 py-2 text-sm font-medium transition bg-white text-gray-700 border border-gray-300 hover:border-gray-400"
+                data-slide-index="2"
+                aria-label="Show saved jobs screenshot"
+                aria-pressed="false"
+              >
+                Saved Jobs
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -607,6 +667,10 @@
               position: relative;
               border-color: #000;
             }
+            .bundle-option.placeholder {
+              visibility: hidden;
+              pointer-events: none;
+            }
             .bundle-badge {
               position: absolute;
               top: -10px;
@@ -622,7 +686,7 @@
           </style>
 
           <h2 class="page-section-heading mb-4">Pricing</h2>
-          <p class="text-lg text-gray-600 leading-relaxed mb-8">Simple per‑job pricing for climate‑adjusted weather files. Save with bundles, or contact us about bulk and enterprise integrations.</p>
+          <p class="text-lg text-gray-600 leading-relaxed mb-8">Straightforward credit-based pricing for climate-adjusted weather files. Save with bundles, or contact us about bulk and enterprise integrations.</p>
           
           <!-- Individual / Enterprise Toggle -->
           <div class="flex justify-start mb-8">
@@ -635,32 +699,32 @@
           <!-- Individual view -->
           <div id="pricing-individual">
             <div class="grid md:grid-cols-3 gap-6 mb-8">
-              <!-- Single Job -->
+              <!-- Single Credit -->
               <div class="pricing-card-new">
                 <div class="pricing-card-header">
                   <i class="fas fa-file pricing-card-icon"></i>
-                  <div class="pricing-card-name">Single job</div>
+                  <div class="pricing-card-name">1 credit</div>
                   <div class="pricing-card-description">Pay as you go</div>
                 </div>
                 <div class="pricing-features-list">
                   <div class="pricing-feature-item">
                     <i class="fas fa-check pricing-feature-check"></i>
-                    <span>Great for one‑off analysis or trial; ready in under 1 minute</span>
+                    <span>Ideal for one-off analysis or trial runs</span>
                   </div>
                   <div class="pricing-feature-item">
                     <i class="fas fa-check pricing-feature-check"></i>
-                    <span>API‑friendly; optional DDY/STAT add‑ons</span>
+                    <span>Includes a future EPW file with optional DDY/STAT outputs</span>
                   </div>
                 </div>
                 <div class="bundle-options">
                   <div class="bundle-option">
                     <div class="bundle-name">1 credit</div>
                     <div class="bundle-price-details">
-                      <div class="pricing-card-price"><span class="currency">$</span>25</div>
-                      <div class="pricing-card-billing">per job</div>
+                      <div class="pricing-card-price"><span class="currency">$</span>50</div>
+                      <div class="pricing-card-billing">$50.00 per credit</div>
                     </div>
                   </div>
-                  <div class="bundle-option" aria-hidden="true" style="visibility: hidden; pointer-events: none;">
+                  <div class="bundle-option placeholder" aria-hidden="true">
                     <div class="bundle-name">placeholder</div>
                     <div class="bundle-price-details">
                       <div class="pricing-card-price"><span class="currency">$</span>00</div>
@@ -679,32 +743,32 @@
                 <div class="pricing-recommended-badge">Most Popular</div>
                 <div class="pricing-card-header">
                   <i class="fas fa-layer-group pricing-card-icon"></i>
-                  <div class="pricing-card-name">Bundles</div>
-                  <div class="pricing-card-description">Save with 4‑ or 8‑packs</div>
+                  <div class="pricing-card-name">Credit bundles</div>
+                  <div class="pricing-card-description">Save with 4- or 8-credit bundles</div>
                 </div>
                 <div class="pricing-features-list">
                   <div class="pricing-feature-item">
                     <i class="fas fa-check pricing-feature-check"></i>
-                    <span>Great for multi‑scenario analysis on one facility (4‑pack: 2 periods × 2 scenarios)</span>
+                    <span>Best fit for comparing multiple future years, scenarios, or models</span>
                   </div>
                   <div class="pricing-feature-item">
                     <i class="fas fa-check pricing-feature-check"></i>
-                    <span>Ideal for deep‑dive or multi‑site analysis with the 8‑pack</span>
+                    <span>Credits can be used across projects and teammates</span>
                   </div>
                 </div>
                 <div class="bundle-options">
                   <div class="bundle-option">
-                    <div class="bundle-name">4 credits</div>
+                    <div class="bundle-name">4 credit bundle</div>
                     <div class="bundle-price-details">
-                      <div class="pricing-card-price"><span class="currency">$</span>80</div>
-                      <div class="pricing-card-billing">$20 per job</div>
+                      <div class="pricing-card-price"><span class="currency">$</span>100</div>
+                      <div class="pricing-card-billing">$25.00 per credit</div>
                     </div>
                   </div>
                   <div class="bundle-option">
-                    <div class="bundle-name">8 credits</div>
+                    <div class="bundle-name">8 credit bundle</div>
                     <div class="bundle-price-details">
-                      <div class="pricing-card-price"><span class="currency">$</span>140</div>
-                      <div class="pricing-card-billing">$17.50 per job</div>
+                      <div class="pricing-card-price"><span class="currency">$</span>160</div>
+                      <div class="pricing-card-billing">$20.00 per credit</div>
                     </div>
                   </div>
                 </div>
@@ -718,28 +782,28 @@
               <div class="pricing-card-new">
                 <div class="pricing-card-header">
                   <i class="fas fa-boxes pricing-card-icon"></i>
-                  <div class="pricing-card-name">Bulk pricing (10+ jobs)</div>
-                  <div class="pricing-card-description">Best per‑job pricing for teams</div>
+                  <div class="pricing-card-name">10+ credits</div>
+                  <div class="pricing-card-description">Excellent per-credit pricing</div>
                 </div>
                 <div class="pricing-features-list">
                   <div class="pricing-feature-item">
                     <i class="fas fa-check pricing-feature-check"></i>
-                    <span>Great for portfolios and batch generation; best per‑job pricing</span>
+                    <span>Best fit for portfolios, batch generation, and team workflows</span>
                   </div>
                   <div class="pricing-feature-item">
                     <i class="fas fa-check pricing-feature-check"></i>
-                    <span>API and webhook friendly; volume discounts</span>
+                    <span>Volume-friendly purchasing with lower unit cost</span>
                   </div>
                 </div>
                 <div class="bundle-options">
                   <div class="bundle-option">
                     <div class="bundle-name">10+ credits</div>
                     <div class="bundle-price-details">
-                      <div class="pricing-card-price"><span class="currency">$</span>15</div>
-                      <div class="pricing-card-billing">per job for 10+ jobs</div>
+                      <div class="pricing-card-price"><span class="currency">$</span>17</div>
+                      <div class="pricing-card-billing">$17.00 per credit</div>
                     </div>
                   </div>
-                  <div class="bundle-option" aria-hidden="true" style="visibility: hidden; pointer-events: none;">
+                  <div class="bundle-option placeholder" aria-hidden="true">
                     <div class="bundle-name">placeholder</div>
                     <div class="bundle-price-details">
                       <div class="pricing-card-price"><span class="currency">$</span>00</div>
@@ -752,6 +816,11 @@
                   <span>Get Started</span>
                 </a>
               </div>
+            </div>
+            <div class="pricing-note">
+              <strong>How pricing works</strong><br>
+              1 credit = 1 job for any combination of future year, climate scenario and climate model(s).<br>
+              Outputs include a future EPW file, a STAT file, and an optional DDY file.
             </div>
           </div>
 
@@ -1058,6 +1127,100 @@
     </div>
   </footer>
 
+  <script>
+    (function () {
+      var gallery = document.getElementById('app-screenshot-gallery');
+      if (!gallery) return;
+
+      var image = document.getElementById('app-screenshot-image');
+      var prevButton = document.getElementById('app-screenshot-prev');
+      var nextButton = document.getElementById('app-screenshot-next');
+      var dotButtons = Array.prototype.slice.call(document.querySelectorAll('.app-screenshot-dot'));
+      var slides = JSON.parse(gallery.getAttribute('data-slides') || '[]');
+      var currentIndex = 0;
+      var intervalId = null;
+      var fadeTimeoutId = null;
+      var isTransitioning = false;
+      var activeButtonClasses = ['bg-radbridge-blue', 'text-white'];
+      var inactiveButtonClasses = ['bg-white', 'text-gray-700', 'border', 'border-gray-300', 'hover:border-gray-400'];
+
+      if (!image || !prevButton || !nextButton || !slides.length) return;
+
+      function updateSlideContent(index) {
+        currentIndex = (index + slides.length) % slides.length;
+        var slide = slides[currentIndex];
+
+        image.src = slide.src;
+        image.alt = slide.alt;
+
+        dotButtons.forEach(function (button, buttonIndex) {
+          var isActive = buttonIndex === currentIndex;
+          button.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+          button.classList.toggle(activeButtonClasses[0], isActive);
+          button.classList.toggle(activeButtonClasses[1], isActive);
+          inactiveButtonClasses.forEach(function (className) {
+            button.classList.toggle(className, !isActive);
+          });
+        });
+      }
+
+      function renderSlide(index, skipFade) {
+        if (isTransitioning) return;
+
+        if (skipFade) {
+          updateSlideContent(index);
+          image.classList.remove('opacity-0');
+          image.classList.add('opacity-100');
+          return;
+        }
+
+        isTransitioning = true;
+        image.classList.remove('opacity-100');
+        image.classList.add('opacity-0');
+
+        if (fadeTimeoutId) {
+          window.clearTimeout(fadeTimeoutId);
+        }
+
+        fadeTimeoutId = window.setTimeout(function () {
+          updateSlideContent(index);
+          image.classList.remove('opacity-0');
+          image.classList.add('opacity-100');
+          isTransitioning = false;
+        }, 350);
+      }
+
+      function restartAutoplay() {
+        if (intervalId) {
+          window.clearInterval(intervalId);
+        }
+
+        intervalId = window.setInterval(function () {
+          renderSlide(currentIndex + 1);
+        }, 5000);
+      }
+
+      prevButton.addEventListener('click', function () {
+        renderSlide(currentIndex - 1);
+        restartAutoplay();
+      });
+
+      nextButton.addEventListener('click', function () {
+        renderSlide(currentIndex + 1);
+        restartAutoplay();
+      });
+
+      dotButtons.forEach(function (button) {
+        button.addEventListener('click', function () {
+          renderSlide(Number(button.getAttribute('data-slide-index')));
+          restartAutoplay();
+        });
+      });
+
+      renderSlide(0, true);
+      restartAutoplay();
+    })();
+  </script>
   <script type="module" src="/src/main.js"></script>
 </body>
 </html>

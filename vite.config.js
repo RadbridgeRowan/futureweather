@@ -9,6 +9,7 @@ export default defineConfig({
       input: {
         main: resolve(__dirname, 'index.html'),
         index2: resolve(__dirname, 'index2.html'),
+        publicApiPage: resolve(__dirname, 'publicApiPage.html'),
       },
     },
   },

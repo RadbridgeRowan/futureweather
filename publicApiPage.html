@@ -1,0 +1,582 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Future Weather API</title>
+  <meta
+    name="description"
+    content="Public developer overview for the Future Weather API. Generate climate-adjusted EPW and optional DDY weather files programmatically."
+  >
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="/src/style.css">
+  <style>
+    h1, h2, h3, h4, h5, h6 { font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif; }
+
+    :root {
+      --nav-bg: #0B1F3F;
+      --nav-text: #FFFFFF;
+      --nav-text-hover: #E0E7EF;
+      --hero-bg: #F8FAFB;
+      --hero-heading: #0B1F3F;
+      --hero-text: #4A5568;
+      --btn-primary-bg: #1E5A8E;
+      --btn-primary-hover: #164670;
+      --btn-primary-text: #FFFFFF;
+      --btn-secondary-bg: #FFFFFF;
+      --btn-secondary-text: #1E5A8E;
+      --btn-secondary-border: #1E5A8E;
+      --btn-secondary-hover-bg: #1E5A8E;
+      --btn-secondary-hover-text: #FFFFFF;
+      --promo-icon: #6B7280;
+      --promo-text: #6B7280;
+      --api-soft-bg: #EEF5FB;
+      --api-border: #D8E3EE;
+      --code-bg: #0F172A;
+      --code-text: #E5EEF8;
+    }
+
+    .text-promo-icon { color: var(--promo-icon); }
+    .text-promo-text { color: var(--promo-text); }
+
+    .api-card {
+      background: white;
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
+      padding: 28px 24px;
+      transition: all 0.2s;
+      height: 100%;
+    }
+
+    .api-card:hover {
+      border-color: #cbd5e1;
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+    }
+
+    .api-card-icon {
+      font-size: 30px;
+      color: #1E5A8E;
+      margin-bottom: 14px;
+    }
+
+    .api-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      background: white;
+      border: 1px solid var(--api-border);
+      border-radius: 9999px;
+      color: #334155;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .api-code-shell {
+      background: linear-gradient(180deg, #172033 0%, #0F172A 100%);
+      color: var(--code-text);
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.22);
+    }
+
+    .api-code-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 16px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .api-code-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 9999px;
+      display: inline-block;
+    }
+
+    .api-code-dot.red { background: #fb7185; }
+    .api-code-dot.yellow { background: #fbbf24; }
+    .api-code-dot.green { background: #34d399; }
+
+    .api-code-shell pre {
+      margin: 0;
+      padding: 20px;
+      overflow-x: auto;
+      font-size: 14px;
+      line-height: 1.7;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    }
+
+    .api-highlight {
+      background: var(--api-soft-bg);
+      border: 1px solid var(--api-border);
+      border-radius: 12px;
+      padding: 22px 20px;
+    }
+
+    .api-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .api-list-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      color: #475569;
+      line-height: 1.6;
+    }
+
+    .api-list-item i {
+      margin-top: 4px;
+      color: #1E5A8E;
+    }
+
+    .faq-answer.hidden {
+      display: none;
+    }
+
+    @media (max-width: 1023px) {
+      .api-hero-grid {
+        display: grid;
+        gap: 28px;
+      }
+    }
+  </style>
+</head>
+<body class="font-ibm">
+  <div class="bg-white">
+    <header class="sticky top-0 left-0 right-0 z-30 shadow-md bg-nav-bg">
+      <div class="container-custom flex items-center justify-between py-4">
+        <div>
+          <a href="/">
+            <img src="assets/images/LogoWhite.png" alt="Future Weather Logo" class="h-8">
+          </a>
+        </div>
+        <div class="flex items-center space-x-4">
+          <a href="https://futureweather.co/" target="_blank" rel="noopener" class="flex items-center gap-2 rounded px-3 py-2 font-semibold text-sm transition duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 bg-btn-primary-bg text-btn-primary-text hover:bg-btn-primary-hover">
+            <i class="fas fa-rocket text-base text-btn-primary-text"></i>
+            <span>Try it Free</span>
+          </a>
+          <a href="#overview" class="inline-flex items-center justify-center text-sm font-medium px-4 py-2 rounded border transition duration-300 bg-btn-secondary-bg text-btn-secondary-text border-btn-secondary-border hover:bg-btn-secondary-hover-bg hover:text-btn-secondary-hover-text">
+            <i class="fas fa-book-open text-base mr-2"></i>
+            API
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <section class="relative overflow-hidden bg-hero-bg border-b border-gray-200">
+      <div class="container-custom py-12 lg:py-16">
+        <div class="grid lg:grid-cols-2 gap-10 items-center api-hero-grid">
+          <div class="text-center lg:text-left">
+            <div class="inline-flex items-center gap-2 rounded-full border border-gray-200 bg-white px-4 py-2 text-sm text-gray-600 mb-5">
+              <i class="fas fa-code"></i>
+              Public developer overview
+            </div>
+            <h1 class="text-3xl lg:text-5xl mb-5 leading-snug font-medium font-open-sans text-hero-heading">
+              Build <span class="text-btn-primary-bg font-semibold">future-ready</span> weather workflows with the Future Weather API
+            </h1>
+            <p class="text-lg mb-6 leading-snug font-open-sans text-hero-text max-w-2xl mx-auto lg:mx-0">
+              Generate climate-adjusted EPW and DDY weather files programmatically. Submit historical weather files, choose future years and emissions scenarios, and retrieve future-ready outputs for simulation, analytics, and automation.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+              <a href="https://app.futureweather.co/" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-2 font-semibold px-5 py-2 rounded transition duration-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 bg-btn-primary-bg text-btn-primary-text hover:bg-btn-primary-hover">
+                <i class="fas fa-book-open text-lg text-btn-primary-text"></i>
+                <span>Sign in for full API docs</span>
+              </a>
+              <button onclick="document.getElementById('contact-subject').value='Future Weather API access inquiry'; openContactModal()" class="inline-flex items-center justify-center font-medium px-5 py-2 rounded border transition duration-200 focus:outline-none focus:ring-1 focus:ring-offset-2 bg-btn-secondary-bg text-btn-secondary-text border-btn-secondary-border hover:bg-btn-secondary-hover-bg hover:text-btn-secondary-hover-text">
+                Contact us about API access
+              </button>
+            </div>
+            <div class="mt-4 flex items-center justify-center lg:justify-start gap-2">
+              <i class="fas fa-lock text-base text-promo-icon"></i>
+              <span class="text-sm text-promo-text">Interactive reference, API keys, and webhook tools are available to authorized users inside the app.</span>
+            </div>
+          </div>
+
+          <div class="space-y-4">
+            <div class="api-code-shell">
+              <div class="api-code-header">
+                <span class="api-code-dot red"></span>
+                <span class="api-code-dot yellow"></span>
+                <span class="api-code-dot green"></span>
+                <span class="ml-2 text-sm text-gray-300">example-request.sh</span>
+              </div>
+              <pre><code>curl -X POST https://app.futureweather.co/jobs \
+  -H "Authorization: Bearer fw_your_personal_access_token" \
+  -H "Idempotency-Key: &lt;a-stable-random-uuid&gt;" \
+  -F "future_year=2080" \
+  -F "scenario=ssp245" \
+  -F "epw_file=@/path/to/file.epw"</code></pre>
+            </div>
+
+            <div class="flex flex-wrap gap-3">
+              <span class="api-pill"><i class="fas fa-file-waveform"></i> EPW and DDY outputs</span>
+              <span class="api-pill"><i class="fas fa-bell"></i> Webhooks</span>
+              <span class="api-pill"><i class="fas fa-chart-line"></i> Analytics</span>
+              <span class="api-pill"><i class="fas fa-layer-group"></i> Batch workflows</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="flex">
+      <aside class="hidden lg:block w-64 bg-white border-r border-gray-200 sticky top-14 h-[calc(100vh-3.5rem)] overflow-y-auto">
+        <nav class="py-8 px-6">
+          <ul class="space-y-1">
+            <li><a href="#overview" class="sidebar-link active">Overview</a></li>
+            <li><a href="#build" class="sidebar-link">What You Can Build</a></li>
+            <li><a href="#workflow" class="sidebar-link">How It Works</a></li>
+            <li><a href="#auth" class="sidebar-link">Authentication</a></li>
+            <li><a href="#request" class="sidebar-link">Example Request</a></li>
+            <li><a href="#outputs" class="sidebar-link">What You Get Back</a></li>
+            <li><a href="#cta" class="sidebar-link">Next Steps</a></li>
+            <li><a href="#faq" class="sidebar-link">FAQ</a></li>
+          </ul>
+        </nav>
+      </aside>
+
+      <main class="flex-1 max-w-5xl mx-auto px-6 py-12 lg:px-12 lg:py-16">
+        <section id="overview" class="mb-20 scroll-mt-20">
+          <h2 class="page-section-heading mb-6">Overview</h2>
+          <p class="text-lg text-gray-600 leading-relaxed mb-4">
+            The Future Weather API gives developers a programmatic way to generate climate-adjusted EPW and DDY weather files for technical workflows. Instead of using the web interface manually, your applications can submit jobs, monitor processing status, and retrieve future weather outputs directly through authenticated API calls.
+          </p>
+          <p class="text-lg text-gray-600 leading-relaxed mb-4">
+            The API follows the same core methodology as the Future Weather platform: start with a historical EPW, apply CMIP6 climate projection signals for a selected future year and scenario, and produce future EPW outputs, with DDY generation available when requested for supported workflows.
+          </p>
+          <p class="text-lg text-gray-600 leading-relaxed">
+            This public page is meant to help developers understand what is available and whether the API fits their workflow. Full interactive reference documentation, personal access tokens, and webhook management remain available inside the authenticated application.
+          </p>
+        </section>
+
+        <section id="build" class="mb-20 scroll-mt-20">
+          <h2 class="page-section-heading mb-8">What you can build</h2>
+          <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
+            <div class="api-card">
+              <i class="fas fa-gears api-card-icon"></i>
+              <h3 class="text-xl font-semibold text-gray-900 mb-3">Automated simulation pipelines</h3>
+              <p class="text-gray-600 leading-relaxed">Generate future EPW and DDY files automatically as part of internal modeling, QA, or scenario comparison workflows.</p>
+            </div>
+            <div class="api-card">
+              <i class="fas fa-layer-group api-card-icon"></i>
+              <h3 class="text-xl font-semibold text-gray-900 mb-3">Batch climate studies</h3>
+              <p class="text-gray-600 leading-relaxed">Run multiple future years and emissions scenarios across portfolios, research studies, or productized workflows.</p>
+            </div>
+            <div class="api-card">
+              <i class="fas fa-chart-line api-card-icon"></i>
+              <h3 class="text-xl font-semibold text-gray-900 mb-3">Weather analytics</h3>
+              <p class="text-gray-600 leading-relaxed">Retrieve comparison analytics between historical and future weather conditions for reporting and downstream applications.</p>
+            </div>
+            <div class="api-card">
+              <i class="fas fa-building api-card-icon"></i>
+              <h3 class="text-xl font-semibold text-gray-900 mb-3">Building performance tools</h3>
+              <p class="text-gray-600 leading-relaxed">Embed climate-adjusted weather generation into building performance, HVAC sizing, and resilience analysis products.</p>
+            </div>
+            <div class="api-card">
+              <i class="fas fa-bell api-card-icon"></i>
+              <h3 class="text-xl font-semibold text-gray-900 mb-3">Webhook-driven systems</h3>
+              <p class="text-gray-600 leading-relaxed">Trigger downstream jobs when weather generation completes instead of relying only on client-side polling.</p>
+            </div>
+            <div class="api-card">
+              <i class="fas fa-file-circle-plus api-card-icon"></i>
+              <h3 class="text-xl font-semibold text-gray-900 mb-3">Optional DDY workflows</h3>
+              <p class="text-gray-600 leading-relaxed">Request DDY generation alongside EPW output when your design or compliance workflow requires it.</p>
+            </div>
+          </div>
+        </section>
+
+        <section id="workflow" class="mb-20 scroll-mt-20">
+          <h2 class="page-section-heading mb-8">How it works</h2>
+          <div class="grid md:grid-cols-3 gap-12">
+            <div class="text-center md:text-left">
+              <i class="fas fa-upload text-5xl mb-4 mx-auto md:mx-0 text-radbridge-blue"></i>
+              <h3 class="text-lg font-semibold text-gray-900 mb-3">1. Upload a historical EPW</h3>
+              <p class="text-gray-600 leading-relaxed">Submit a historical EPW and choose a target future year, scenario, plus any optional DDY or advanced parameters needed for your workflow.</p>
+            </div>
+            <div class="text-center md:text-left">
+              <i class="fas fa-cloud-sun-rain text-5xl mb-4 mx-auto md:mx-0 text-radbridge-blue"></i>
+              <h3 class="text-lg font-semibold text-gray-900 mb-3">2. Process the job asynchronously</h3>
+              <p class="text-gray-600 leading-relaxed">Future Weather applies CMIP6-driven morphing logic to generate future-ready outputs while preserving realistic hourly structure.</p>
+            </div>
+            <div class="text-center md:text-left">
+              <i class="fas fa-download text-5xl mb-4 mx-auto md:mx-0 text-radbridge-blue"></i>
+              <h3 class="text-lg font-semibold text-gray-900 mb-3">3. Download results or trigger follow-on work</h3>
+              <p class="text-gray-600 leading-relaxed">Poll for status or receive a webhook, then download the generated EPW, optional DDY, and any related analytics for automation pipelines.</p>
+            </div>
+          </div>
+        </section>
+
+        <section id="auth" class="mb-20 scroll-mt-20">
+          <h2 class="page-section-heading mb-8">Authentication</h2>
+          <div class="grid lg:grid-cols-2 gap-8 items-start">
+            <div class="api-highlight">
+              <h3 class="text-xl font-semibold text-gray-900 mb-4">Bearer-token authentication</h3>
+              <p class="text-gray-700 leading-relaxed mb-4">
+                Authenticated API requests use a Bearer token. Signed-in users can create and manage personal access tokens inside the Future Weather application.
+              </p>
+              <div class="rounded border border-gray-200 bg-white px-4 py-3 font-mono text-sm text-gray-800">
+                Authorization: Bearer fw_your_personal_access_token
+              </div>
+            </div>
+
+            <div class="api-list">
+              <div class="api-list-item">
+                <i class="fas fa-check-circle"></i>
+                <div>Personal access tokens are available to authorized users inside the app.</div>
+              </div>
+              <div class="api-list-item">
+                <i class="fas fa-check-circle"></i>
+                <div>Full interactive documentation is available after sign-in.</div>
+              </div>
+              <div class="api-list-item">
+                <i class="fas fa-check-circle"></i>
+                <div>Webhook configuration and testing are also handled in the authenticated application.</div>
+              </div>
+              <div class="api-list-item">
+                <i class="fas fa-check-circle"></i>
+                <div>This public page is intentionally high level, so developers can evaluate the API before logging in.</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="request" class="mb-20 scroll-mt-20">
+          <h2 class="page-section-heading mb-8">Example request</h2>
+          <p class="text-lg text-gray-600 leading-relaxed mb-6">
+            A typical first integration sends a job request with a historical EPW file and a target future year. Additional parameters like scenario, models, and DDY-related inputs can be added when you need both EPW and DDY outputs.
+          </p>
+          <div class="api-code-shell mb-6">
+            <div class="api-code-header">
+              <span class="api-code-dot red"></span>
+              <span class="api-code-dot yellow"></span>
+              <span class="api-code-dot green"></span>
+              <span class="ml-2 text-sm text-gray-300">curl</span>
+            </div>
+            <pre><code>curl -X POST https://app.futureweather.co/jobs \
+  -H "Authorization: Bearer fw_your_personal_access_token" \
+  -H "Idempotency-Key: &lt;a-stable-random-uuid&gt;" \
+  -F "future_year=2080" \
+  -F "epw_file=@/path/to/file.epw"
+
+# Optional fields:
+#  -F "scenario=ssp245"
+#  -F "models=BCC-CSM2-MR"
+#  -F "outputs=DDY"
+#  -F "ddy_file=@/path/to/historical.ddy"</code></pre>
+          </div>
+          <div class="api-highlight">
+            <p class="text-gray-700 leading-relaxed">
+              The full API reference includes more detail on request fields, response structure, job polling, webhook signatures, analytics endpoints, and rate limits.
+            </p>
+          </div>
+        </section>
+
+        <section id="outputs" class="mb-20 scroll-mt-20">
+          <h2 class="page-section-heading mb-8">What you get back</h2>
+          <div class="grid md:grid-cols-2 gap-6">
+            <div class="api-card">
+              <i class="fas fa-file-waveform api-card-icon"></i>
+              <h3 class="text-xl font-semibold text-gray-900 mb-3">Future EPW output</h3>
+              <p class="text-gray-600 leading-relaxed">Every successful job produces a future EPW file suitable for simulation workflows and technical analysis.</p>
+            </div>
+            <div class="api-card">
+              <i class="fas fa-temperature-half api-card-icon"></i>
+              <h3 class="text-xl font-semibold text-gray-900 mb-3">Optional DDY generation</h3>
+              <p class="text-gray-600 leading-relaxed">When requested with the right inputs, jobs can also produce future DDY outputs aligned with the morphed weather file.</p>
+            </div>
+            <div class="api-card">
+              <i class="fas fa-list-check api-card-icon"></i>
+              <h3 class="text-xl font-semibold text-gray-900 mb-3">Job status and downloads</h3>
+              <p class="text-gray-600 leading-relaxed">Use status and download endpoints to monitor progress and retrieve results cleanly from automated clients.</p>
+            </div>
+            <div class="api-card">
+              <i class="fas fa-chart-column api-card-icon"></i>
+              <h3 class="text-xl font-semibold text-gray-900 mb-3">Comparison analytics</h3>
+              <p class="text-gray-600 leading-relaxed">Completed jobs can expose analytics comparing historical and future weather conditions for reporting or decision support.</p>
+            </div>
+          </div>
+        </section>
+
+        <section id="cta" class="mb-20 scroll-mt-20">
+          <h2 class="page-section-heading mb-8">Ready to integrate?</h2>
+          <div class="rounded-lg border border-gray-200 bg-gray-50 p-8 lg:p-10">
+            <div class="max-w-3xl">
+              <p class="text-lg text-gray-700 leading-relaxed mb-6">
+                Sign in to access the full API reference, create personal access tokens, configure webhooks, and explore more detailed EPW and DDY request examples. This public page is intended as a starting point, while the authenticated app provides the full developer toolkit.
+              </p>
+              <div class="flex flex-col sm:flex-row gap-4">
+                <a href="https://app.futureweather.co/" target="_blank" rel="noopener" class="inline-flex items-center justify-center font-medium px-5 py-2 rounded border transition duration-200 focus:outline-none focus:ring-1 focus:ring-offset-2 bg-btn-secondary-bg text-btn-secondary-text border-btn-secondary-border hover:bg-btn-secondary-hover-bg hover:text-btn-secondary-hover-text">
+                  Sign in
+                </a>
+              </div>
+              <p class="text-sm text-gray-500 mt-4">
+                Full API documentation is available to authorized users inside the Future Weather application.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section id="faq" class="mb-20 scroll-mt-20">
+          <h2 class="page-section-heading mb-8">Frequently Asked Questions</h2>
+          <div class="border-t border-gray-200">
+            <div class="border-b border-gray-200 py-6">
+              <button onclick="toggleFaq(1)" class="w-full text-left flex justify-between items-center gap-4">
+                <span class="font-medium text-gray-900">Who is this API for?</span>
+                <i class="fas fa-plus text-lg text-gray-700 transition-transform transform flex-shrink-0" id="faq-icon-1"></i>
+              </button>
+              <div id="faq-content-1" class="faq-answer hidden pt-4">
+                <p class="text-gray-600 leading-relaxed">Teams building simulation workflows, analytics pipelines, portfolio studies, and custom integrations around future climate weather files.</p>
+              </div>
+            </div>
+            <div class="border-b border-gray-200 py-6">
+              <button onclick="toggleFaq(2)" class="w-full text-left flex justify-between items-center gap-4">
+                <span class="font-medium text-gray-900">Do I need to use the web app?</span>
+                <i class="fas fa-plus text-lg text-gray-700 transition-transform transform flex-shrink-0" id="faq-icon-2"></i>
+              </button>
+              <div id="faq-content-2" class="faq-answer hidden pt-4">
+                <p class="text-gray-600 leading-relaxed">You can integrate programmatically with the API, but authenticated access is still required for the full developer documentation and token management experience.</p>
+              </div>
+            </div>
+            <div class="border-b border-gray-200 py-6">
+              <button onclick="toggleFaq(3)" class="w-full text-left flex justify-between items-center gap-4">
+                <span class="font-medium text-gray-900">Can I automate job completion handling?</span>
+                <i class="fas fa-plus text-lg text-gray-700 transition-transform transform flex-shrink-0" id="faq-icon-3"></i>
+              </button>
+              <div id="faq-content-3" class="faq-answer hidden pt-4">
+                <p class="text-gray-600 leading-relaxed">Yes. The platform supports webhooks so downstream systems can react when a job completes instead of relying only on polling.</p>
+              </div>
+            </div>
+            <div class="border-b border-gray-200 py-6">
+              <button onclick="toggleFaq(4)" class="w-full text-left flex justify-between items-center gap-4">
+                <span class="font-medium text-gray-900">Does the API return analytics too?</span>
+                <i class="fas fa-plus text-lg text-gray-700 transition-transform transform flex-shrink-0" id="faq-icon-4"></i>
+              </button>
+              <div id="faq-content-4" class="faq-answer hidden pt-4">
+                <p class="text-gray-600 leading-relaxed">Yes. In addition to downloadable outputs, completed jobs can expose comparison analytics between historical and future weather conditions.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <div id="contactModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+    <div class="bg-white rounded-lg p-8 max-w-md w-full mx-4">
+      <div class="flex justify-between items-center mb-6">
+        <h3 class="text-2xl font-bold text-radbridge-blue">Contact Us</h3>
+        <button onclick="closeContactModal()" class="text-gray-500 hover:text-gray-700" aria-label="Close contact form">
+          <i class="fas fa-times text-xl"></i>
+        </button>
+      </div>
+      <form id="contact-form" action="https://formspree.io/f/xwpbkgyo" method="POST" class="space-y-4">
+        <input type="hidden" name="_subject" id="contact-subject" value="">
+        <div>
+          <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+          <input type="text" name="name" id="name" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-radbridge-blue focus:ring-radbridge-blue">
+        </div>
+        <div>
+          <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+          <input type="email" name="email" id="email" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-radbridge-blue focus:ring-radbridge-blue">
+        </div>
+        <div>
+          <label for="message" class="block text-sm font-medium text-gray-700">Message</label>
+          <textarea name="message" id="message" rows="4" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-radbridge-blue focus:ring-radbridge-blue"></textarea>
+        </div>
+        <button type="submit" class="w-full bg-radbridge-blue text-white font-semibold px-6 py-3 rounded-lg shadow transition hover:bg-radbridge-blue/90">
+          Send Message
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <footer class="bg-gray-900 text-white py-12">
+    <div class="container-custom">
+      <div class="text-center mb-8">
+        <a href="https://radbridge.com" target="_blank" rel="noopener">
+          <img src="assets/images/Radbridge_logo_white_PNG.png" alt="Radbridge Logo" class="h-10 mx-auto">
+        </a>
+      </div>
+      <div class="text-center text-gray-400">
+        © 2025 Radbridge Incorporated.
+      </div>
+    </div>
+  </footer>
+
+  <script type="module">
+    import { initAnalytics } from './src/analytics.js';
+
+    initAnalytics();
+  </script>
+
+  <script>
+    function openContactModal() {
+      var modal = document.getElementById('contactModal');
+      if (!modal) return;
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeContactModal() {
+      var modal = document.getElementById('contactModal');
+      if (!modal) return;
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    function toggleFaq(id) {
+      var content = document.getElementById('faq-content-' + id);
+      var icon = document.getElementById('faq-icon-' + id);
+      if (!content || !icon) return;
+      var isHidden = content.classList.contains('hidden');
+      content.classList.toggle('hidden', !isHidden);
+      icon.classList.toggle('fa-plus', !isHidden);
+      icon.classList.toggle('fa-minus', isHidden);
+    }
+
+    (function () {
+      var sidebarLinks = Array.prototype.slice.call(document.querySelectorAll('.sidebar-link'));
+      var sections = sidebarLinks
+        .map(function (link) {
+          var id = link.getAttribute('href');
+          return id ? document.querySelector(id) : null;
+        })
+        .filter(Boolean);
+
+      if (!sidebarLinks.length || !sections.length || typeof IntersectionObserver === 'undefined') return;
+
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          var activeId = '#' + entry.target.id;
+          sidebarLinks.forEach(function (link) {
+            link.classList.toggle('active', link.getAttribute('href') === activeId);
+          });
+        });
+      }, {
+        rootMargin: '-20% 0px -65% 0px',
+        threshold: 0.1
+      });
+
+      sections.forEach(function (section) {
+        observer.observe(section);
+      });
+    })();
+  </script>
+</body>
+</html>

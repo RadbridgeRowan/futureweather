@@ -1,3 +1,5 @@
+import { initAnalytics, trackEvent } from './analytics';
+
 // Modal functionality
 window.openContactModal = (e) => {
   if (e) e.preventDefault();
@@ -5,6 +7,10 @@ window.openContactModal = (e) => {
   modal.classList.remove('hidden');
   modal.classList.add('flex');
   document.body.style.overflow = 'hidden';
+  trackEvent('form_start', {
+    form_name: 'contact_form',
+    form_destination: 'formspree',
+  });
 };
 
 window.closeContactModal = () => {
@@ -20,6 +26,10 @@ window.openRequestModal = (e) => {
   modal.classList.remove('hidden');
   modal.classList.add('flex');
   document.body.style.overflow = 'hidden';
+  trackEvent('form_start', {
+    form_name: 'request_form',
+    form_destination: 'formspree',
+  });
 };
 
 window.closeRequestModal = () => {
@@ -31,6 +41,7 @@ window.closeRequestModal = () => {
 
 // Simple smooth scrolling for navigation links
 document.addEventListener('DOMContentLoaded', function() {
+  initAnalytics();
   console.log('DOM Content Loaded');
   
   // Parkbeat modal functionality

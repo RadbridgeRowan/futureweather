@@ -185,6 +185,29 @@
       color: #64748b;
     }
 
+    .revit-compat-card {
+      background: white;
+      border: 1px solid #e5e7eb;
+      border-radius: 14px;
+      padding: 20px;
+    }
+
+    .revit-compat-badge i {
+      color: #1E5A8E;
+    }
+
+    .revit-compat-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 9999px;
+      background: #eff6fc;
+      color: #1e3a5f;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
     @media (max-width: 1023px) {
       .revit-hero-grid {
         display: grid;
@@ -216,30 +239,40 @@
     </header>
 
     <section class="relative overflow-hidden bg-hero-bg border-b border-gray-200">
-      <div class="container-custom py-12 lg:py-16">
-        <div class="max-w-4xl">
-          <div class="text-center lg:text-left">
-            <div class="inline-flex items-center gap-2 rounded-full border border-gray-200 bg-white px-4 py-2 text-sm text-gray-600 mb-5">
-              <i class="fas fa-cubes"></i>
-              Autodesk Revit + Dynamo
-            </div>
-            <h1 class="text-3xl lg:text-5xl mb-5 leading-snug font-medium font-open-sans text-hero-heading">
-              Generate <span class="text-btn-primary-bg font-semibold">future weather files</span>, right inside Revit
-            </h1>
-            <p class="text-lg mb-6 leading-snug font-open-sans text-hero-text max-w-2xl mx-auto lg:mx-0">
-              Generate climate-adjusted EPW and DDY files for 2035-2090 directly from Dynamo. No browser, no manual downloads, just drag, connect, and run.
-            </p>
-            <div class="flex justify-center lg:justify-start">
-              <a href="#overview" class="inline-flex items-center justify-center gap-2 font-semibold px-5 py-2 rounded transition duration-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 bg-btn-primary-bg text-btn-primary-text hover:bg-btn-primary-hover">
-                <i class="fas fa-arrow-down text-lg text-btn-primary-text"></i>
-                <span>Learn More</span>
-              </a>
-            </div>
-            <div class="mt-4 flex items-center justify-center lg:justify-start gap-2">
-              <i class="fas fa-gift text-base text-promo-icon"></i>
-              <span class="text-sm text-promo-text">New users can claim 5 free credits with the Dynamo promotion link.</span>
+      <div class="lg:flex lg:items-stretch">
+        <div class="lg:w-1/2 relative">
+          <div class="container-custom pt-12 pb-8 lg:py-16 h-full flex flex-col justify-center">
+            <div class="text-center lg:text-left">
+              <div class="inline-flex items-center gap-2 rounded-full border border-gray-200 bg-white px-4 py-2 text-sm text-gray-600 mb-5">
+                <i class="fas fa-cubes"></i>
+                Autodesk Revit + Dynamo
+              </div>
+              <h1 class="text-3xl lg:text-5xl mb-5 leading-snug font-medium font-open-sans text-hero-heading">
+                Generate <span class="text-btn-primary-bg font-semibold">future weather files</span>, right inside Revit
+              </h1>
+              <p class="text-lg mb-6 leading-snug font-open-sans text-hero-text max-w-2xl mx-auto lg:mx-0">
+                Generate climate-adjusted EPW and DDY files for 2035-2090 directly from Dynamo. No browser, no manual downloads, just drag, connect, and run.
+              </p>
+              <div class="flex justify-center lg:justify-start">
+                <a href="#overview" class="inline-flex items-center justify-center gap-2 font-semibold px-5 py-2 rounded transition duration-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 bg-btn-primary-bg text-btn-primary-text hover:bg-btn-primary-hover">
+                  <i class="fas fa-arrow-down text-lg text-btn-primary-text"></i>
+                  <span>Learn More</span>
+                </a>
+              </div>
+              <div class="mt-4 flex items-center justify-center lg:justify-start gap-2">
+                <i class="fas fa-gift text-base text-promo-icon"></i>
+                <span class="text-sm text-promo-text">New users can claim 5 free credits with the Dynamo promotion link.</span>
+              </div>
             </div>
           </div>
+        </div>
+        <div class="lg:w-1/2 relative">
+          <img
+            src="/assets/images/dynamoSingleJob.png"
+            alt="FutureWeather single job workflow in Dynamo"
+            class="h-64 w-full object-cover object-left-top lg:h-full mt-4 lg:mt-0"
+          >
+          <div class="absolute inset-0" style="background-image: linear-gradient(to right, rgba(248, 250, 251, 1) 0%, rgba(248, 250, 251, 0) 15%), linear-gradient(to top, rgba(239, 246, 252, 1) 0%, rgba(239, 246, 252, 0) 20%)"></div>
         </div>
       </div>
     </section>
@@ -331,9 +364,6 @@
               <p class="text-gray-600 leading-relaxed">Run multi-year, multi-scenario batch generation with future DDY files included alongside each EPW output.</p>
             </div>
           </div>
-          <div class="revit-placeholder mt-6">
-            <strong>Template workflow screenshots coming soon.</strong> The package already includes working example graphs, so you can start with the provided `.dyn` files immediately.
-          </div>
         </section>
 
         <section id="inputs" class="mb-20 scroll-mt-20">
@@ -364,22 +394,22 @@
                 <tr>
                   <td><strong>future_year</strong></td>
                   <td>Yes</td>
-                  <td>Target future year for climate adjustment. Integer value between 2035 and 2090, such as <code>2050</code>.</td>
+                  <td>Target year refers to the future climate period that your weather files will represent. By default, this tool uses a standard 30-year window (&plusmn;15 years) around your target year in order to reduce statistical noise. Enter an integer between 2035 and 2090, such as <code>2050</code>.</td>
                 </tr>
                 <tr>
                   <td><strong>future_years</strong></td>
                   <td>Yes, batch</td>
-                  <td>List of target years for batch generation. Example: <code>[2050, 2080]</code>.</td>
+                  <td>List of target years for batch generation. You can select multiple years, for example <code>[2050, 2080]</code>.</td>
                 </tr>
                 <tr>
                   <td><strong>scenario</strong></td>
                   <td>Yes</td>
-                  <td>CMIP6 climate scenario code. See the scenario reference below.</td>
+                  <td>CMIP6 climate scenario code representing a possible future. Climate scenarios combine socioeconomic pathways with different levels of greenhouse gas emissions. In general, higher scenarios such as <code>ssp585</code> represent more warming and greater climate impacts. See the scenario reference below.</td>
                 </tr>
                 <tr>
                   <td><strong>scenarios</strong></td>
                   <td>Yes, batch</td>
-                  <td>List of scenario codes for batch generation. Example: <code>["ssp245", "ssp585"]</code>.</td>
+                  <td>List of climate scenario codes for batch generation. You can select multiple scenarios, for example <code>["ssp245", "ssp585"]</code>.</td>
                 </tr>
                 <tr>
                   <td><strong>output_dir</strong></td>
@@ -441,11 +471,10 @@
                   </tbody>
                 </table>
               </div>
-              <p class="text-gray-600 leading-relaxed mt-4">Most users start with <strong>SSP2-4.5</strong> as a moderate baseline. For resilience studies or worst-case testing, <strong>SSP5-8.5</strong> is often the preferred scenario.</p>
-            </div>
-
-            <div class="revit-highlight">
-              <h3 class="text-2xl font-semibold text-gray-900 mb-4">Climate models</h3>
+              <p class="text-gray-700 leading-relaxed mt-4">
+                Climate scenarios represent possible futures. They combine socioeconomic pathways with different levels of greenhouse gas emissions. In general, higher scenarios like <strong>SSP5-8.5</strong> represent more warming and greater climate impacts. You can select multiple scenarios.
+              </p>
+              <h3 class="text-2xl font-semibold text-gray-900 mt-8 mb-4">Climate models</h3>
               <p class="text-gray-700 leading-relaxed mb-4">
                 FutureWeather uses an ensemble of <strong>23 CMIP6 global climate models</strong> to produce robust multi-model average projections. In the Dynamo package, the full ensemble is used automatically by default.
               </p>
@@ -488,9 +517,6 @@
               <p class="text-gray-600 leading-relaxed">
                 Results are organized into folders by year and scenario, such as <code>output_dir/2050_ssp245/</code> and <code>output_dir/2080_ssp585/</code>.
               </p>
-            </div>
-            <div class="revit-placeholder">
-              <strong>Batch workflow screenshot coming soon.</strong> The batch template already ships with the package so users can test multi-year and multi-scenario runs immediately.
             </div>
           </div>
         </section>
@@ -600,33 +626,32 @@
         <section id="compatibility" class="mb-20 scroll-mt-20">
           <h2 class="page-section-heading mb-8">Compatibility</h2>
           <div class="grid lg:grid-cols-2 gap-8 items-start">
-            <div>
-              <h3 class="text-2xl font-semibold text-gray-900 mb-4">Works with your existing tools</h3>
-              <div class="flex flex-wrap gap-3">
-                <span class="revit-pill">EnergyPlus</span>
-                <span class="revit-pill">OpenStudio</span>
-                <span class="revit-pill">DesignBuilder</span>
-                <span class="revit-pill">Ladybug Tools</span>
-                <span class="revit-pill">IES VE</span>
-                <span class="revit-pill">Any EPW-compatible tool</span>
-              </div>
-            </div>
             <div class="revit-highlight">
-              <h3 class="text-2xl font-semibold text-gray-900 mb-4">Compatible with</h3>
+              <h3 class="text-2xl font-semibold text-gray-900 mb-4">Environments</h3>
               <div class="revit-list">
                 <div class="revit-list-item">
                   <i class="fas fa-desktop"></i>
-                  <div>Revit 2025 and 2026</div>
+                  <div><strong>Revit</strong><br>2025 and 2026</div>
                 </div>
                 <div class="revit-list-item">
                   <i class="fas fa-code-branch"></i>
-                  <div>Dynamo 3.x and 4.0</div>
+                  <div><strong>Dynamo</strong><br>3.x and 4.0</div>
                 </div>
                 <div class="revit-list-item">
                   <i class="fas fa-window-maximize"></i>
-                  <div>Windows 10 and 11</div>
+                  <div><strong>Windows</strong><br>10 and 11</div>
                 </div>
               </div>
+            </div>
+
+            <div class="revit-compat-card">
+              <h3 class="text-2xl font-semibold text-gray-900 mb-4">Output files</h3>
+              <p class="text-gray-600 leading-relaxed mb-4">
+                FutureWeather generates standard weather file outputs that fit directly into downstream simulation, sizing, and comfort analysis workflows after you leave Revit.
+              </p>
+              <p class="text-gray-700 leading-relaxed">
+                Use the outputs with <strong>EnergyPlus</strong>, <strong>OpenStudio</strong>, <strong>DesignBuilder</strong>, <strong>Ladybug Tools</strong>, <strong>IES VE</strong>, and other software that accepts standard EPW weather files.
+              </p>
             </div>
           </div>
         </section>
@@ -663,24 +688,48 @@
         })
         .filter(Boolean);
 
-      if (!sidebarLinks.length || !sections.length || typeof IntersectionObserver === 'undefined') return;
+      if (!sidebarLinks.length || !sections.length) return;
 
-      var observer = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-          if (!entry.isIntersecting) return;
-          var activeId = '#' + entry.target.id;
-          sidebarLinks.forEach(function (link) {
-            link.classList.toggle('active', link.getAttribute('href') === activeId);
-          });
+      var header = document.querySelector('header');
+
+      function setActiveLink(activeId) {
+        sidebarLinks.forEach(function (link) {
+          link.classList.toggle('active', link.getAttribute('href') === activeId);
         });
-      }, {
-        rootMargin: '-20% 0px -65% 0px',
-        threshold: 0.1
+      }
+
+      function updateActiveLink() {
+        var headerOffset = header ? header.offsetHeight : 0;
+        var scrollMarker = window.scrollY + headerOffset + 120;
+        var activeSection = sections[0];
+
+        sections.forEach(function (section) {
+          if (section.offsetTop <= scrollMarker) {
+            activeSection = section;
+          }
+        });
+
+        if (activeSection) {
+          setActiveLink('#' + activeSection.id);
+        }
+      }
+
+      sidebarLinks.forEach(function (link) {
+        link.addEventListener('click', function () {
+          var targetId = link.getAttribute('href');
+          if (targetId) {
+            window.setTimeout(function () {
+              setActiveLink(targetId);
+              updateActiveLink();
+            }, 50);
+          }
+        });
       });
 
-      sections.forEach(function (section) {
-        observer.observe(section);
-      });
+      window.addEventListener('scroll', updateActiveLink, { passive: true });
+      window.addEventListener('resize', updateActiveLink);
+      window.addEventListener('hashchange', updateActiveLink);
+      updateActiveLink();
     })();
   </script>
 </body>

@@ -284,6 +284,7 @@
             <li><a href="#overview" class="sidebar-link active">Overview</a></li>
             <li><a href="#install" class="sidebar-link">How It Works</a></li>
             <li><a href="#templates" class="sidebar-link">Included Templates</a></li>
+            <li><a href="#nodes" class="sidebar-link">Included Nodes</a></li>
             <li><a href="#inputs" class="sidebar-link">Input Reference</a></li>
             <li><a href="#outputs" class="sidebar-link">What You Get</a></li>
             <li><a href="#why" class="sidebar-link">Why Future Weather</a></li>
@@ -323,45 +324,93 @@
             <div class="revit-card">
               <i class="fas fa-key revit-card-icon"></i>
               <h3 class="text-xl font-semibold text-gray-900 mb-3">3. Create an API key</h3>
-              <p class="text-gray-600 leading-relaxed">Inside the app, go to <strong>API Docs</strong>, open the <strong>API Keys</strong> tab, create a token, and save your PAT somewhere secure. It starts with <code>fw_</code>.</p>
+              <p class="text-gray-600 leading-relaxed">Inside the app, open <strong>API Docs</strong> in the left navigation, switch to the <strong>API Keys</strong> tab, click <strong>Create Token</strong>, and save your PAT somewhere secure. It starts with <code>fw_</code> and gets pasted into the Dynamo <strong>API Key (PAT)</strong> input.</p>
             </div>
             <div class="revit-card">
               <i class="fas fa-play revit-card-icon"></i>
               <h3 class="text-xl font-semibold text-gray-900 mb-3">4. Open a template and run</h3>
-              <p class="text-gray-600 leading-relaxed">Open one of the included example graphs, fill in your inputs, and click <strong>Run</strong>. Processing happens in the cloud and typically finishes in under a minute.</p>
+              <p class="text-gray-600 leading-relaxed">Open one of the included example graphs with <strong>File &gt; Open</strong>, because the templates do not appear in the node library. Fill in your inputs and click <strong>Run</strong>. Processing happens in the cloud and typically finishes in under a minute per file.</p>
             </div>
           </div>
           <div class="revit-highlight mt-8">
             <p class="text-gray-700 leading-relaxed mb-3">
-              Included templates live in your Dynamo packages folder:
+              Included templates live in your Dynamo packages folder under <code>FutureWeather\extra</code>:
             </p>
-            <div class="rounded border border-gray-200 bg-white px-4 py-3 font-mono text-sm text-gray-800">
-              %APPDATA%\Dynamo\Dynamo Revit\3\packages\FutureWeather\extra\
+            <div class="rounded border border-gray-200 bg-white px-4 py-3 font-mono text-sm text-gray-800 mb-3">
+              %APPDATA%\Dynamo\Dynamo Revit\3.6\packages\FutureWeather\extra\
             </div>
+            <div class="rounded border border-gray-200 bg-white px-4 py-3 font-mono text-sm text-gray-800 mb-3">
+              %APPDATA%\Dynamo\Dynamo Revit\4\packages\FutureWeather\extra\
+            </div>
+            <p class="text-gray-700 leading-relaxed mb-2">
+              If your installed Dynamo version is different, replace <code>3.6</code> with your version number, such as <code>3.5</code> or <code>3.7</code>.
+            </p>
+            <p class="text-gray-700 leading-relaxed">
+              <code>%APPDATA%</code> points to your Windows <strong>AppData\Roaming</strong> folder, not <strong>AppData\Local</strong>.
+            </p>
+          </div>
+          <div class="revit-highlight mt-6">
+            <h3 class="text-2xl font-semibold text-gray-900 mb-4">First-run tip</h3>
+            <p class="text-gray-700 leading-relaxed">
+              If an example graph opens with nodes stacked in the top-left corner, press <strong>Ctrl+L</strong> in Dynamo to run <strong>Cleanup Node Layout</strong>. This is a known layout issue in some Dynamo installs.
+            </p>
           </div>
         </section>
 
         <section id="templates" class="mb-20 scroll-mt-20">
           <h2 class="page-section-heading mb-8">Included templates</h2>
           <p class="text-lg text-gray-600 leading-relaxed mb-6">
-            The package includes ready-to-use Dynamo templates so you do not have to build a graph from scratch just to test the workflow. Use them as-is or adapt them into your own firm templates.
+            The package includes ready-to-use Dynamo templates so you do not have to build a graph from scratch just to test the workflow. Use them as-is or adapt them into your own firm templates and handoff standards.
           </p>
           <div class="grid md:grid-cols-2 gap-6">
             <div class="revit-card">
               <h3 class="text-xl font-semibold text-gray-900 mb-3">FW_SingleJobExample.dyn</h3>
-              <p class="text-gray-600 leading-relaxed">Generate a single future EPW file. This is the simplest starting point: provide a historical EPW, choose a year and scenario, and receive a future-adjusted EPW and STAT file.</p>
+              <p class="text-gray-600 leading-relaxed">Generate one future EPW for a single year and scenario. This is the fastest way to validate your API key, EPW input, and output folder setup.</p>
             </div>
             <div class="revit-card">
               <h3 class="text-xl font-semibold text-gray-900 mb-3">FW_SingleJobWithDDYExample.dyn</h3>
-              <p class="text-gray-600 leading-relaxed">Same workflow as the single-job template, but with a historical DDY input so you can also generate a future DDY for HVAC sizing workflows.</p>
+              <p class="text-gray-600 leading-relaxed">Same as the single-job template, but with a historical DDY input so you can generate a matching future DDY for HVAC sizing workflows.</p>
             </div>
             <div class="revit-card">
               <h3 class="text-xl font-semibold text-gray-900 mb-3">FW_BatchJobExample.dyn</h3>
-              <p class="text-gray-600 leading-relaxed">Generate multiple future EPW files at once using lists of years and scenarios. Results are organized into subdirectories by year and scenario.</p>
+              <p class="text-gray-600 leading-relaxed">Generate EPWs for multiple year and scenario combinations in one run. For example, <code>[2050, 2080]</code> with <code>["ssp245", "ssp585"]</code> creates four future EPW files.</p>
             </div>
             <div class="revit-card">
               <h3 class="text-xl font-semibold text-gray-900 mb-3">FW_BatchJobWithDDYExample.dyn</h3>
-              <p class="text-gray-600 leading-relaxed">Run multi-year, multi-scenario batch generation with future DDY files included alongside each EPW output.</p>
+              <p class="text-gray-600 leading-relaxed">Run the same multi-year, multi-scenario batch workflow with future DDY files generated alongside each EPW result.</p>
+            </div>
+          </div>
+        </section>
+
+        <section id="nodes" class="mb-20 scroll-mt-20">
+          <h2 class="page-section-heading mb-8">Included nodes</h2>
+          <p class="text-lg text-gray-600 leading-relaxed mb-6">
+            The package includes both one-step nodes for quick use and lower-level nodes for custom Dynamo graphs.
+          </p>
+          <div class="grid md:grid-cols-2 gap-6">
+            <div class="revit-card">
+              <h3 class="text-xl font-semibold text-gray-900 mb-3">FW.FutureWeatherSingleJob</h3>
+              <p class="text-gray-600 leading-relaxed">Submit, wait for completion, and download results in one step. Best for straightforward single-file workflows.</p>
+            </div>
+            <div class="revit-card">
+              <h3 class="text-xl font-semibold text-gray-900 mb-3">FW.FutureWeatherBatchJob</h3>
+              <p class="text-gray-600 leading-relaxed">Generate multiple year and scenario combinations in one run. Best for option studies, resilience testing, and packaged handoffs.</p>
+            </div>
+            <div class="revit-card">
+              <h3 class="text-xl font-semibold text-gray-900 mb-3">FW.Authenticate</h3>
+              <p class="text-gray-600 leading-relaxed">Validate your API key and confirm account access before launching a generation run.</p>
+            </div>
+            <div class="revit-card">
+              <h3 class="text-xl font-semibold text-gray-900 mb-3">FW.GenerateFutureWeather</h3>
+              <p class="text-gray-600 leading-relaxed">Submit a job without waiting for download. Useful when you want finer control over sequencing in a custom graph.</p>
+            </div>
+            <div class="revit-card">
+              <h3 class="text-xl font-semibold text-gray-900 mb-3">FW.CheckJobStatus</h3>
+              <p class="text-gray-600 leading-relaxed">Poll a submitted job and determine when outputs are ready to download.</p>
+            </div>
+            <div class="revit-card">
+              <h3 class="text-xl font-semibold text-gray-900 mb-3">FW.DownloadResults</h3>
+              <p class="text-gray-600 leading-relaxed">Download generated EPW, DDY, and STAT files after a job completes.</p>
             </div>
           </div>
         </section>
@@ -631,15 +680,19 @@
               <div class="revit-list">
                 <div class="revit-list-item">
                   <i class="fas fa-desktop"></i>
-                  <div><strong>Revit</strong><br>2025 and 2026</div>
+                  <div><strong>Revit</strong><br>2025 and newer</div>
                 </div>
                 <div class="revit-list-item">
                   <i class="fas fa-code-branch"></i>
-                  <div><strong>Dynamo</strong><br>3.x and 4.0</div>
+                  <div><strong>Dynamo</strong><br>Current Revit Dynamo environments, including 3.6 and 4.x</div>
                 </div>
                 <div class="revit-list-item">
                   <i class="fas fa-window-maximize"></i>
                   <div><strong>Windows</strong><br>10 and 11</div>
+                </div>
+                <div class="revit-list-item">
+                  <i class="fas fa-code"></i>
+                  <div><strong>Package type</strong><br>Pure Python package with no extra pip install required</div>
                 </div>
               </div>
             </div>

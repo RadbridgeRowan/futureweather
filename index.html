@@ -144,6 +144,40 @@
     /* Icon utility colors mapped to theme variables */
     .text-promo-icon { color: var(--promo-icon); }
     .text-promo-text { color: var(--promo-text); }
+
+    .announcement-entry {
+      border: 1px solid #e5e7eb;
+      border-radius: 16px;
+      background: #ffffff;
+      padding: 24px;
+      box-shadow: 0 16px 40px rgba(15, 23, 42, 0.06);
+    }
+
+    .announcement-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      border-radius: 9999px;
+      background: #eff6fc;
+      color: #1e5a8e;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      padding: 0.35rem 0.85rem;
+    }
+
+    .announcement-popup-link {
+      display: block;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 0.85rem 0.95rem;
+      transition: border-color 0.2s, background-color 0.2s, transform 0.2s;
+    }
+
+    .announcement-popup-link:hover {
+      border-color: #1e5a8e;
+      background: #f8fbfe;
+      transform: translateY(-1px);
+    }
   </style>
 </head>
 <body class="font-ibm">
@@ -226,7 +260,7 @@
                 id="app-screenshot-image"
                 src="assets/images/appAnalytics.png"
                 alt="Future Weather analytics screen"
-                class="w-full transition-opacity duration-700 ease-in-out opacity-100"
+                class="w-full transition-opacity duration-[1200ms] ease-in-out opacity-100"
               >
               <button
                 type="button"
@@ -289,6 +323,7 @@
             <li><a href="#how-it-works" class="sidebar-link">How It Works</a></li>
             <li><a href="#what-you-receive" class="sidebar-link">Common Use Cases</a></li>
             <li><a href="#pricing" class="sidebar-link">Pricing</a></li>
+            <li><a href="#announcements" class="sidebar-link">Announcements</a></li>
             <li><a href="#team" class="sidebar-link">Meet the Team</a></li>
             <li><a href="#faq" class="sidebar-link">FAQ</a></li>
           </ul>
@@ -873,6 +908,41 @@
           </script>
         </section>
 
+        <!-- Announcements Section -->
+        <section id="announcements" class="mb-20 scroll-mt-20">
+          <h2 class="page-section-heading mb-4">Announcements</h2>
+          <p class="text-lg text-gray-600 leading-relaxed mb-8">Recent product and community updates from FutureWeather.co.</p>
+          <div class="space-y-6">
+            <article class="announcement-entry">
+              <span class="announcement-tag">
+                <i class="fas fa-microphone-lines"></i>
+                ASHRAE TC 4.2
+              </span>
+              <h3 class="text-2xl font-semibold text-gray-900 mt-4 mb-3">FutureWeather.co presented to ASHRAE Technical Committee 4.2</h3>
+              <p class="text-gray-700 leading-relaxed mb-4">Rowan Schmidt, Head of Product at FutureWeather.co, was invited to present FutureWeather.co to ASHRAE Technical Committee 4.2 (Climatic Conditions) in February 2026. The session was a technical, non-commercial presentation focused on the methodology, product, and future weather generation workflow.</p>
+              <p class="text-gray-700 leading-relaxed">The presentation deck is available as a PDF for download below.</p>
+              <a href="/assets/documents/ASHRAE%20TC%204.2_Future%20Weather_Rowan%20Schmidt_20260203.pdf" target="_blank" rel="noopener" class="mt-6 inline-flex w-full items-center justify-center gap-2 font-semibold px-5 py-3 rounded bg-btn-primary-bg text-btn-primary-text hover:bg-btn-primary-hover transition duration-300">
+                <i class="fas fa-file-arrow-down text-btn-primary-text"></i>
+                <span>Download Presentation PDF</span>
+              </a>
+            </article>
+
+            <article class="announcement-entry">
+              <span class="announcement-tag">
+                <i class="fas fa-cubes"></i>
+                New integration
+              </span>
+              <h3 class="text-2xl font-semibold text-gray-900 mt-4 mb-3">New Dynamo package for Autodesk Revit workflows</h3>
+              <p class="text-gray-700 leading-relaxed mb-4">FutureWeather.co is now available as a Dynamo package for Autodesk Revit users who want to generate future climate-adjusted EPW and DDY files directly from Dynamo. The package connects to the FutureWeather.co API in the cloud, with support for single jobs, batch workflows, authentication, and result downloads.</p>
+              <p class="text-gray-700 leading-relaxed">This makes it easier to bring future climate weather files into BIM, energy modeling, HVAC sizing, and thermal comfort workflows without leaving the Revit environment.</p>
+              <a href="/revit/" class="mt-6 inline-flex w-full items-center justify-center gap-2 font-semibold px-5 py-3 rounded bg-btn-primary-bg text-btn-primary-text hover:bg-btn-primary-hover transition duration-300">
+                <i class="fas fa-arrow-right text-btn-primary-text"></i>
+                <span>Learn More</span>
+              </a>
+            </article>
+          </div>
+        </section>
+
         <!-- Meet the Team Section -->
         <section id="team" class="mb-20 scroll-mt-20">
           <h2 class="page-section-heading mb-8">Meet the Team</h2>
@@ -969,6 +1039,33 @@
         </section>
 
       </main>
+    </div>
+  </div>
+
+  <div id="announcements-popup" class="hidden md:block fixed bottom-6 right-6 z-40 w-full max-w-md px-4 md:px-0 opacity-0 translate-y-4 pointer-events-none transition-all duration-300">
+    <div class="rounded-2xl border border-gray-200 bg-white p-4 shadow-2xl">
+      <div class="flex items-center justify-between gap-3 mb-3">
+        <div>
+          <div class="text-xs font-semibold uppercase tracking-[0.18em] text-radbridge-blue">Recent announcements</div>
+        </div>
+        <button id="announcements-popup-close" type="button" class="rounded-full p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-700 transition" aria-label="Dismiss recent announcements">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="space-y-2.5 mb-3">
+        <a href="#announcements" class="announcement-popup-link announcements-popup-link">
+          <div class="text-sm font-semibold text-gray-900">ASHRAE TC 4.2 presentation</div>
+          <div class="text-sm text-gray-600 mt-1">Rowan Schmidt presented FutureWeather.co to ASHRAE TC 4.2 in February. Learn more and download the presentation.</div>
+        </a>
+        <a href="/revit/" class="announcement-popup-link announcements-popup-link">
+          <div class="text-sm font-semibold text-gray-900">New FutureWeather.co Dynamo package for Revit</div>
+          <div class="text-sm text-gray-600 mt-1">This new package enables generation of future EPW and DDY files directly from Dynamo in Autodesk Revit.</div>
+        </a>
+      </div>
+      <a href="#announcements" class="inline-flex items-center gap-2 text-sm font-semibold text-radbridge-blue hover:underline announcements-popup-link">
+        <span>View all announcements</span>
+        <i class="fas fa-arrow-right"></i>
+      </a>
     </div>
   </div>
 
@@ -1113,7 +1210,7 @@
         </a>
       </div>
       <div class="text-center text-gray-400">
-        © 2025 Radbridge Incorporated.
+        © 2026 Radbridge Incorporated.
       </div>
     </div>
   </footer>
@@ -1178,7 +1275,7 @@
           image.classList.remove('opacity-0');
           image.classList.add('opacity-100');
           isTransitioning = false;
-        }, 350);
+        }, 600);
       }
 
       function restartAutoplay() {

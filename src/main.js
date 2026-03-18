@@ -70,6 +70,40 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
+  // Landing page announcement popup
+  const announcementsPopup = document.getElementById('announcements-popup');
+  const closeAnnouncementsPopup = document.getElementById('announcements-popup-close');
+  const announcementPopupLinks = document.querySelectorAll('.announcements-popup-link');
+
+  if (announcementsPopup) {
+    const announcementPopupStorageKey = 'futureWeatherAnnouncementsClosed';
+
+    const hideAnnouncementsPopup = (rememberChoice = false) => {
+      announcementsPopup.classList.add('opacity-0', 'translate-y-4', 'pointer-events-none');
+      if (rememberChoice) {
+        sessionStorage.setItem(announcementPopupStorageKey, 'true');
+      }
+    };
+
+    if (window.innerWidth >= 768 && sessionStorage.getItem(announcementPopupStorageKey) !== 'true') {
+      setTimeout(() => {
+        announcementsPopup.classList.remove('opacity-0', 'translate-y-4', 'pointer-events-none');
+      }, 2500);
+    }
+
+    if (closeAnnouncementsPopup) {
+      closeAnnouncementsPopup.addEventListener('click', () => {
+        hideAnnouncementsPopup(true);
+      });
+    }
+
+    announcementPopupLinks.forEach((link) => {
+      link.addEventListener('click', () => {
+        hideAnnouncementsPopup(true);
+      });
+    });
+  }
+
   // Smooth scrolling for anchor links
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {

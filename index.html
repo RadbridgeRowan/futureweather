@@ -196,11 +196,28 @@
             <i class="fas fa-rocket text-base text-btn-primary-text"></i>
             <span>Try it Free</span>
           </a>
-          <a href="./publicApiPage.html" data-analytics-label="nav_api_docs" class="inline-flex items-center justify-center text-sm font-medium px-4 py-2 rounded border transition duration-300 bg-btn-secondary-bg text-btn-secondary-text border-btn-secondary-border hover:bg-btn-secondary-hover-bg hover:text-btn-secondary-hover-text">
-            <i class="fas fa-book-open text-base mr-2"></i>
-            API Docs
-          </a>
-          
+          <div class="integrations-dropdown">
+            <a href="/#integrations" class="inline-flex items-center justify-center text-sm font-medium px-4 py-2 rounded border transition duration-300 bg-btn-secondary-bg text-btn-secondary-text border-btn-secondary-border hover:bg-btn-secondary-hover-bg hover:text-btn-secondary-hover-text" data-analytics-label="nav_integrations">
+              <i class="fas fa-puzzle-piece text-base mr-2"></i>
+              Integrations
+              <i class="fas fa-chevron-down text-xs ml-2 hidden md:inline"></i>
+            </a>
+            <div class="integrations-dropdown-panel hidden md:block">
+              <a href="/publicApiPage.html" class="integrations-dropdown-item">
+                <i class="fas fa-code"></i>
+                API Documentation
+              </a>
+              <a href="/python/" class="integrations-dropdown-item">
+                <i class="fab fa-python"></i>
+                Python Package
+              </a>
+              <a href="/revit/" class="integrations-dropdown-item">
+                <i class="fas fa-cubes"></i>
+                Revit / Dynamo
+              </a>
+            </div>
+          </div>
+
         </div>
       </div>
     </header>
@@ -323,6 +340,7 @@
             <li><a href="#how-it-works" class="sidebar-link">How It Works</a></li>
             <li><a href="#what-you-receive" class="sidebar-link">Common Use Cases</a></li>
             <li><a href="#pricing" class="sidebar-link">Pricing</a></li>
+            <li><a href="#integrations" class="sidebar-link">Integrations</a></li>
             <li><a href="#announcements" class="sidebar-link">Announcements</a></li>
             <li><a href="#team" class="sidebar-link">Meet the Team</a></li>
             <li><a href="#faq" class="sidebar-link">FAQ</a></li>
@@ -906,6 +924,42 @@
               }
             }
           </script>
+        </section>
+
+        <!-- Integrations Section -->
+        <section id="integrations" class="mb-20 scroll-mt-20">
+          <h2 class="page-section-heading mb-4">Integrations</h2>
+          <p class="text-lg text-gray-600 leading-relaxed mb-8">Access FutureWeather data the way that fits your workflow.</p>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <a href="https://app.futureweather.co/" target="_blank" rel="noopener" class="integration-card group">
+              <div class="integration-card-icon">
+                <i class="fas fa-globe"></i>
+              </div>
+              <h3 class="text-lg font-semibold text-gray-900 mb-2 group-hover:text-btn-primary-bg transition">Web App</h3>
+              <p class="text-sm text-gray-600 leading-relaxed">Generate future weather files through the browser. Upload an EPW, pick your scenario, and download results.</p>
+            </a>
+            <a href="/publicApiPage.html" class="integration-card group">
+              <div class="integration-card-icon">
+                <i class="fas fa-code"></i>
+              </div>
+              <h3 class="text-lg font-semibold text-gray-900 mb-2 group-hover:text-btn-primary-bg transition">REST API</h3>
+              <p class="text-sm text-gray-600 leading-relaxed">Programmatic access for batch workflows, CI/CD pipelines, and enterprise integrations.</p>
+            </a>
+            <a href="/python/" class="integration-card group">
+              <div class="integration-card-icon">
+                <i class="fab fa-python"></i>
+              </div>
+              <h3 class="text-lg font-semibold text-gray-900 mb-2 group-hover:text-btn-primary-bg transition">Python Package</h3>
+              <p class="text-sm text-gray-600 leading-relaxed"><code class="text-xs bg-gray-100 px-1.5 py-0.5 rounded">pip install futureweather</code> — a lightweight client for scripts, notebooks, and OpenStudio workflows.</p>
+            </a>
+            <a href="/revit/" class="integration-card group">
+              <div class="integration-card-icon">
+                <i class="fas fa-cubes"></i>
+              </div>
+              <h3 class="text-lg font-semibold text-gray-900 mb-2 group-hover:text-btn-primary-bg transition">Revit / Dynamo</h3>
+              <p class="text-sm text-gray-600 leading-relaxed">Generate future EPW and DDY files directly from Dynamo without leaving your BIM workflow.</p>
+            </a>
+          </div>
         </section>
 
         <!-- Announcements Section -->

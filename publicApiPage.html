@@ -170,10 +170,27 @@
             <i class="fas fa-rocket text-base text-btn-primary-text"></i>
             <span>Try it Free</span>
           </a>
-          <a href="#overview" class="inline-flex items-center justify-center text-sm font-medium px-4 py-2 rounded border transition duration-300 bg-btn-secondary-bg text-btn-secondary-text border-btn-secondary-border hover:bg-btn-secondary-hover-bg hover:text-btn-secondary-hover-text">
-            <i class="fas fa-book-open text-base mr-2"></i>
-            API
-          </a>
+          <div class="integrations-dropdown">
+            <a href="/#integrations" class="inline-flex items-center justify-center text-sm font-medium px-4 py-2 rounded border transition duration-300 bg-btn-secondary-bg text-btn-secondary-text border-btn-secondary-border hover:bg-btn-secondary-hover-bg hover:text-btn-secondary-hover-text" data-analytics-label="nav_integrations">
+              <i class="fas fa-puzzle-piece text-base mr-2"></i>
+              Integrations
+              <i class="fas fa-chevron-down text-xs ml-2 hidden md:inline"></i>
+            </a>
+            <div class="integrations-dropdown-panel hidden md:block">
+              <a href="/publicApiPage.html" class="integrations-dropdown-item active">
+                <i class="fas fa-code"></i>
+                API Documentation
+              </a>
+              <a href="/python/" class="integrations-dropdown-item">
+                <i class="fab fa-python"></i>
+                Python Package
+              </a>
+              <a href="/revit/" class="integrations-dropdown-item">
+                <i class="fas fa-cubes"></i>
+                Revit / Dynamo
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </header>
@@ -247,6 +264,11 @@
             <li><a href="#cta" class="sidebar-link">Next Steps</a></li>
             <li><a href="#faq" class="sidebar-link">FAQ</a></li>
           </ul>
+          <div class="sidebar-divider">
+            <p class="sidebar-section-label">Other Integrations</p>
+            <a href="/python/" class="sidebar-cross-link"><i class="fab fa-python mr-2"></i>Python Package</a>
+            <a href="/revit/" class="sidebar-cross-link"><i class="fas fa-cubes mr-2"></i>Revit / Dynamo</a>
+          </div>
         </nav>
       </aside>
 

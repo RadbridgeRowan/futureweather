@@ -1,0 +1,1033 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Future Weather for Grasshopper</title>
+  <meta
+    name="description"
+    content="Generate future climate-adjusted EPW, DDY, and STAT weather files directly in Grasshopper for Ladybug Tools and Honeybee workflows."
+  >
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="/src/style.css">
+  <style>
+    h1, h2, h3, h4, h5, h6 { font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif; }
+
+    :root {
+      --nav-bg: #0B1F3F;
+      --nav-text: #FFFFFF;
+      --nav-text-hover: #E0E7EF;
+      --hero-bg: #F8FAFB;
+      --hero-heading: #0B1F3F;
+      --hero-text: #4A5568;
+      --btn-primary-bg: #1E5A8E;
+      --btn-primary-hover: #164670;
+      --btn-primary-text: #FFFFFF;
+      --btn-secondary-bg: #FFFFFF;
+      --btn-secondary-text: #1E5A8E;
+      --btn-secondary-border: #1E5A8E;
+      --btn-secondary-hover-bg: #1E5A8E;
+      --btn-secondary-hover-text: #FFFFFF;
+      --promo-icon: #6B7280;
+      --promo-text: #6B7280;
+      --soft-bg: #EEF5FB;
+      --soft-border: #D8E3EE;
+      --code-bg: #0F172A;
+      --code-text: #E5EEF8;
+    }
+
+    .text-promo-icon { color: var(--promo-icon); }
+    .text-promo-text { color: var(--promo-text); }
+
+    .gh-card {
+      background: white;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 28px 24px;
+      height: 100%;
+      transition: all 0.2s;
+    }
+
+    .gh-card:hover {
+      border-color: #cbd5e1;
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+    }
+
+    .gh-card-icon {
+      font-size: 30px;
+      color: #1E5A8E;
+      margin-bottom: 14px;
+    }
+
+    .gh-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      background: white;
+      border: 1px solid var(--soft-border);
+      border-radius: 9999px;
+      color: #334155;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .gh-highlight {
+      background: var(--soft-bg);
+      border: 1px solid var(--soft-border);
+      border-radius: 12px;
+      padding: 22px 20px;
+    }
+
+    .gh-code-shell {
+      background: linear-gradient(180deg, #172033 0%, #0F172A 100%);
+      color: var(--code-text);
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.22);
+    }
+
+    .gh-code-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 16px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .gh-code-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 9999px;
+      display: inline-block;
+    }
+
+    .gh-code-dot.red { background: #fb7185; }
+    .gh-code-dot.yellow { background: #fbbf24; }
+    .gh-code-dot.green { background: #34d399; }
+
+    .gh-code-shell pre {
+      margin: 0;
+      padding: 20px;
+      overflow-x: auto;
+      font-size: 14px;
+      line-height: 1.7;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    }
+
+    .gh-table-wrap {
+      overflow-x: auto;
+      border: 1px solid #e5e7eb;
+      border-radius: 14px;
+      background: white;
+    }
+
+    .gh-table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 720px;
+    }
+
+    .gh-table th,
+    .gh-table td {
+      padding: 14px 16px;
+      border-bottom: 1px solid #e5e7eb;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .gh-table th {
+      background: #F8FAFC;
+      color: #0F172A;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .gh-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .gh-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .gh-list-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      color: #475569;
+      line-height: 1.6;
+    }
+
+    .gh-list-item i {
+      margin-top: 4px;
+      color: #1E5A8E;
+    }
+
+    .gh-placeholder {
+      border: 1px dashed #cbd5e1;
+      border-radius: 14px;
+      background: #f8fafc;
+      padding: 22px;
+      color: #64748b;
+    }
+
+    .gh-compat-card {
+      background: white;
+      border: 1px solid #e5e7eb;
+      border-radius: 14px;
+      padding: 20px;
+    }
+
+    .gh-compat-badge i {
+      color: #1E5A8E;
+    }
+
+    .gh-compat-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 9999px;
+      background: #eff6fc;
+      color: #1e3a5f;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .gh-faq-answer.hidden {
+      display: none;
+    }
+
+    @media (max-width: 1023px) {
+      .gh-hero-grid {
+        display: grid;
+        gap: 28px;
+      }
+    }
+  </style>
+</head>
+<body class="font-ibm">
+  <div class="bg-white">
+    <header class="sticky top-0 left-0 right-0 z-30 shadow-md bg-nav-bg">
+      <div class="container-custom flex items-center justify-between py-4">
+        <div>
+          <a href="/">
+            <img src="/assets/images/LogoWhite.png" alt="Future Weather Logo" class="h-8">
+          </a>
+        </div>
+        <div class="flex items-center space-x-4">
+          <a href="https://app.futureweather.co/" target="_blank" rel="noopener" data-analytics-label="nav_sign_in" class="inline-flex items-center justify-center text-sm font-medium px-4 py-2 rounded border transition duration-300 bg-btn-secondary-bg text-btn-secondary-text border-btn-secondary-border hover:bg-btn-secondary-hover-bg hover:text-btn-secondary-hover-text">
+            Sign In
+          </a>
+          <a href="https://app.futureweather.co/signup" target="_blank" rel="noopener" data-analytics-label="nav_sign_up" class="flex items-center gap-2 rounded px-3 py-2 font-semibold text-sm transition duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 bg-btn-primary-bg text-btn-primary-text hover:bg-btn-primary-hover">
+            <span>Sign Up · 5 Free Credits</span>
+          </a>
+          <div class="integrations-dropdown">
+            <a href="/#integrations" class="inline-flex items-center justify-center text-sm font-medium px-4 py-2 rounded border transition duration-300 bg-btn-secondary-bg text-btn-secondary-text border-btn-secondary-border hover:bg-btn-secondary-hover-bg hover:text-btn-secondary-hover-text" data-analytics-label="nav_integrations">
+              <i class="fas fa-puzzle-piece text-base mr-2"></i>
+              Integrations
+              <i class="fas fa-chevron-down text-xs ml-2 hidden md:inline"></i>
+            </a>
+            <div class="integrations-dropdown-panel hidden md:block">
+              <a href="/publicApiPage.html" class="integrations-dropdown-item">
+                <i class="fas fa-code"></i>
+                API Documentation
+              </a>
+              <a href="/python/" class="integrations-dropdown-item">
+                <i class="fab fa-python"></i>
+                Python Package
+              </a>
+              <a href="/revit/" class="integrations-dropdown-item">
+                <i class="fas fa-cubes"></i>
+                Revit / Dynamo
+              </a>
+              <a href="/grasshopper/" class="integrations-dropdown-item active">
+                <i class="fas fa-bug"></i>
+                Grasshopper
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section class="relative overflow-hidden bg-hero-bg border-b border-gray-200">
+      <div class="lg:flex lg:items-stretch">
+        <div class="lg:w-1/2 relative">
+          <div class="container-custom pt-12 pb-8 lg:py-16 h-full flex flex-col justify-center">
+            <div class="text-center lg:text-left">
+              <div class="inline-flex items-center gap-2 rounded-full border border-gray-200 bg-white px-4 py-2 text-sm text-gray-600 mb-5">
+                <i class="fas fa-bug"></i>
+                Rhino Grasshopper
+              </div>
+              <h1 class="text-3xl lg:text-5xl mb-5 leading-snug font-medium font-open-sans text-hero-heading">
+                Generate <span class="text-btn-primary-bg font-semibold">future weather files</span> on the Grasshopper canvas
+              </h1>
+              <p class="text-lg mb-6 leading-snug font-open-sans text-hero-text max-w-2xl mx-auto lg:mx-0">
+                Generate climate-adjusted EPW, DDY, and STAT files for 2035-2090 directly from Grasshopper. Output paths wire straight into Ladybug and Honeybee components.
+              </p>
+              <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                <a href="#overview" class="inline-flex items-center justify-center gap-2 font-semibold px-5 py-2 rounded transition duration-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 bg-btn-primary-bg text-btn-primary-text hover:bg-btn-primary-hover">
+                  <i class="fas fa-arrow-down text-lg text-btn-primary-text"></i>
+                  <span>Learn More</span>
+                </a>
+                <a href="https://app.futureweather.co/signup" target="_blank" rel="noopener" class="inline-flex items-center justify-center font-medium px-5 py-2 rounded border transition duration-200 focus:outline-none focus:ring-1 focus:ring-offset-2 bg-btn-secondary-bg text-btn-secondary-text border-btn-secondary-border hover:bg-btn-secondary-hover-bg hover:text-btn-secondary-hover-text">
+                  Sign Up · 5 Free Credits
+                </a>
+              </div>
+              <div class="mt-4 flex items-center justify-center lg:justify-start gap-2">
+                <i class="fas fa-clock text-base text-promo-icon"></i>
+                <span class="text-sm text-promo-text">Async execution keeps the canvas responsive. Jobs typically finish in under a minute.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="lg:w-1/2 relative">
+          <img
+            src="/assets/images/grasshopperSingleJob.png"
+            alt="FutureWeather single job workflow in Grasshopper"
+            class="h-64 w-full object-cover object-left-top lg:h-full mt-4 lg:mt-0"
+          >
+          <div class="absolute inset-0" style="background-image: linear-gradient(to right, rgba(248, 250, 251, 1) 0%, rgba(248, 250, 251, 0) 15%), linear-gradient(to top, rgba(239, 246, 252, 1) 0%, rgba(239, 246, 252, 0) 20%)"></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="flex">
+      <aside class="hidden lg:block w-64 bg-white border-r border-gray-200 sticky top-14 h-[calc(100vh-3.5rem)] overflow-y-auto">
+        <nav class="py-8 px-6">
+          <ul class="space-y-1">
+            <li><a href="#overview" class="sidebar-link active">Overview</a></li>
+            <li><a href="#install" class="sidebar-link">How It Works</a></li>
+            <li><a href="#examples" class="sidebar-link">Example Files</a></li>
+            <li><a href="#components" class="sidebar-link">Components</a></li>
+            <li><a href="#inputs" class="sidebar-link">Input Reference</a></li>
+            <li><a href="#outputs" class="sidebar-link">What You Get</a></li>
+            <li><a href="#workflow" class="sidebar-link">Ladybug / Honeybee</a></li>
+            <li><a href="#why" class="sidebar-link">Why Future Weather</a></li>
+            <li><a href="#pricing" class="sidebar-link">Pricing</a></li>
+            <li><a href="#compatibility" class="sidebar-link">Compatibility</a></li>
+            <li><a href="#faq" class="sidebar-link">FAQ</a></li>
+          </ul>
+          <div class="sidebar-divider">
+            <p class="sidebar-section-label">Other Integrations</p>
+            <a href="/publicApiPage.html" class="sidebar-cross-link"><i class="fas fa-code mr-2"></i>API Documentation</a>
+            <a href="/python/" class="sidebar-cross-link"><i class="fab fa-python mr-2"></i>Python Package</a>
+            <a href="/revit/" class="sidebar-cross-link"><i class="fas fa-cubes mr-2"></i>Revit / Dynamo</a>
+          </div>
+        </nav>
+      </aside>
+
+      <main class="flex-1 max-w-5xl mx-auto px-6 py-12 lg:px-12 lg:py-16">
+        <section id="overview" class="mb-20 scroll-mt-20">
+          <h2 class="page-section-heading mb-6">Overview</h2>
+          <p class="text-lg text-gray-600 leading-relaxed mb-4">
+            FutureWeather for Grasshopper is a native .gha plugin that generates future climate-adjusted weather files directly on the canvas. You provide a historical EPW, choose a future year and emissions scenario, and the component calls the FutureWeather.co API behind the scenes. The output file paths wire directly into Ladybug and Honeybee components — no file juggling or browser needed.
+          </p>
+          <p class="text-lg text-gray-600 leading-relaxed mb-4">
+            The plugin uses CMIP6 climate projections, the current generation of IPCC climate models, to morph a historical EPW into a future-ready EPW. If you provide a historical DDY file, it also generates a matching future DDY for HVAC sizing.
+          </p>
+          <p class="text-lg text-gray-600 leading-relaxed">
+            This workflow is designed for building energy simulation, HVAC sizing, climate analysis, comfort studies, and resilience planning — anywhere you use weather files in Ladybug Tools.
+          </p>
+        </section>
+
+        <section id="install" class="mb-20 scroll-mt-20">
+          <h2 class="page-section-heading mb-8">How it works</h2>
+          <div class="grid md:grid-cols-2 xl:grid-cols-4 gap-6">
+            <div class="gh-card">
+              <i class="fas fa-download gh-card-icon"></i>
+              <h3 class="text-xl font-semibold text-gray-900 mb-3">1. Install the plugin</h3>
+              <p class="text-gray-600 leading-relaxed">In Rhino, type <strong>PackageManager</strong>, search for <strong>FutureWeather</strong>, and click <strong>Install</strong>. Restart Rhino and Grasshopper.</p>
+            </div>
+            <div class="gh-card">
+              <i class="fas fa-gift gh-card-icon"></i>
+              <h3 class="text-xl font-semibold text-gray-900 mb-3">2. Create an account</h3>
+              <p class="text-gray-600 leading-relaxed">Sign up at <a href="https://app.futureweather.co/signup" target="_blank" rel="noopener" class="text-radbridge-blue hover:underline">app.futureweather.co</a> to get <strong>5 free credits</strong> and test the included example files.</p>
+            </div>
+            <div class="gh-card">
+              <i class="fas fa-key gh-card-icon"></i>
+              <h3 class="text-xl font-semibold text-gray-900 mb-3">3. Create an API key</h3>
+              <p class="text-gray-600 leading-relaxed">Inside the app, open <strong>API Docs</strong> in the left navigation, switch to the <strong>API Keys</strong> tab, click <strong>Create Token</strong>, and save your PAT somewhere secure. It starts with <code>fw_</code> and gets pasted into the <strong>API Key</strong> input on the canvas.</p>
+            </div>
+            <div class="gh-card">
+              <i class="fas fa-play gh-card-icon"></i>
+              <h3 class="text-xl font-semibold text-gray-900 mb-3">4. Open an example and run</h3>
+              <p class="text-gray-600 leading-relaxed">Open one of the included <strong>.gh</strong> example files. Replace the placeholder values with your token, file paths, year, and scenario. Right-click the Boolean toggle and set it to <strong>True</strong> to run.</p>
+            </div>
+          </div>
+          <div class="gh-highlight mt-8">
+            <h3 class="text-2xl font-semibold text-gray-900 mb-4">Run toggle safety</h3>
+            <p class="text-gray-700 leading-relaxed">
+              Every component that spends credits has a <strong>Run</strong> boolean input that defaults to <strong>False</strong>. This prevents accidental credit spend when opening a file or changing upstream parameters. You must explicitly set it to True each time you want to run.
+            </p>
+          </div>
+        </section>
+
+        <section id="examples" class="mb-20 scroll-mt-20">
+          <h2 class="page-section-heading mb-8">Example files</h2>
+          <p class="text-lg text-gray-600 leading-relaxed mb-6">
+            The plugin includes ready-to-use Grasshopper files so you do not have to build a canvas from scratch. Each has a pre-wired layout with all inputs connected and placeholder values — just replace them with your token, parameters, and file paths. <strong>The example files are the fastest way to get started.</strong>
+          </p>
+          <div class="gh-highlight mb-8">
+            <h3 class="text-2xl font-semibold text-gray-900 mb-3">Where to find the example files</h3>
+            <p class="text-gray-700 leading-relaxed mb-3">
+              After installing from the Rhino Package Manager, the example .gh files are located in the package's <code>examples</code> folder:
+            </p>
+            <div class="rounded border border-gray-200 bg-white px-4 py-3 font-mono text-sm text-gray-800 mb-3">
+              %APPDATA%\McNeel\Rhinoceros\packages\8.0\futureweather\&lt;version&gt;\examples\
+            </div>
+            <p class="text-gray-700 leading-relaxed mb-2">
+              For example: <code>C:\Users\&lt;you&gt;\AppData\Roaming\McNeel\Rhinoceros\packages\8.0\futureweather\1.0.2\examples\</code>
+            </p>
+            <p class="text-gray-700 leading-relaxed">
+              If you are using Rhino 7, replace <code>8.0</code> with <code>7.0</code>. <code>%APPDATA%</code> points to your Windows <strong>AppData\Roaming</strong> folder, not <strong>AppData\Local</strong>.
+            </p>
+          </div>
+          <div class="grid md:grid-cols-2 xl:grid-cols-4 gap-6">
+            <div class="gh-card">
+              <h3 class="text-xl font-semibold text-gray-900 mb-3">FW_SingleJob.gh</h3>
+              <p class="text-gray-600 leading-relaxed">Generate one future EPW for a single year and scenario. The fastest way to validate your API key and test the workflow.</p>
+            </div>
+            <div class="gh-card">
+              <h3 class="text-xl font-semibold text-gray-900 mb-3">FW_SingleJobWithDDY.gh</h3>
+              <p class="text-gray-600 leading-relaxed">Same as the single-job example, but with a historical DDY input so you can generate a matching future DDY for HVAC sizing workflows.</p>
+            </div>
+            <div class="gh-card">
+              <h3 class="text-xl font-semibold text-gray-900 mb-3">FW_BatchJob.gh</h3>
+              <p class="text-gray-600 leading-relaxed">Generate EPWs for multiple year and scenario combinations in one run. For example, <code>[2050, 2080]</code> with <code>[ssp245, ssp585]</code> creates four future EPW files.</p>
+            </div>
+            <div class="gh-card">
+              <h3 class="text-xl font-semibold text-gray-900 mb-3">FW_BatchJobWithDDY.gh</h3>
+              <p class="text-gray-600 leading-relaxed">Batch-generate future EPW and matching DDY outputs across multiple year and scenario combinations when your workflow needs both simulation and HVAC sizing files.</p>
+            </div>
+          </div>
+        </section>
+
+        <section id="components" class="mb-20 scroll-mt-20">
+          <h2 class="page-section-heading mb-8">Components</h2>
+          <p class="text-lg text-gray-600 leading-relaxed mb-6">
+            All components appear under the <strong>FutureWeather</strong> tab in Grasshopper. The plugin includes both one-step async components for quick use and lower-level components for custom non-blocking workflows.
+          </p>
+          <div class="grid md:grid-cols-2 gap-6">
+            <div class="gh-card">
+              <h3 class="text-xl font-semibold text-gray-900 mb-3">FW Future Weather</h3>
+              <p class="text-gray-600 leading-relaxed">Submit, poll, and download a future EPW in one step. Runs asynchronously so the canvas stays responsive. Best for straightforward single-file workflows.</p>
+            </div>
+            <div class="gh-card">
+              <h3 class="text-xl font-semibold text-gray-900 mb-3">FW Future Weather Batch</h3>
+              <p class="text-gray-600 leading-relaxed">Generate multiple year and scenario combinations in one run. Best for parametric studies, resilience testing, and multi-scenario comparisons.</p>
+            </div>
+            <div class="gh-card">
+              <h3 class="text-xl font-semibold text-gray-900 mb-3">FW Authenticate</h3>
+              <p class="text-gray-600 leading-relaxed">Validate your API key and confirm your credit balance before launching a generation run.</p>
+            </div>
+            <div class="gh-card">
+              <h3 class="text-xl font-semibold text-gray-900 mb-3">FW List Projects</h3>
+              <p class="text-gray-600 leading-relaxed">List your projects in the FutureWeather dashboard for organizing jobs by client or building.</p>
+            </div>
+            <div class="gh-card">
+              <h3 class="text-xl font-semibold text-gray-900 mb-3">FW Submit Job</h3>
+              <p class="text-gray-600 leading-relaxed">Submit a job without waiting for completion. Returns a job ID immediately. Useful for custom sequencing in advanced workflows.</p>
+            </div>
+            <div class="gh-card">
+              <h3 class="text-xl font-semibold text-gray-900 mb-3">FW Check Status</h3>
+              <p class="text-gray-600 leading-relaxed">Poll a submitted job's status. Wire to a Grasshopper <strong>Timer</strong> component for auto-polling.</p>
+            </div>
+            <div class="gh-card">
+              <h3 class="text-xl font-semibold text-gray-900 mb-3">FW Download Results</h3>
+              <p class="text-gray-600 leading-relaxed">Download generated EPW, DDY, and STAT files after a job completes.</p>
+            </div>
+          </div>
+        </section>
+
+        <section id="inputs" class="mb-20 scroll-mt-20">
+          <h2 class="page-section-heading mb-8">Input reference</h2>
+          <p class="text-lg text-gray-600 leading-relaxed mb-6">
+            Every input used by the FutureWeather Grasshopper components is summarized below. All inputs accept text from Grasshopper Panels — no sliders or type conversions needed.
+          </p>
+          <div class="gh-table-wrap mb-8">
+            <table class="gh-table">
+              <thead>
+                <tr>
+                  <th>Input</th>
+                  <th>Required</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Key</strong></td>
+                  <td>Yes</td>
+                  <td>Your Personal Access Token. Starts with <code>fw_</code>. Create one in the app under API Docs > API Keys.</td>
+                </tr>
+                <tr>
+                  <td><strong>EPW</strong></td>
+                  <td>Yes</td>
+                  <td>Path to your historical EPW weather file. Type or paste a file path in a Panel.</td>
+                </tr>
+                <tr>
+                  <td><strong>Year</strong></td>
+                  <td>Yes</td>
+                  <td>Target future year between 2035 and 2090 (e.g., <code>2050</code>). Uses a 30-year window around the target to reduce statistical noise. Enter as text in a Panel.</td>
+                </tr>
+                <tr>
+                  <td><strong>Years</strong></td>
+                  <td>Yes, batch</td>
+                  <td>List of target years for batch generation. Put each year on its own line in a Panel, or separate with commas (e.g., <code>2050, 2080</code>).</td>
+                </tr>
+                <tr>
+                  <td><strong>SSP</strong></td>
+                  <td>Yes</td>
+                  <td>CMIP6 climate scenario code. Options: <code>ssp126</code>, <code>ssp245</code>, <code>ssp370</code>, <code>ssp585</code>. See the scenario reference below.</td>
+                </tr>
+                <tr>
+                  <td><strong>SSPs</strong></td>
+                  <td>Yes, batch</td>
+                  <td>List of scenario codes for batch generation. One per line in a Panel, or comma-separated (e.g., <code>ssp245, ssp585</code>).</td>
+                </tr>
+                <tr>
+                  <td><strong>Dir</strong></td>
+                  <td>Yes</td>
+                  <td>Output directory where generated files will be saved.</td>
+                </tr>
+                <tr>
+                  <td><strong>DDY</strong></td>
+                  <td>No</td>
+                  <td>Path to a historical DDY file. When provided, a future-adjusted DDY is generated alongside the EPW.</td>
+                </tr>
+                <tr>
+                  <td><strong>Name</strong></td>
+                  <td>No</td>
+                  <td>Friendly label for the job (e.g., <code>Chicago Office 2050</code>) to help identify it in the dashboard.</td>
+                </tr>
+                <tr>
+                  <td><strong>Project</strong></td>
+                  <td>No</td>
+                  <td>Project label for organization. If the project does not exist yet, it is created automatically.</td>
+                </tr>
+                <tr>
+                  <td><strong>Run</strong></td>
+                  <td>Yes</td>
+                  <td>Boolean toggle. Defaults to <strong>False</strong>. Set to True to start the job. Prevents accidental credit spend.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="grid lg:grid-cols-2 gap-8 items-start">
+            <div>
+              <h3 class="text-2xl font-semibold text-gray-900 mb-4">Climate scenarios</h3>
+              <div class="gh-table-wrap">
+                <table class="gh-table">
+                  <thead>
+                    <tr>
+                      <th>Scenario</th>
+                      <th>Code</th>
+                      <th>Global Warming by 2100</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>SSP1-2.6</td>
+                      <td><code>ssp126</code></td>
+                      <td>~1.8&deg;C</td>
+                    </tr>
+                    <tr>
+                      <td>SSP2-4.5</td>
+                      <td><code>ssp245</code></td>
+                      <td>~2.7&deg;C</td>
+                    </tr>
+                    <tr>
+                      <td>SSP3-7.0</td>
+                      <td><code>ssp370</code></td>
+                      <td>~3.6&deg;C</td>
+                    </tr>
+                    <tr>
+                      <td>SSP5-8.5</td>
+                      <td><code>ssp585</code></td>
+                      <td>~4.4&deg;C</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <p class="text-gray-700 leading-relaxed mt-4">
+                Climate scenarios represent possible futures. They combine socioeconomic pathways with different levels of greenhouse gas emissions. In general, higher scenarios like <strong>SSP5-8.5</strong> represent more warming and greater climate impacts.
+              </p>
+              <h3 class="text-2xl font-semibold text-gray-900 mt-8 mb-4">Climate models</h3>
+              <p class="text-gray-700 leading-relaxed mb-4">
+                FutureWeather uses an ensemble of <strong>23 CMIP6 global climate models</strong> to produce robust multi-model average projections. In the Grasshopper plugin, the full ensemble is used automatically by default.
+              </p>
+              <p class="text-gray-700 leading-relaxed">
+                If you need to select specific climate models for research or a custom workflow, use the <a href="https://app.futureweather.co/" target="_blank" rel="noopener" class="text-radbridge-blue hover:underline">FutureWeather web app</a> or <a href="/publicApiPage.html" class="text-radbridge-blue hover:underline">API</a>, both of which support model-level selection.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section id="outputs" class="mb-20 scroll-mt-20">
+          <h2 class="page-section-heading mb-8">What you get</h2>
+          <div class="grid md:grid-cols-3 gap-6 mb-8">
+            <div class="gh-card">
+              <i class="fas fa-file-waveform gh-card-icon"></i>
+              <h3 class="text-xl font-semibold text-gray-900 mb-3">Future EPW</h3>
+              <p class="text-gray-600 leading-relaxed">Annual hourly weather data for EnergyPlus, OpenStudio, Ladybug, Honeybee, and other tools that accept standard EPW files. Always generated.</p>
+            </div>
+            <div class="gh-card">
+              <i class="fas fa-temperature-half gh-card-icon"></i>
+              <h3 class="text-xl font-semibold text-gray-900 mb-3">Future DDY</h3>
+              <p class="text-gray-600 leading-relaxed">Future design day conditions in ASHRAE format for HVAC sizing. Generated when you provide a historical DDY input.</p>
+            </div>
+            <div class="gh-card">
+              <i class="fas fa-chart-column gh-card-icon"></i>
+              <h3 class="text-xl font-semibold text-gray-900 mb-3">STAT report</h3>
+              <p class="text-gray-600 leading-relaxed">Climate statistics summary generated alongside the EPW output for quick review and reporting.</p>
+            </div>
+          </div>
+
+          <div class="grid lg:grid-cols-2 gap-8 items-start">
+            <div>
+              <h3 class="text-2xl font-semibold text-gray-900 mb-4">Batch generation</h3>
+              <p class="text-gray-600 leading-relaxed mb-4">
+                Need multiple scenarios or multiple future years? Use <strong>FW Future Weather Batch</strong> to generate all combinations in one run.
+              </p>
+              <p class="text-gray-600 leading-relaxed mb-4">
+                Example: <code>[2050, 2080]</code> &times; <code>[ssp245, ssp585]</code> creates four future weather files in a single run, using four credits.
+              </p>
+              <p class="text-gray-600 leading-relaxed">
+                Results are organized into subdirectories by year and scenario, such as <code>output_dir/2050_ssp245/</code> and <code>output_dir/2080_ssp585/</code>.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section id="workflow" class="mb-20 scroll-mt-20">
+          <h2 class="page-section-heading mb-8">Ladybug / Honeybee integration</h2>
+          <p class="text-lg text-gray-600 leading-relaxed mb-6">
+            FutureWeather outputs file paths that wire directly into downstream Ladybug and Honeybee components. Everything downstream works exactly the same — the only difference is that the EPW now represents future rather than historical climate conditions.
+          </p>
+
+          <div class="grid lg:grid-cols-2 gap-8 mb-8">
+            <div>
+              <h3 class="text-2xl font-semibold text-gray-900 mb-4">Climate analysis (Ladybug)</h3>
+              <p class="text-gray-600 leading-relaxed mb-4">
+                For sun path diagrams, wind roses, psychrometric charts, radiation analysis, and UTCI comfort maps, wire the future EPW into <strong>LB Import EPW</strong>:
+              </p>
+              <div class="gh-code-shell">
+                <div class="gh-code-header">
+                  <span class="gh-code-dot red"></span>
+                  <span class="gh-code-dot yellow"></span>
+                  <span class="gh-code-dot green"></span>
+                  <span class="ml-2 text-sm text-gray-300">Ladybug workflow</span>
+                </div>
+                <pre><code>[LB Download Weather]
+        |
+        v  epw_file
+[FW Future Weather]
+   Year: 2060
+   SSP:  ssp245
+   Run:  True
+        |
+        v  EPW (file path)
+[LB Import EPW]
+        |
+        v  dry_bulb_temp, wind_speed, radiation ...
+[LB SunPath]  [LB Wind Rose]  [LB Psychrometric Chart]</code></pre>
+              </div>
+            </div>
+
+            <div>
+              <h3 class="text-2xl font-semibold text-gray-900 mb-4">Energy simulation (Honeybee)</h3>
+              <p class="text-gray-600 leading-relaxed mb-4">
+                For building energy simulation and HVAC sizing, wire the future EPW and DDY paths into <strong>HB Model to OSM</strong>:
+              </p>
+              <div class="gh-code-shell">
+                <div class="gh-code-header">
+                  <span class="gh-code-dot red"></span>
+                  <span class="gh-code-dot yellow"></span>
+                  <span class="gh-code-dot green"></span>
+                  <span class="ml-2 text-sm text-gray-300">Honeybee workflow</span>
+                </div>
+                <pre><code>[FW Future Weather]
+   EPW + DDY inputs
+   Year: 2060
+   SSP:  ssp245
+        |            |
+        v EPW        v DDY
+[HB Model to OSM]  [HB Sizing Parameter]
+        |                   |
+        v                   v
+    annual sim         HVAC sizing
+        |
+        v
+[HB Read Room Energy Result]
+   heating, cooling, peak loads</code></pre>
+              </div>
+            </div>
+          </div>
+
+          <div class="gh-highlight">
+            <h3 class="text-2xl font-semibold text-gray-900 mb-4">Why the DDY matters for sizing</h3>
+            <p class="text-gray-700 leading-relaxed mb-3">
+              EnergyPlus uses design day conditions from the DDY file to size HVAC systems. A historical DDY might define the 0.4% cooling design day at 35&deg;C, but by 2060 the equivalent design day could be 38&deg;C. If you morph the EPW but keep the historical DDY, the cooling system gets sized for today's extremes but simulated in a hotter climate — it may be undersized.
+            </p>
+            <p class="text-gray-700 leading-relaxed">
+              When you provide a historical DDY alongside the EPW, FutureWeather generates a future DDY that shifts the design conditions in lockstep with the morphed EPW, keeping your sizing and simulation consistent.
+            </p>
+          </div>
+        </section>
+
+        <section id="why" class="mb-20 scroll-mt-20">
+          <h2 class="page-section-heading mb-8">Why Future Weather</h2>
+          <div class="grid lg:grid-cols-2 gap-8 items-start">
+            <div class="gh-list">
+              <div class="gh-list-item">
+                <i class="fas fa-check-circle"></i>
+                <div><strong>Buildings designed today last decades.</strong> Historical weather files do not account for the climate conditions those buildings will actually experience.</div>
+              </div>
+              <div class="gh-list-item">
+                <i class="fas fa-check-circle"></i>
+                <div><strong>Energy codes and resilience frameworks</strong> increasingly expect future climate analysis rather than present-day-only sizing assumptions.</div>
+              </div>
+              <div class="gh-list-item">
+                <i class="fas fa-check-circle"></i>
+                <div><strong>Future-year simulation supports</strong> LEED, BREEAM, Passive House, resilience planning, and long-horizon HVAC sizing decisions.</div>
+              </div>
+              <div class="gh-list-item">
+                <i class="fas fa-check-circle"></i>
+                <div><strong>Current design days may understate future cooling loads</strong>, especially for projects with long operational lifetimes.</div>
+              </div>
+            </div>
+
+            <div class="gh-highlight">
+              <h3 class="text-2xl font-semibold text-gray-900 mb-4">The science</h3>
+              <div class="gh-list">
+                <div class="gh-list-item">
+                  <i class="fas fa-flask"></i>
+                  <div><strong>CMIP6 climate projections</strong> based on the IPCC AR6 generation of models.</div>
+                </div>
+                <div class="gh-list-item">
+                  <i class="fas fa-layer-group"></i>
+                  <div><strong>23 global climate models</strong> combined into a robust ensemble average.</div>
+                </div>
+                <div class="gh-list-item">
+                  <i class="fas fa-road"></i>
+                  <div><strong>4 emissions scenarios</strong> from low-emissions mitigation to very high emissions.</div>
+                </div>
+                <div class="gh-list-item">
+                  <i class="fas fa-book-open"></i>
+                  <div><strong>Peer-reviewed methodology</strong> developed at the University of Coimbra with more than 180 citations.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="pricing" class="mb-20 scroll-mt-20">
+          <h2 class="page-section-heading mb-8">Pricing</h2>
+          <p class="text-lg text-gray-600 leading-relaxed mb-6">
+            The Grasshopper plugin is <strong>free</strong>. Weather file generation uses credits, where one credit equals one run and includes an EPW, STAT, and optional DDY output.
+          </p>
+          <div class="gh-table-wrap mb-6">
+            <table class="gh-table">
+              <thead>
+                <tr>
+                  <th>Credits</th>
+                  <th>Price</th>
+                  <th>Per File</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>$50</td>
+                  <td>$50</td>
+                </tr>
+                <tr>
+                  <td>4</td>
+                  <td>$100</td>
+                  <td>$25</td>
+                </tr>
+                <tr>
+                  <td>8</td>
+                  <td>$160</td>
+                  <td>$20</td>
+                </tr>
+                <tr>
+                  <td>10+</td>
+                  <td>$17 each</td>
+                  <td>$17</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="rounded-lg border border-gray-200 bg-gray-50 p-8 lg:p-10">
+            <div class="max-w-3xl">
+              <p class="text-lg text-gray-700 leading-relaxed mb-6">
+                New users get <strong>5 free credits</strong> to test the service and try the included example files.
+              </p>
+              <div class="flex flex-col sm:flex-row gap-4">
+                <a href="https://app.futureweather.co/signup" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-2 font-semibold px-5 py-2 rounded bg-btn-primary-bg text-btn-primary-text hover:bg-btn-primary-hover transition duration-300">
+                  <span>Sign Up · 5 Free Credits</span>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="rounded-lg border border-gray-200 bg-white p-8 lg:p-10 mt-6">
+            <div class="max-w-3xl">
+              <h3 class="text-2xl font-semibold text-gray-900 mb-4">Enterprise & Partners</h3>
+              <p class="text-lg text-gray-700 leading-relaxed mb-6">
+                Planning larger studies, team workflows, or partner offerings? We offer volume discounts, organization-wide purchasing, and support for enterprise and implementation partners.
+              </p>
+              <div class="flex flex-col sm:flex-row gap-4">
+                <button onclick="document.getElementById('contact-subject').value='FutureWeather Grasshopper enterprise or partnership inquiry'; openContactModal()" class="inline-flex items-center justify-center gap-2 font-semibold px-5 py-2 rounded bg-btn-primary-bg text-btn-primary-text hover:bg-btn-primary-hover transition duration-300">
+                  <i class="fas fa-envelope text-btn-primary-text"></i>
+                  <span>Contact Us</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="compatibility" class="mb-20 scroll-mt-20">
+          <h2 class="page-section-heading mb-8">Compatibility</h2>
+          <div class="grid lg:grid-cols-2 gap-8 items-start">
+            <div class="gh-highlight">
+              <h3 class="text-2xl font-semibold text-gray-900 mb-4">Environments</h3>
+              <div class="gh-list">
+                <div class="gh-list-item">
+                  <i class="fas fa-desktop"></i>
+                  <div><strong>Rhino</strong><br>7 and 8 (Rhino 8 uses a .NET Framework 4.8 compatibility layer)</div>
+                </div>
+                <div class="gh-list-item">
+                  <i class="fas fa-bug"></i>
+                  <div><strong>Grasshopper</strong><br>Included with Rhino 7+ and Rhino 8</div>
+                </div>
+                <div class="gh-list-item">
+                  <i class="fas fa-window-maximize"></i>
+                  <div><strong>Windows</strong><br>10 and 11</div>
+                </div>
+                <div class="gh-list-item">
+                  <i class="fas fa-code"></i>
+                  <div><strong>Package type</strong><br>Compiled C# .gha plugin — no Python dependencies or pip installs needed</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="gh-compat-card">
+              <h3 class="text-2xl font-semibold text-gray-900 mb-4">Works with</h3>
+              <p class="text-gray-600 leading-relaxed mb-4">
+                Output files wire directly into Ladybug Tools and Honeybee components and are compatible with any software that accepts standard EPW weather files.
+              </p>
+              <p class="text-gray-700 leading-relaxed">
+                Use the outputs with <strong>Ladybug</strong>, <strong>Honeybee</strong>, <strong>EnergyPlus</strong>, <strong>OpenStudio</strong>, <strong>DesignBuilder</strong>, <strong>IES VE</strong>, and other simulation tools.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section id="faq" class="mb-20 scroll-mt-20">
+          <h2 class="page-section-heading mb-8">Frequently Asked Questions</h2>
+          <div class="border-t border-gray-200">
+            <div class="border-b border-gray-200 py-6">
+              <button onclick="toggleFaq(1)" class="w-full text-left flex justify-between items-center gap-4">
+                <span class="font-medium text-gray-900">Does this freeze the Grasshopper canvas?</span>
+                <i class="fas fa-plus text-lg text-gray-700 transition-transform transform flex-shrink-0" id="faq-icon-1"></i>
+              </button>
+              <div id="faq-content-1" class="gh-faq-answer hidden pt-4">
+                <p class="text-gray-600 leading-relaxed">No. The main components (FW Future Weather and FW Future Weather Batch) run asynchronously on a background thread. The canvas stays responsive during processing, and the component's status message updates live (Uploading, Processing, Downloading, Done).</p>
+              </div>
+            </div>
+            <div class="border-b border-gray-200 py-6">
+              <button onclick="toggleFaq(2)" class="w-full text-left flex justify-between items-center gap-4">
+                <span class="font-medium text-gray-900">How long does a job take?</span>
+                <i class="fas fa-plus text-lg text-gray-700 transition-transform transform flex-shrink-0" id="faq-icon-2"></i>
+              </button>
+              <div id="faq-content-2" class="gh-faq-answer hidden pt-4">
+                <p class="text-gray-600 leading-relaxed">Typically under a minute. The component polls automatically and downloads results when the job completes.</p>
+              </div>
+            </div>
+            <div class="border-b border-gray-200 py-6">
+              <button onclick="toggleFaq(3)" class="w-full text-left flex justify-between items-center gap-4">
+                <span class="font-medium text-gray-900">Do I need Python or pip?</span>
+                <i class="fas fa-plus text-lg text-gray-700 transition-transform transform flex-shrink-0" id="faq-icon-3"></i>
+              </button>
+              <div id="faq-content-3" class="gh-faq-answer hidden pt-4">
+                <p class="text-gray-600 leading-relaxed">No. The plugin is a compiled C# .gha assembly. It installs through the Rhino Package Manager with no Python, pip, or other dependencies.</p>
+              </div>
+            </div>
+            <div class="border-b border-gray-200 py-6">
+              <button onclick="toggleFaq(4)" class="w-full text-left flex justify-between items-center gap-4">
+                <span class="font-medium text-gray-900">Can I use text Panels for Year and Scenario inputs?</span>
+                <i class="fas fa-plus text-lg text-gray-700 transition-transform transform flex-shrink-0" id="faq-icon-4"></i>
+              </button>
+              <div id="faq-content-4" class="gh-faq-answer hidden pt-4">
+                <p class="text-gray-600 leading-relaxed">Yes. All inputs accept text. You can type <code>2050</code> in a Panel and wire it directly — no Number Sliders or type conversions needed. For batch components, put each value on its own line or separate with commas.</p>
+              </div>
+            </div>
+            <div class="border-b border-gray-200 py-6">
+              <button onclick="toggleFaq(5)" class="w-full text-left flex justify-between items-center gap-4">
+                <span class="font-medium text-gray-900">Will it re-run the job every time Grasshopper re-solves?</span>
+                <i class="fas fa-plus text-lg text-gray-700 transition-transform transform flex-shrink-0" id="faq-icon-5"></i>
+              </button>
+              <div id="faq-content-5" class="gh-faq-answer hidden pt-4">
+                <p class="text-gray-600 leading-relaxed">No. The component hashes its inputs. If nothing has changed since the last run, it uses the cached results instead of submitting a new job. You will not be double-charged.</p>
+              </div>
+            </div>
+            <div class="border-b border-gray-200 py-6">
+              <button onclick="toggleFaq(6)" class="w-full text-left flex justify-between items-center gap-4">
+                <span class="font-medium text-gray-900">Where do I get an API key?</span>
+                <i class="fas fa-plus text-lg text-gray-700 transition-transform transform flex-shrink-0" id="faq-icon-6"></i>
+              </button>
+              <div id="faq-content-6" class="gh-faq-answer hidden pt-4">
+                <p class="text-gray-600 leading-relaxed">Sign in at <a href="https://app.futureweather.co" target="_blank" rel="noopener" class="text-radbridge-blue hover:underline">app.futureweather.co</a>, go to <strong>API Docs > API Keys</strong>, and create a new key. The key starts with <code>fw_</code>.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <footer class="bg-gray-900 text-white py-12">
+    <div class="container-custom">
+      <div class="text-center mb-8">
+        <a href="https://radbridge.com" target="_blank" rel="noopener">
+          <img src="/assets/images/Radbridge_logo_white_PNG.png" alt="Radbridge Logo" class="h-10 mx-auto">
+        </a>
+      </div>
+      <div class="text-center text-gray-400">
+        &copy; 2026 Radbridge Incorporated.
+      </div>
+    </div>
+  </footer>
+
+  <div id="contactModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+    <div class="bg-white rounded-lg p-8 max-w-md w-full mx-4">
+      <div class="flex justify-between items-center mb-6">
+        <h3 class="text-2xl font-bold text-radbridge-blue">Contact Us</h3>
+        <button onclick="closeContactModal()" class="text-gray-500 hover:text-gray-700" aria-label="Close contact form">
+          <i class="fas fa-times text-xl"></i>
+        </button>
+      </div>
+      <form id="contact-form" action="https://formspree.io/f/xwpbkgyo" method="POST" class="space-y-4">
+        <input type="hidden" name="_subject" id="contact-subject" value="">
+        <div>
+          <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+          <input type="text" name="name" id="name" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-radbridge-blue focus:ring-radbridge-blue">
+        </div>
+        <div>
+          <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+          <input type="email" name="email" id="email" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-radbridge-blue focus:ring-radbridge-blue">
+        </div>
+        <div>
+          <label for="message" class="block text-sm font-medium text-gray-700">Message</label>
+          <textarea name="message" id="message" rows="4" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-radbridge-blue focus:ring-radbridge-blue"></textarea>
+        </div>
+        <button type="submit" class="w-full bg-radbridge-blue text-white font-semibold px-6 py-3 rounded-lg shadow transition hover:bg-radbridge-blue/90">
+          Send Message
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <script type="module">
+    import { initAnalytics } from '../src/analytics.js';
+
+    initAnalytics();
+  </script>
+
+  <script>
+    function openContactModal() {
+      var modal = document.getElementById('contactModal');
+      if (!modal) return;
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeContactModal() {
+      var modal = document.getElementById('contactModal');
+      if (!modal) return;
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    function toggleFaq(id) {
+      var content = document.getElementById('faq-content-' + id);
+      var icon = document.getElementById('faq-icon-' + id);
+      if (!content || !icon) return;
+      var isHidden = content.classList.contains('hidden');
+      content.classList.toggle('hidden', !isHidden);
+      icon.classList.toggle('fa-plus', !isHidden);
+      icon.classList.toggle('fa-minus', isHidden);
+    }
+
+    (function () {
+      var sidebarLinks = Array.prototype.slice.call(document.querySelectorAll('.sidebar-link'));
+      var sections = sidebarLinks
+        .map(function (link) {
+          var id = link.getAttribute('href');
+          return id ? document.querySelector(id) : null;
+        })
+        .filter(Boolean);
+
+      if (!sidebarLinks.length || !sections.length) return;
+
+      var header = document.querySelector('header');
+
+      function setActiveLink(activeId) {
+        sidebarLinks.forEach(function (link) {
+          link.classList.toggle('active', link.getAttribute('href') === activeId);
+        });
+      }
+
+      function updateActiveLink() {
+        var headerOffset = header ? header.offsetHeight : 0;
+        var scrollMarker = window.scrollY + headerOffset + 120;
+        var activeSection = sections[0];
+
+        sections.forEach(function (section) {
+          if (section.offsetTop <= scrollMarker) {
+            activeSection = section;
+          }
+        });
+
+        if (activeSection) {
+          setActiveLink('#' + activeSection.id);
+        }
+      }
+
+      sidebarLinks.forEach(function (link) {
+        link.addEventListener('click', function () {
+          var targetId = link.getAttribute('href');
+          if (targetId) {
+            window.setTimeout(function () {
+              setActiveLink(targetId);
+              updateActiveLink();
+            }, 50);
+          }
+        });
+      });
+
+      window.addEventListener('scroll', updateActiveLink, { passive: true });
+      window.addEventListener('resize', updateActiveLink);
+      window.addEventListener('hashchange', updateActiveLink);
+      updateActiveLink();
+    })();
+  </script>
+</body>
+</html>

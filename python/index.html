@@ -240,6 +240,10 @@
                 <i class="fas fa-cubes"></i>
                 Revit / Dynamo
               </a>
+              <a href="/grasshopper/" class="integrations-dropdown-item">
+                <i class="fas fa-bug"></i>
+                Grasshopper
+              </a>
             </div>
           </div>
         </div>
@@ -323,6 +327,7 @@ paths = futureweather.generate(
             <p class="sidebar-section-label">Other Integrations</p>
             <a href="/publicApiPage.html" class="sidebar-cross-link"><i class="fas fa-code mr-2"></i>API Documentation</a>
             <a href="/revit/" class="sidebar-cross-link"><i class="fas fa-cubes mr-2"></i>Revit / Dynamo</a>
+            <a href="/grasshopper/" class="sidebar-cross-link"><i class="fas fa-bug mr-2"></i>Grasshopper</a>
           </div>
         </nav>
       </aside>
@@ -815,6 +820,20 @@ paths = futureweather.download_results("fw_your_key_here", job_id, "./output/")<
               </tbody>
             </table>
           </div>
+          <div class="rounded-lg border border-gray-200 bg-gray-50 p-8 lg:p-10">
+            <div class="max-w-3xl">
+              <h3 class="text-2xl font-semibold text-gray-900 mb-4">Enterprise & Partners</h3>
+              <p class="text-lg text-gray-700 leading-relaxed mb-6">
+                Running larger studies, team workflows, or partner integrations? We offer volume discounts, organization-wide purchasing, and support for enterprise and implementation partners.
+              </p>
+              <div class="flex flex-col sm:flex-row gap-4">
+                <button onclick="document.getElementById('contact-subject').value='FutureWeather Python enterprise or partnership inquiry'; openContactModal()" class="inline-flex items-center justify-center gap-2 font-semibold px-5 py-2 rounded bg-btn-primary-bg text-btn-primary-text hover:bg-btn-primary-hover transition duration-300">
+                  <i class="fas fa-envelope text-btn-primary-text"></i>
+                  <span>Contact Us</span>
+                </button>
+              </div>
+            </div>
+          </div>
         </section>
 
         <section id="faq" class="mb-20 scroll-mt-20">
@@ -907,6 +926,35 @@ paths = futureweather.download_results("fw_your_key_here", job_id, "./output/")<
     </div>
   </div>
 
+  <div id="contactModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+    <div class="bg-white rounded-lg p-8 max-w-md w-full mx-4">
+      <div class="flex justify-between items-center mb-6">
+        <h3 class="text-2xl font-bold text-radbridge-blue">Contact Us</h3>
+        <button onclick="closeContactModal()" class="text-gray-500 hover:text-gray-700" aria-label="Close contact form">
+          <i class="fas fa-times text-xl"></i>
+        </button>
+      </div>
+      <form id="contact-form" action="https://formspree.io/f/xwpbkgyo" method="POST" class="space-y-4">
+        <input type="hidden" name="_subject" id="contact-subject" value="">
+        <div>
+          <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+          <input type="text" name="name" id="name" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-radbridge-blue focus:ring-radbridge-blue">
+        </div>
+        <div>
+          <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+          <input type="email" name="email" id="email" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-radbridge-blue focus:ring-radbridge-blue">
+        </div>
+        <div>
+          <label for="message" class="block text-sm font-medium text-gray-700">Message</label>
+          <textarea name="message" id="message" rows="4" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-radbridge-blue focus:ring-radbridge-blue"></textarea>
+        </div>
+        <button type="submit" class="w-full bg-radbridge-blue text-white font-semibold px-6 py-3 rounded-lg shadow transition hover:bg-radbridge-blue/90">
+          Send Message
+        </button>
+      </form>
+    </div>
+  </div>
+
   <footer class="bg-gray-900 text-white py-12">
     <div class="container-custom">
       <div class="text-center mb-8">
@@ -927,6 +975,20 @@ paths = futureweather.download_results("fw_your_key_here", job_id, "./output/")<
   </script>
 
   <script>
+    function openContactModal() {
+      var modal = document.getElementById('contactModal');
+      if (!modal) return;
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeContactModal() {
+      var modal = document.getElementById('contactModal');
+      if (!modal) return;
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
     function toggleFaq(id) {
       var content = document.getElementById('faq-content-' + id);
       var icon = document.getElementById('faq-icon-' + id);

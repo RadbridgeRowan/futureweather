@@ -12,6 +12,7 @@ export default defineConfig({
         publicApiPage: resolve(__dirname, 'publicApiPage.html'),
         python: resolve(__dirname, 'python/index.html'),
         revit: resolve(__dirname, 'revit/index.html'),
+        grasshopper: resolve(__dirname, 'grasshopper/index.html'),
       },
     },
   },

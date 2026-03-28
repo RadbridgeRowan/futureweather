@@ -970,8 +970,10 @@ paths = futureweather.download_results("fw_your_key_here", job_id, "./output/")<
 
   <script type="module">
     import { initAnalytics } from '../src/analytics.js';
+    import { initPartnerReferralTracking } from '../src/referral.js';
 
     initAnalytics();
+    initPartnerReferralTracking();
   </script>
 
   <script>

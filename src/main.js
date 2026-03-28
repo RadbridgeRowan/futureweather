@@ -1,4 +1,5 @@
 import { initAnalytics, trackEvent } from './analytics';
+import { initPartnerReferralTracking } from './referral';
 
 // Modal functionality
 window.openContactModal = (e) => {
@@ -42,6 +43,7 @@ window.closeRequestModal = () => {
 // Simple smooth scrolling for navigation links
 document.addEventListener('DOMContentLoaded', function() {
   initAnalytics();
+  initPartnerReferralTracking();
   console.log('DOM Content Loaded');
   
   // Parkbeat modal functionality

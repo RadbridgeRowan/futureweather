@@ -160,7 +160,7 @@ body {
 
   /* Integration cards on landing page */
   .integration-card {
-    @apply bg-white border border-gray-200 rounded-xl p-6 transition-all duration-200 hover:shadow-md hover:border-gray-300;
+    @apply bg-white border border-gray-200 rounded-xl p-5 transition-all duration-200 hover:shadow-md hover:border-gray-300;
   }
 
   .integration-card-icon {

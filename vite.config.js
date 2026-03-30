@@ -8,7 +8,6 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: resolve(__dirname, 'index.html'),
-        index2: resolve(__dirname, 'index2.html'),
         publicApiPage: resolve(__dirname, 'publicApiPage.html'),
         python: resolve(__dirname, 'python/index.html'),
         revit: resolve(__dirname, 'revit/index.html'),

@@ -260,77 +260,6 @@
       </div>
     </section>
 
-    <!-- App Screenshot Section -->
-    <section class="py-8 app-screenshot-section-bg">
-      <div class="container-custom text-center">
-        <div class="lg:w-3/4 mx-auto">
-          <div
-            class="rounded-lg shadow-2xl overflow-hidden border border-gray-200 bg-white"
-            id="app-screenshot-gallery"
-            data-slides='[
-              {"src":"assets/images/appAnalytics.png","alt":"Future Weather analytics screen","label":"Analytics"},
-              {"src":"assets/images/appNewJob.png","alt":"Future Weather new job screen","label":"New Job"},
-              {"src":"assets/images/appSavedJobs.png","alt":"Future Weather saved jobs screen","label":"Saved Jobs"}
-            ]'
-          >
-            <div class="relative">
-              <img
-                id="app-screenshot-image"
-                src="assets/images/appAnalytics.png"
-                alt="Future Weather analytics screen"
-                class="w-full transition-opacity duration-[1200ms] ease-in-out opacity-100"
-              >
-              <button
-                type="button"
-                id="app-screenshot-prev"
-                class="absolute left-4 top-1/2 -translate-y-1/2 rounded-full bg-white/90 px-3 py-2 text-gray-700 shadow transition hover:bg-white"
-                aria-label="Show previous app screenshot"
-              >
-                <i class="fas fa-chevron-left"></i>
-              </button>
-              <button
-                type="button"
-                id="app-screenshot-next"
-                class="absolute right-4 top-1/2 -translate-y-1/2 rounded-full bg-white/90 px-3 py-2 text-gray-700 shadow transition hover:bg-white"
-                aria-label="Show next app screenshot"
-              >
-                <i class="fas fa-chevron-right"></i>
-              </button>
-            </div>
-            <div class="flex flex-wrap items-center justify-center gap-3 border-t border-gray-200 bg-gray-50 px-4 py-4">
-              <button
-                type="button"
-                class="app-screenshot-dot rounded-full px-4 py-2 text-sm font-medium transition bg-radbridge-blue text-white"
-                data-slide-index="0"
-                aria-label="Show analytics screenshot"
-                aria-pressed="true"
-              >
-                Analytics
-              </button>
-              <button
-                type="button"
-                class="app-screenshot-dot rounded-full px-4 py-2 text-sm font-medium transition bg-white text-gray-700 border border-gray-300 hover:border-gray-400"
-                data-slide-index="1"
-                aria-label="Show new job screenshot"
-                aria-pressed="false"
-              >
-                New Job
-              </button>
-              <button
-                type="button"
-                class="app-screenshot-dot rounded-full px-4 py-2 text-sm font-medium transition bg-white text-gray-700 border border-gray-300 hover:border-gray-400"
-                data-slide-index="2"
-                aria-label="Show saved jobs screenshot"
-                aria-pressed="false"
-              >
-                Saved Jobs
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <div class="flex">
       <!-- Left Sidebar Navigation -->
       <aside class="hidden lg:block w-64 bg-white border-r border-gray-200 sticky top-14 h-[calc(100vh-3.5rem)] overflow-y-auto">
@@ -358,6 +287,78 @@
           <p class="text-lg text-gray-600 leading-relaxed mb-4">Future Weather transforms historical weather files into future climate-adjusted files (EPW, and optional DDY/STAT) in less than 60 seconds. The platform takes a baseline EPW file and applies the latest (CMIP6) climate change projections through a morphing process—adjusting temperature, humidity, solar radiation, and other variables to reflect future conditions while preserving realistic hourly weather patterns. The result is a physically consistent weather file representing conditions at a specific future time period.</p>
           <p class="text-lg text-gray-600 leading-relaxed mb-4">The morphing methodology is based on published research developed by Dr. Eugénio Rodrigues at the University of Coimbra. The platform supports 23 CMIP6 global climate models across multiple SSP scenarios, with flexible time period selection and model ensemble averaging. Files are generated through a web interface or API and are compatible with EnergyPlus and leading commercial building and HVAC design tools that accept EPW/DDY/STAT formats.</p>
           <p class="text-lg text-gray-600 leading-relaxed">Typical applications include HVAC load calculations under future design conditions, whole-building energy analysis for climate adaptation planning, and thermal resilience assessments. The platform is designed for engineers, architects, and researchers who need standardized future weather data for technical analysis and regulatory compliance.</p>
+        </section>
+
+        <!-- App Screenshot Section -->
+        <section class="mb-20">
+          <div
+            class="flex flex-col gap-4 lg:flex-row lg:items-start"
+            id="app-screenshot-gallery"
+            data-slides='[
+              {"src":"assets/images/appAnalytics.png","alt":"Future Weather analytics screen","label":"Analytics"},
+              {"src":"assets/images/appNewJob.png","alt":"Future Weather new job screen","label":"New Job"},
+              {"src":"assets/images/appSavedJobs.png","alt":"Future Weather saved jobs screen","label":"Saved Jobs"}
+            ]'
+          >
+            <div class="flex w-full flex-col gap-3 sm:w-40 lg:w-36 lg:shrink-0">
+              <div class="text-left text-xs font-semibold uppercase tracking-wider text-gray-500">
+                Example Screens
+              </div>
+              <button
+                type="button"
+                class="app-screenshot-dot rounded-lg px-3 py-3 text-left text-sm font-medium transition bg-radbridge-blue text-white"
+                data-slide-index="0"
+                aria-label="Show analytics screenshot"
+                aria-pressed="true"
+              >
+                Analytics
+              </button>
+              <button
+                type="button"
+                class="app-screenshot-dot rounded-lg px-3 py-3 text-left text-sm font-medium transition bg-white text-gray-700 border border-gray-300 hover:border-gray-400"
+                data-slide-index="1"
+                aria-label="Show new job screenshot"
+                aria-pressed="false"
+              >
+                New Job
+              </button>
+              <button
+                type="button"
+                class="app-screenshot-dot rounded-lg px-3 py-3 text-left text-sm font-medium transition bg-white text-gray-700 border border-gray-300 hover:border-gray-400"
+                data-slide-index="2"
+                aria-label="Show saved jobs screenshot"
+                aria-pressed="false"
+              >
+                Saved Jobs
+              </button>
+            </div>
+            <div class="w-full rounded-lg border border-gray-200 bg-white shadow-2xl overflow-hidden">
+              <div class="relative">
+                <img
+                  id="app-screenshot-image"
+                  src="assets/images/appAnalytics.png"
+                  alt="Future Weather analytics screen"
+                  class="w-full transition-opacity duration-[1200ms] ease-in-out opacity-100"
+                >
+                <button
+                  type="button"
+                  id="app-screenshot-prev"
+                  class="absolute left-4 top-1/2 -translate-y-1/2 rounded-full bg-white/90 px-3 py-2 text-gray-700 shadow transition hover:bg-white"
+                  aria-label="Show previous app screenshot"
+                >
+                  <i class="fas fa-chevron-left"></i>
+                </button>
+                <button
+                  type="button"
+                  id="app-screenshot-next"
+                  class="absolute right-4 top-1/2 -translate-y-1/2 rounded-full bg-white/90 px-3 py-2 text-gray-700 shadow transition hover:bg-white"
+                  aria-label="Show next app screenshot"
+                >
+                  <i class="fas fa-chevron-right"></i>
+                </button>
+              </div>
+            </div>
+          </div>
         </section>
 
         <!-- Benefits Section -->
@@ -412,8 +413,8 @@
             </div>
 
             <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-              <a href="https://weatherdownloader.oikolab.com/" target="_blank" rel="noopener" class="integration-card group flex flex-col">
-                <img src="/assets/images/oikolab-logo-dark.svg" alt="Oikolab" class="h-6 mb-2 mt-[-4px] object-contain object-left w-auto">
+              <a href="https://downloader.oikolab.com/app?section=epw" target="_blank" rel="noopener" class="integration-card group flex flex-col">
+                <img src="/assets/images/oikolab-logo-dark.svg" alt="Oikolab" class="h-6 mb-2 mt-[-4px] -ml-6 w-auto self-center object-contain object-center">
                 <p class="text-sm text-gray-600 leading-relaxed">An official data partner, Oikolab lets you generate historical, AMY, or TMY EPW files for nearly any latitude/longitude worldwide.</p>
               </a>
 

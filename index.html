@@ -763,18 +763,138 @@
           </style>
 
           <h2 class="page-section-heading mb-4">Pricing</h2>
-          <p class="text-lg text-gray-600 leading-relaxed mb-8">Straightforward credit-based pricing for climate-adjusted weather files. Save with bundles, or contact us about bulk and enterprise integrations.</p>
+          <p class="text-lg text-gray-600 leading-relaxed mb-8">Choose a monthly subscription for the best per-credit rate, or buy credits as you go. Contact us for enterprise and API integrations.</p>
           
           <!-- Individual / Enterprise Toggle -->
           <div class="flex justify-start mb-8">
             <div class="pricing-toggle" role="tablist" aria-label="Pricing view">
-              <button id="pricing-toggle-individual" class="active" role="tab" aria-selected="true" aria-controls="pricing-individual" onclick="setPricingView('individual')">Individual</button>
-              <button id="pricing-toggle-enterprise" role="tab" aria-selected="false" aria-controls="pricing-enterprise" onclick="setPricingView('enterprise')">Enterprise & Partners</button>
+              <button id="pricing-toggle-subscriptions" class="active" role="tab" aria-selected="true" aria-controls="pricing-subscriptions" onclick="setPricingView('subscriptions')">Plans</button>
+              <button id="pricing-toggle-payg" role="tab" aria-selected="false" aria-controls="pricing-payg" onclick="setPricingView('payg')">Pay As You Go</button>
             </div>
           </div>
 
-          <!-- Individual view -->
-          <div id="pricing-individual">
+          <!-- Subscriptions view (default) -->
+          <div id="pricing-subscriptions">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+              <!-- Starter -->
+              <div class="pricing-card-new">
+                <div class="pricing-card-header">
+                  <i class="fas fa-seedling pricing-card-icon"></i>
+                  <div class="pricing-card-name">Starter</div>
+                  <div class="pricing-card-description">Small teams and individuals</div>
+                </div>
+                <div class="pricing-price-section">
+                  <div class="pricing-card-price"><span class="currency">$</span>149</div>
+                  <div class="pricing-card-billing">/mo · 8 credits · ~$18.63/credit</div>
+                </div>
+                <div class="pricing-features-list">
+                  <div class="pricing-feature-item">
+                    <i class="fas fa-check pricing-feature-check"></i>
+                    <span>Rolls over up to 24 credits (3 months)</span>
+                  </div>
+                  <div class="pricing-feature-item">
+                    <i class="fas fa-check pricing-feature-check"></i>
+                    <span>Top up with PAYG packs for overages</span>
+                  </div>
+                  <div class="pricing-feature-item">
+                    <i class="fas fa-check pricing-feature-check"></i>
+                    <span>Credits usable through end of billing period if cancelled</span>
+                  </div>
+                </div>
+                <a href="https://app.futureweather.co/signup" target="_blank" rel="noopener" data-analytics-label="pricing_subscribe_starter" class="w-full mt-auto inline-flex items-center justify-center gap-2 font-semibold px-5 py-2 rounded bg-btn-primary-bg text-btn-primary-text hover:bg-btn-primary-hover transition duration-300">
+                  <span>Subscribe</span>
+                </a>
+              </div>
+
+              <!-- Studio (recommended) -->
+              <div class="pricing-card-new recommended">
+                <div class="pricing-recommended-badge">Most Popular</div>
+                <div class="pricing-card-header">
+                  <i class="fas fa-layer-group pricing-card-icon"></i>
+                  <div class="pricing-card-name">Studio</div>
+                  <div class="pricing-card-description">Teams with regular project needs</div>
+                </div>
+                <div class="pricing-price-section">
+                  <div class="pricing-card-price"><span class="currency">$</span>349</div>
+                  <div class="pricing-card-billing">/mo · 20 credits · ~$17.45/credit</div>
+                </div>
+                <div class="pricing-features-list">
+                  <div class="pricing-feature-item">
+                    <i class="fas fa-check pricing-feature-check"></i>
+                    <span>Rolls over up to 60 credits (3 months)</span>
+                  </div>
+                  <div class="pricing-feature-item">
+                    <i class="fas fa-check pricing-feature-check"></i>
+                    <span>Top up with PAYG packs for overages</span>
+                  </div>
+                  <div class="pricing-feature-item">
+                    <i class="fas fa-check pricing-feature-check"></i>
+                    <span>Credits usable through end of billing period if cancelled</span>
+                  </div>
+                </div>
+                <a href="https://app.futureweather.co/signup" target="_blank" rel="noopener" data-analytics-label="pricing_subscribe_studio" class="w-full mt-auto inline-flex items-center justify-center gap-2 font-semibold px-5 py-2 rounded bg-btn-primary-bg text-btn-primary-text hover:bg-btn-primary-hover transition duration-300">
+                  <span>Subscribe</span>
+                </a>
+              </div>
+
+              <!-- Firm -->
+              <div class="pricing-card-new">
+                <div class="pricing-card-header">
+                  <i class="fas fa-building pricing-card-icon"></i>
+                  <div class="pricing-card-name">Firm</div>
+                  <div class="pricing-card-description">Large practices and firms</div>
+                </div>
+                <div class="pricing-price-section">
+                  <div class="pricing-card-price"><span class="currency">$</span>749</div>
+                  <div class="pricing-card-billing">/mo · 50 credits · ~$14.98/credit</div>
+                </div>
+                <div class="pricing-features-list">
+                  <div class="pricing-feature-item">
+                    <i class="fas fa-check pricing-feature-check"></i>
+                    <span>Rolls over up to 150 credits (3 months)</span>
+                  </div>
+                  <div class="pricing-feature-item">
+                    <i class="fas fa-check pricing-feature-check"></i>
+                    <span>Top up with PAYG packs for overages</span>
+                  </div>
+                  <div class="pricing-feature-item">
+                    <i class="fas fa-check pricing-feature-check"></i>
+                    <span>Credits usable through end of billing period if cancelled</span>
+                  </div>
+                </div>
+                <a href="https://app.futureweather.co/signup" target="_blank" rel="noopener" data-analytics-label="pricing_subscribe_firm" class="w-full mt-auto inline-flex items-center justify-center gap-2 font-semibold px-5 py-2 rounded bg-btn-primary-bg text-btn-primary-text hover:bg-btn-primary-hover transition duration-300">
+                  <span>Subscribe</span>
+                </a>
+              </div>
+
+              <!-- Enterprise -->
+              <div class="pricing-card-new">
+                <div class="pricing-card-header">
+                  <i class="fas fa-people-group pricing-card-icon"></i>
+                  <div class="pricing-card-name">Enterprise & Integration Partners</div>
+                </div>
+                <div class="pricing-features-list" style="flex-grow: 0; margin-top: auto;">
+                  <div class="pricing-feature-item">
+                    <i class="fas fa-check pricing-feature-check"></i>
+                    <span>Custom plans & volume discounts</span>
+                  </div>
+                  <div class="pricing-feature-item">
+                    <i class="fas fa-check pricing-feature-check"></i>
+                    <span>Revenue-share options</span>
+                  </div>
+                  <div class="pricing-feature-item">
+                    <i class="fas fa-check pricing-feature-check"></i>
+                    <span>Dedicated onboarding, technical support, API & webhook</span>
+                  </div>
+                </div>
+                <button onclick="document.getElementById('contact-subject').value='Future weather generator enterprise customer inquiry'; openContactModal()" class="w-full font-semibold px-5 py-2 rounded bg-btn-primary-bg text-btn-primary-text hover:bg-btn-primary-hover transition duration-300">Contact us</button>
+              </div>
+            </div>
+            <p class="pricing-note">Unused credits roll over each month up to the cap shown (3× monthly allocation). Credits remain usable through the end of your billing period if you cancel.</p>
+          </div>
+
+          <!-- Pay As You Go view -->
+          <div id="pricing-payg" class="hidden">
             <div class="grid md:grid-cols-3 gap-6 mb-8">
               <!-- Single Credit -->
               <div class="pricing-card-new">
@@ -801,13 +921,6 @@
                       <div class="pricing-card-billing">$50.00 per credit</div>
                     </div>
                   </div>
-                  <div class="bundle-option placeholder" aria-hidden="true">
-                    <div class="bundle-name">placeholder</div>
-                    <div class="bundle-price-details">
-                      <div class="pricing-card-price"><span class="currency">$</span>00</div>
-                      <div class="pricing-card-billing">per job</div>
-                    </div>
-                  </div>
                 </div>
                 <a href="https://app.futureweather.co/signup" target="_blank" rel="noopener" data-analytics-label="pricing_get_started_single" class="w-full mt-auto inline-flex items-center justify-center gap-2 font-semibold px-5 py-2 rounded bg-btn-primary-bg text-btn-primary-text hover:bg-btn-primary-hover transition duration-300">
                   <i class="fas fa-rocket text-lg text-btn-primary-text"></i>
@@ -815,13 +928,12 @@
                 </a>
               </div>
 
-              <!-- Bundles (recommended) -->
-              <div class="pricing-card-new recommended">
-                <div class="pricing-recommended-badge">Most Popular</div>
+              <!-- 4-credit pack -->
+              <div class="pricing-card-new">
                 <div class="pricing-card-header">
                   <i class="fas fa-layer-group pricing-card-icon"></i>
-                  <div class="pricing-card-name">Credit bundles</div>
-                  <div class="pricing-card-description">Save with 4- or 8-credit bundles</div>
+                  <div class="pricing-card-name">4-credit pack</div>
+                  <div class="pricing-card-description">Save 40% vs single credit</div>
                 </div>
                 <div class="pricing-features-list">
                   <div class="pricing-feature-item">
@@ -835,17 +947,10 @@
                 </div>
                 <div class="bundle-options">
                   <div class="bundle-option">
-                    <div class="bundle-name">4 credit bundle</div>
+                    <div class="bundle-name">4 credits</div>
                     <div class="bundle-price-details">
-                      <div class="pricing-card-price"><span class="currency">$</span>100</div>
-                      <div class="pricing-card-billing">$25.00 per credit</div>
-                    </div>
-                  </div>
-                  <div class="bundle-option">
-                    <div class="bundle-name">8 credit bundle</div>
-                    <div class="bundle-price-details">
-                      <div class="pricing-card-price"><span class="currency">$</span>160</div>
-                      <div class="pricing-card-billing">$20.00 per credit</div>
+                      <div class="pricing-card-price"><span class="currency">$</span>120</div>
+                      <div class="pricing-card-billing">$30.00 per credit</div>
                     </div>
                   </div>
                 </div>
@@ -855,12 +960,12 @@
                 </a>
               </div>
 
-              <!-- Bulk (10+) -->
+              <!-- 10+ credits -->
               <div class="pricing-card-new">
                 <div class="pricing-card-header">
                   <i class="fas fa-boxes pricing-card-icon"></i>
                   <div class="pricing-card-name">10+ credits</div>
-                  <div class="pricing-card-description">Excellent per-credit pricing</div>
+                  <div class="pricing-card-description">Best per-credit rate for bulk runs</div>
                 </div>
                 <div class="pricing-features-list">
                   <div class="pricing-feature-item">
@@ -874,17 +979,10 @@
                 </div>
                 <div class="bundle-options">
                   <div class="bundle-option">
-                    <div class="bundle-name">10+ credits</div>
+                    <div class="bundle-name">10 credits</div>
                     <div class="bundle-price-details">
-                      <div class="pricing-card-price"><span class="currency">$</span>17</div>
-                      <div class="pricing-card-billing">$17.00 per credit</div>
-                    </div>
-                  </div>
-                  <div class="bundle-option placeholder" aria-hidden="true">
-                    <div class="bundle-name">placeholder</div>
-                    <div class="bundle-price-details">
-                      <div class="pricing-card-price"><span class="currency">$</span>00</div>
-                      <div class="pricing-card-billing">per job</div>
+                      <div class="pricing-card-price"><span class="currency">$</span>200</div>
+                      <div class="pricing-card-billing">$20.00 per credit</div>
                     </div>
                   </div>
                 </div>
@@ -897,63 +995,32 @@
             <div class="pricing-note">
               <strong>How pricing works</strong><br>
               1 credit = 1 job for any combination of future year, climate scenario and climate model(s).<br>
-              Outputs include a future EPW file, a STAT file, and an optional DDY file.
-            </div>
-          </div>
-
-          <!-- Enterprise view -->
-          <div id="pricing-enterprise" class="hidden">
-            <div class="grid md:grid-cols-2 gap-6 mb-8">
-              <div class="pricing-card-new">
-                <div class="pricing-card-header">
-                  <i class="fas fa-people-group pricing-card-icon"></i>
-                  <div class="pricing-card-name">Enterprise</div>
-                  <div class="pricing-card-description">For larger organizations with ongoing or programmatic needs</div>
-                </div>
-                <div class="pricing-features-list">
-                  <div class="pricing-feature-item"><i class="fas fa-check pricing-feature-check"></i><span>SLA & priority support</span></div>
-                  <div class="pricing-feature-item"><i class="fas fa-check pricing-feature-check"></i><span>API + webhook support; higher limits available</span></div>
-                  <div class="pricing-feature-item"><i class="fas fa-check pricing-feature-check"></i><span>Volume discounts</span></div>
-                </div>
-                <button onclick="document.getElementById('contact-subject').value='Future weather generator enterprise customer inquiry'; openContactModal()" class="w-full mt-auto font-semibold px-5 py-2 rounded bg-btn-primary-bg text-btn-primary-text hover:bg-btn-primary-hover transition duration-300">Contact us</button>
-              </div>
-              <div class="pricing-card-new">
-                <div class="pricing-card-header">
-                  <i class="fas fa-handshake pricing-card-icon"></i>
-                  <div class="pricing-card-name">Partners & integrators</div>
-                  <div class="pricing-card-description">Embed future weather into planning tools and workflows</div>
-                </div>
-                <div class="pricing-features-list">
-                  <div class="pricing-feature-item"><i class="fas fa-check pricing-feature-check"></i><span>API integration with joint integration support</span></div>
-                  <div class="pricing-feature-item"><i class="fas fa-check pricing-feature-check"></i><span>Volume discounts</span></div>
-                  <div class="pricing-feature-item"><i class="fas fa-check pricing-feature-check"></i><span>Revenue‑share options</span></div>
-                </div>
-                <button onclick="document.getElementById('contact-subject').value='Future weather generator partnership inquiry'; openContactModal()" class="w-full mt-auto font-semibold px-5 py-2 rounded bg-btn-primary-bg text-btn-primary-text hover:bg-btn-primary-hover transition duration-300 mt-16">Contact us</button>
-              </div>
+              Outputs include a future EPW file, a STAT file, and an optional DDY file.<br>
+              Subscribers can also purchase PAYG packs at these rates for overages.
             </div>
           </div>
 
           <script>
             function setPricingView(view) {
-              var individual = document.getElementById('pricing-individual');
-              var enterprise = document.getElementById('pricing-enterprise');
-              var btnInd = document.getElementById('pricing-toggle-individual');
-              var btnEnt = document.getElementById('pricing-toggle-enterprise');
-              if (!individual || !enterprise || !btnInd || !btnEnt) return;
-              if (view === 'enterprise') {
-                enterprise.classList.remove('hidden');
-                individual.classList.add('hidden');
-                btnEnt.classList.add('active');
-                btnEnt.setAttribute('aria-selected', 'true');
-                btnInd.classList.remove('active');
-                btnInd.setAttribute('aria-selected', 'false');
+              var subs = document.getElementById('pricing-subscriptions');
+              var payg = document.getElementById('pricing-payg');
+              var btnSubs = document.getElementById('pricing-toggle-subscriptions');
+              var btnPayg = document.getElementById('pricing-toggle-payg');
+              if (!subs || !payg || !btnSubs || !btnPayg) return;
+              if (view === 'payg') {
+                payg.classList.remove('hidden');
+                subs.classList.add('hidden');
+                btnPayg.classList.add('active');
+                btnPayg.setAttribute('aria-selected', 'true');
+                btnSubs.classList.remove('active');
+                btnSubs.setAttribute('aria-selected', 'false');
               } else {
-                individual.classList.remove('hidden');
-                enterprise.classList.add('hidden');
-                btnInd.classList.add('active');
-                btnInd.setAttribute('aria-selected', 'true');
-                btnEnt.classList.remove('active');
-                btnEnt.setAttribute('aria-selected', 'false');
+                subs.classList.remove('hidden');
+                payg.classList.add('hidden');
+                btnSubs.classList.add('active');
+                btnSubs.setAttribute('aria-selected', 'true');
+                btnPayg.classList.remove('active');
+                btnPayg.setAttribute('aria-selected', 'false');
               }
             }
           </script>

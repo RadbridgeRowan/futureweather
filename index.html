@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <link rel="icon" type="image/png" href="/favicon.png" />
+  <link rel="icon" type="image/png" href="/favicon-512.png" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Future Weather</title>
   <meta name="description" content="Generate climate-adjusted EPW/DDY weather files and API for building performance modeling.">
@@ -178,7 +178,42 @@
       background: #f8fbfe;
       transform: translateY(-1px);
     }
+
+    /* Hero A/B frame toggle */
+    .hero-variant { display: none; }
+    [data-hero-variant="a"] .hero-variant--a { display: block; }
+    [data-hero-variant="b"] .hero-variant--b { display: block; }
+
+    /* Hero typewriter cursor */
+    .hero-typewriter { white-space: nowrap; }
+    .hero-typewriter::after {
+      content: '|';
+      margin-left: 2px;
+      font-weight: 400;
+      animation: hero-caret-blink 1s steps(1) infinite;
+    }
+    @keyframes hero-caret-blink { 50% { opacity: 0; } }
+    .hero-typewriter--done::after { display: none; }
+    @media (prefers-reduced-motion: reduce) {
+      .hero-typewriter::after { display: none; }
+    }
   </style>
+  <script>
+    // Hero A/B: assign a sticky 50/50 variant before paint to avoid flicker.
+    (function () {
+      try {
+        var KEY = 'fw_hero_ab';
+        var params = new URLSearchParams(window.location.search);
+        var forced = params.get('hero');           // ?hero=a / ?hero=b for QA
+        var v = forced === 'a' || forced === 'b' ? forced : localStorage.getItem(KEY);
+        if (v !== 'a' && v !== 'b') { v = Math.random() < 0.5 ? 'a' : 'b'; }
+        localStorage.setItem(KEY, v);
+        document.documentElement.setAttribute('data-hero-variant', v);
+      } catch (e) {
+        document.documentElement.setAttribute('data-hero-variant', 'a');
+      }
+    })();
+  </script>
 </head>
 <body class="font-ibm">
   <!-- Main Content Area -->
@@ -188,7 +223,7 @@
       <div class="container-custom flex items-center justify-between py-4">
         <div>
           <a href="/">
-            <img src="assets/images/LogoWhite.png" alt="Future Weather Logo" class="h-8">
+            <img src="assets/images/futureweather-lockup-white.svg" alt="Future Weather Logo" class="h-8">
           </a>
         </div>
         <div class="flex items-center space-x-4">
@@ -230,14 +265,15 @@
     <!-- Hero Section -->
     <section class="relative overflow-hidden bg-hero-bg">
       <div class="lg:flex lg:items-stretch">
-        <div class="lg:w-1/2 relative">
+        <div class="lg:w-3/5 relative">
           <div class="container-custom pt-12 pb-8 lg:py-16 h-full flex flex-col justify-center">
             <div class="text-center lg:text-left">
-              <h1 class="text-3xl lg:text-5xl mb-4 mt-2 leading-snug font-medium font-open-sans text-hero-heading">
-                  Design for <span class="text-btn-primary-bg font-semibold">Tomorrow's</span> Climate
+              <h1 class="text-3xl/[1.25] lg:text-5xl/[1.25] mb-4 mt-2 font-medium font-open-sans text-hero-heading">
+                <span class="hero-variant hero-variant--a">Stress-test your<br><span class="text-btn-primary-bg font-semibold hero-typewriter" data-words="building,data center,solar project,grid">building</span><br>against tomorrow's climate</span>
+                <span class="hero-variant hero-variant--b">How will your<br><span class="text-btn-primary-bg font-semibold hero-typewriter" data-words="building,data center,solar project,grid">building</span><br>perform under future climate conditions?</span>
               </h1>
               <p class="text-lg mb-6 leading-snug font-open-sans text-hero-text">
-                Generate future weather files (EPW, DDY, STAT) for building, solar, and data center modeling in under 60 seconds.
+                Generate future weather files (EPW, DDY, STAT) for building, solar, and data center modeling in under 30 seconds.
               </p>
     
               <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
@@ -253,7 +289,7 @@
             </div>
           </div>
         </div>
-        <div class="lg:w-1/2 relative">
+        <div class="lg:w-2/5 relative">
            <img src="assets/images/AdobeStock_1561329698 - Copy.jpeg" alt="Stylized representation of weather data" class="h-64 w-full object-cover lg:h-full mt-4">
            <div class="absolute inset-0" style="background-image: linear-gradient(to right, rgba(248, 250, 251, 1) 0%, rgba(248, 250, 251, 0) 15%), linear-gradient(to top, rgba(239, 246, 252, 1) 0%, rgba(239, 246, 252, 0) 20%)"></div>
         </div>
@@ -269,6 +305,7 @@
             <li><a href="#benefits" class="sidebar-link">Benefits</a></li>
             <li><a href="#how-it-works" class="sidebar-link">How It Works</a></li>
             <li><a href="#what-you-receive" class="sidebar-link">Common Use Cases</a></li>
+            <li><a href="/enhancements/" class="sidebar-link">Enhancements</a></li>
             <li><a href="#pricing" class="sidebar-link">Pricing</a></li>
             <li><a href="#integrations" class="sidebar-link">Integrations</a></li>
             <li><a href="#announcements" class="sidebar-link">Announcements</a></li>
@@ -284,8 +321,8 @@
         <!-- Overview Section -->
         <section id="overview" class="mb-20 scroll-mt-20">
           <h2 class="page-section-heading mb-6">Overview</h2>
-          <p class="text-lg text-gray-600 leading-relaxed mb-4">Future Weather transforms historical weather files into future climate-adjusted files (EPW, and optional DDY/STAT) in less than 60 seconds. The platform takes a baseline EPW file and applies the latest (CMIP6) climate change projections through a morphing process—adjusting temperature, humidity, solar radiation, and other variables to reflect future conditions while preserving realistic hourly weather patterns. The result is a physically consistent weather file representing conditions at a specific future time period.</p>
-          <p class="text-lg text-gray-600 leading-relaxed mb-4">The morphing methodology is based on published research developed by Dr. Eugénio Rodrigues at the University of Coimbra. The platform supports 23 CMIP6 global climate models across multiple SSP scenarios, with flexible time period selection and model ensemble averaging. Files are generated through a web interface or API and are compatible with EnergyPlus and leading commercial building and HVAC design tools that accept EPW/DDY/STAT formats.</p>
+          <p class="text-lg text-gray-600 leading-relaxed mb-4">Future Weather transforms historical weather files into future climate-adjusted files (EPW, and optional DDY/STAT) in less than 30 seconds. The platform takes a baseline EPW file and applies the latest (CMIP6) climate change projections through a morphing process—adjusting temperature, humidity, solar radiation, and other variables to reflect future conditions while preserving realistic hourly weather patterns. The result is a physically consistent weather file representing conditions at a specific future time period.</p>
+          <p class="text-lg text-gray-600 leading-relaxed mb-4">The morphing methodology is based on published research developed by Dr. Eugénio Rodrigues at the University of Coimbra, and we've added a number of <a href="/enhancements/" class="text-radbridge-blue hover:underline">platform enhancements</a> on top of that foundation. The platform supports 23 CMIP6 global climate models across multiple SSP scenarios, with flexible time period selection and model ensemble averaging. Files are generated through a web interface or API and are compatible with EnergyPlus and leading commercial building and HVAC design tools that accept EPW/DDY/STAT formats.</p>
           <p class="text-lg text-gray-600 leading-relaxed">Typical applications include HVAC load calculations under future design conditions, whole-building energy analysis for climate adaptation planning, and thermal resilience assessments. The platform is designed for engineers, architects, and researchers who need standardized future weather data for technical analysis and regulatory compliance.</p>
         </section>
 
@@ -368,7 +405,7 @@
             <div class="text-center md:text-left">
               <i class="fas fa-bolt text-5xl mb-4 mx-auto md:mx-0"></i>
               <h3 class="text-lg font-semibold text-gray-900 mb-3">Fast & Flexible</h3>
-              <p class="text-gray-600 leading-relaxed">Create climate‑adjusted EPW, DDY, and STAT files in under 60 seconds for any location, climate scenario, and future period, using a full ensemble of 23 climate models or a combination of your choice.</p>
+              <p class="text-gray-600 leading-relaxed">Create climate‑adjusted EPW, DDY, and STAT files in under 30 seconds for any location, climate scenario, and future period, using a full ensemble of 23 climate models or a combination of your choice.</p>
             </div>
             <div class="text-center md:text-left">
               <i class="fas fa-shield-alt text-5xl mb-4 mx-auto md:mx-0"></i>
@@ -1076,6 +1113,20 @@
           <div class="space-y-6">
             <article class="announcement-entry">
               <span class="announcement-tag">
+                <i class="fas fa-flask"></i>
+                Pilot Program
+              </span>
+              <h3 class="text-2xl font-semibold text-gray-900 mt-4 mb-3">FutureWeather.co Pilot Program — now accepting applications</h3>
+              <p class="text-gray-700 leading-relaxed mb-4">We are inviting architecture, engineering, and building-performance practitioners to a six-month pilot (July–December 2026). Selected organizations receive complimentary access to the "Firm" plan — 50 future weather generation jobs per month, a total value of $4,494 over six months — in exchange for practical feedback and an optional co-branded case study.</p>
+              <p class="text-gray-700 leading-relaxed">Applications are open now. Please apply by June 30, 2026 to secure your spot.</p>
+              <a href="/pilot/" class="mt-6 inline-flex w-full items-center justify-center gap-2 font-semibold px-5 py-3 rounded bg-btn-primary-bg text-btn-primary-text hover:bg-btn-primary-hover transition duration-300">
+                <i class="fas fa-arrow-right text-btn-primary-text"></i>
+                <span>Learn More &amp; Apply</span>
+              </a>
+            </article>
+
+            <article class="announcement-entry">
+              <span class="announcement-tag">
                 <i class="fas fa-microphone-lines"></i>
                 ASHRAE TC 4.2
               </span>
@@ -1214,6 +1265,10 @@
         </button>
       </div>
       <div class="space-y-2.5 mb-3">
+        <a href="/pilot/" class="announcement-popup-link announcements-popup-link">
+          <div class="text-sm font-semibold text-gray-900">FutureWeather.co Pilot Program — now accepting applications</div>
+          <div class="text-sm text-gray-600 mt-1">Complimentary six-month Firm-plan access for AEC &amp; building-performance teams. Apply by June 30.</div>
+        </a>
         <a href="#announcements" class="announcement-popup-link announcements-popup-link">
           <div class="text-sm font-semibold text-gray-900">ASHRAE TC 4.2 presentation</div>
           <div class="text-sm text-gray-600 mt-1">Rowan Schmidt presented FutureWeather.co to ASHRAE TC 4.2 in February. Learn more and download the presentation.</div>

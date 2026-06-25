@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/png" href="/favicon-512.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Platform Enhancements & Integrations: FutureWeather.co</title>
+  <meta name="description" content="The methodology refinements, additional outputs, and workflow integrations FutureWeather.co adds on top of the peer-reviewed Future Weather Generator morphing methodology.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="/src/style.css">
+  <style>
+    /* Heading font override for this page */
+    h1, h2, h3, h4, h5, h6 { font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif; }
+
+    /* Deep Ocean Blue (matches the home page) */
+    :root {
+      --nav-bg: #0B1F3F;
+      --nav-text: #FFFFFF;
+      --nav-text-hover: #E0E7EF;
+      --hero-bg: #F8FAFB;
+      --hero-heading: #0B1F3F;
+      --hero-text: #4A5568;
+      --btn-primary-bg: #1E5A8E;
+      --btn-primary-hover: #164670;
+      --btn-primary-text: #FFFFFF;
+      --btn-secondary-bg: #FFFFFF;
+      --btn-secondary-text: #1E5A8E;
+      --btn-secondary-border: #1E5A8E;
+      --btn-secondary-hover-bg: #1E5A8E;
+      --btn-secondary-hover-text: #FFFFFF;
+      --promo-icon: #6B7280;
+      --promo-text: #6B7280;
+    }
+
+    .btn-primary-themed {
+      background-color: var(--btn-primary-bg);
+      color: var(--btn-primary-text);
+      border: 1px solid var(--btn-primary-bg);
+    }
+    .btn-primary-themed:hover { background-color: var(--btn-primary-hover); }
+    .btn-primary-themed svg { color: var(--btn-primary-text); }
+
+    .btn-secondary-themed {
+      background-color: var(--btn-secondary-bg);
+      color: var(--btn-secondary-text);
+      border-color: var(--btn-secondary-border);
+    }
+    .btn-secondary-themed:hover {
+      background-color: var(--btn-secondary-hover-bg);
+      color: var(--btn-secondary-hover-text);
+    }
+    .text-promo-icon { color: var(--promo-icon); }
+    .text-promo-text { color: var(--promo-text); }
+
+    /* Bullet lists */
+    .enh-list { list-style: disc; padding-left: 1.5rem; }
+    .enh-list > li { margin-bottom: 1rem; }
+    .enh-list > li::marker { color: var(--btn-primary-bg); }
+    .enh-list strong { color: #111827; font-weight: 600; }
+
+    /* Comparison table */
+    .enh-table-wrap {
+      overflow-x: auto;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+    }
+    .enh-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+      min-width: 640px;
+    }
+    .enh-table th,
+    .enh-table td {
+      text-align: left;
+      padding: 14px 18px;
+      border-bottom: 1px solid #eef0f3;
+      vertical-align: top;
+      line-height: 1.5;
+    }
+    .enh-table thead th {
+      background: #EEF5FB;
+      color: var(--hero-heading);
+      font-weight: 600;
+      border-bottom: 1px solid #D8E3EE;
+    }
+    .enh-table tbody th { font-weight: 600; color: #334155; white-space: nowrap; }
+    .enh-table td.fwco { color: #1E5A8E; font-weight: 500; }
+    .enh-table tr:last-child th,
+    .enh-table tr:last-child td { border-bottom: none; }
+  </style>
+</head>
+<body class="font-ibm">
+  <div class="bg-white">
+    <!-- Header -->
+    <header class="sticky top-0 left-0 right-0 z-30 shadow-md bg-nav-bg">
+      <div class="container-custom flex items-center justify-between py-4">
+        <div>
+          <a href="/">
+            <img src="/assets/images/futureweather-lockup-white.svg" alt="Future Weather Logo" class="h-8">
+          </a>
+        </div>
+        <div class="flex items-center space-x-4">
+          <a href="https://app.futureweather.co/" target="_blank" rel="noopener" data-analytics-label="nav_sign_in" class="inline-flex items-center justify-center text-sm font-medium px-4 py-2 rounded border transition duration-300 bg-btn-secondary-bg text-btn-secondary-text border-btn-secondary-border hover:bg-btn-secondary-hover-bg hover:text-btn-secondary-hover-text">
+            Sign In
+          </a>
+          <a href="https://app.futureweather.co/signup" target="_blank" rel="noopener" data-analytics-label="nav_sign_up" class="flex items-center gap-2 rounded px-3 py-2 font-semibold text-sm transition duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 bg-btn-primary-bg text-btn-primary-text hover:bg-btn-primary-hover">
+            <span>Sign Up · 5 Free Credits</span>
+          </a>
+          <div class="integrations-dropdown">
+            <a href="/#integrations" class="inline-flex items-center justify-center text-sm font-medium px-4 py-2 rounded border transition duration-300 bg-btn-secondary-bg text-btn-secondary-text border-btn-secondary-border hover:bg-btn-secondary-hover-bg hover:text-btn-secondary-hover-text" data-analytics-label="nav_integrations">
+              <i class="fas fa-puzzle-piece text-base mr-2"></i>
+              Integrations
+              <i class="fas fa-chevron-down text-xs ml-2 hidden md:inline"></i>
+            </a>
+            <div class="integrations-dropdown-panel hidden md:block">
+              <a href="/publicApiPage.html" class="integrations-dropdown-item">
+                <i class="fas fa-code"></i>
+                API Documentation
+              </a>
+              <a href="/python/" class="integrations-dropdown-item">
+                <i class="fab fa-python"></i>
+                Python Package
+              </a>
+              <a href="/revit/" class="integrations-dropdown-item">
+                <i class="fas fa-cubes"></i>
+                Revit / Dynamo
+              </a>
+              <a href="/grasshopper/" class="integrations-dropdown-item">
+                <i class="fas fa-bug"></i>
+                Grasshopper
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="relative overflow-hidden bg-hero-bg border-b border-gray-200">
+      <div class="container-custom py-12 lg:py-16">
+        <div class="max-w-3xl">
+          <h1 class="text-3xl lg:text-5xl mb-5 leading-snug font-medium font-open-sans text-hero-heading">
+            Platform enhancements & integrations</span>
+          </h1>
+          <p class="text-lg mb-4 leading-snug font-open-sans text-hero-text">
+            FutureWeather.co is built on the same peer-reviewed morphing methodology as the original Future Weather Generator desktop application (Rodrigues et al., 2023), developed and maintained by the CURA Lab at the University of Coimbra. The desktop tool remains an excellent, freely available resource, and our platform shares its scientific foundation. This page summarizes the enhancements and conveniences we've added on top of that foundation in the FutureWeather.co platform.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="max-w-4xl mx-auto px-6 py-12 lg:px-8 lg:py-16">
+
+      <!-- Outputs & workflow -->
+      <section id="outputs" class="mb-16 scroll-mt-20">
+        <h2 class="page-section-heading mb-6">Outputs &amp; workflow</h2>
+        <ul class="enh-list text-lg text-gray-600 leading-relaxed">
+          <li><strong>Future design day (DDY) files.</strong> Optional future-adjusted DDY files for HVAC sizing, generated to stay statistically consistent with the morphed EPW.</li>
+          <li><strong>Multi-combination batch runs.</strong> Generate any combination of target years and SSP scenarios in a single request (e.g. 2 scenarios × 2 years = 4 future files).</li>
+          <li><strong>Parametric mode.</strong> For sensitivity and uncertainty studies, generate a wide range of target years (2040-2090) × 4 climate scenarios × 23 <em>individual</em> climate models in one run. Each combination uses a single GCM rather than the ensemble mean, which shows the spread across models, not just the average. A single site can produce up to ~550 future EPW files (and optional DDY), delivered as one bundled download with a manifest. Firm-tier users get a complimentary parametric credit each month.</li>
+          <li><strong>Analytics dashboard.</strong> An interactive dashboard to compare historical vs. future across monthly summaries, full 8,760-hour time series, design conditions, and percentile shifts, including side-by-side comparison of multiple jobs.</li>
+          <li><strong>Saved jobs &amp; projects.</strong> Every job is saved to your account so you can revisit inputs and re-download outputs later, and organize related jobs under projects to keep work grouped by site, client, or study.</li>
+        </ul>
+      </section>
+
+      <!-- Access & integrations -->
+      <section id="access" class="mb-16 scroll-mt-20">
+        <h2 class="page-section-heading mb-6">Access &amp; integrations</h2>
+        <ul class="enh-list text-lg text-gray-600 leading-relaxed">
+          <li><strong>Web application.</strong> Upload an EPW (and optional DDY), choose year and scenario, and download results. No local desktop installation required.</li>
+          <li><strong>Developer REST API.</strong> Full programmatic access via personal access tokens, for scripts, pipelines, and custom integrations.</li>
+          <li><strong>Revit / Dynamo package.</strong> Ready-to-use nodes and graph templates for generating future weather files directly from Revit/Dynamo workflows.</li>
+          <li><strong>Grasshopper plugin.</strong> Components for Rhino/Grasshopper that wire directly into Ladybug Tools workflows.</li>
+          <li><strong>Simulation tool integration.</strong> A production integration with popular simulation tools, to be announced soon.</li>
+          <li><strong>Cloud processing.</strong> Runs happen in the cloud and typically complete in under 30 seconds per file.</li>
+          <li><strong>Customer support.</strong> Reach our team for help with files, scenarios, integrations, and account questions.</li>
+        </ul>
+      </section>
+
+      <!-- Methodology refinements -->
+      <section id="methodology" class="mb-16 scroll-mt-20">
+        <h2 class="page-section-heading mb-6">Methodology refinements</h2>
+        <ul class="enh-list text-lg text-gray-600 leading-relaxed">
+          <li><strong>Horizontal Infrared Radiation (N12).</strong> Previously, N12 was reconstructed each hour from morphed temperature, humidity, and sky cover, broadly similar to how EnergyPlus derives the field when it is missing from a weather file. We now preserve the historical EPW's hourly N12 pattern and apply only the climate signal, using the CMIP6 <code>rlds</code> (surface downwelling longwave radiation) variable, which represents essentially the same quantity as N12. This keeps morphed values closer to the user's baseline EPW while staying internally consistent with the other climate signals, since <code>rlds</code> comes from the same GCMs used throughout the rest of the morph.</li>
+          <li><strong>Direct &amp; Diffuse Radiation (N13–N15).</strong> Global Horizontal Radiation (N13) is morphed by scaling with the monthly CMIP6 <code>rsds</code> (surface downwelling shortwave radiation) ratio, using the same GCM ensemble as the rest of the morph. Direct Normal (N14) and Diffuse Horizontal (N15) are then scaled by the same hourly factor applied to N13, preserving the historical direct/diffuse split, curve shapes, and peak timing from the baseline EPW while applying the climate signal consistently across all three fields.</li>
+          <li><strong>Tail amplification for extremes.</strong> Standard EPW morphing shifts every hour by the same monthly mean delta. Our enhancement draws on sub-daily CMIP6 projections to additionally scale individual percentiles, since extremes (e.g. 0.4, 99.6 percentiles) can warm faster than the monthly mean, which matters for resilience, comfort, and peak-load analysis where the extremes drive the result.</li>
+        </ul>
+      </section>
+
+      <!-- Objective differences -->
+      <section id="comparison" class="mb-8 scroll-mt-20">
+        <h2 class="page-section-heading mb-4">Other platform differences at a glance</h2>
+        <div class="enh-table-wrap">
+          <table class="enh-table">
+            <thead>
+              <tr>
+                <th scope="col"><span class="sr-only">Capability</span></th>
+                <th scope="col">Future Weather Generator</th>
+                <th scope="col">FutureWeather.co</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Implementation</th>
+                <td>Java desktop application</td>
+                <td class="fwco">Python cloud platform</td>
+              </tr>
+              <tr>
+                <th scope="row">Access</th>
+                <td>Local install</td>
+                <td class="fwco">Web UI + REST API + other integration surfaces</td>
+              </tr>
+              <tr>
+                <th scope="row">Climate models</th>
+                <td>CMIP6 ensemble (23 models)</td>
+                <td class="fwco">CMIP6 ensemble (23 models)</td>
+              </tr>
+              <tr>
+                <th scope="row">Scenarios</th>
+                <td>SSP1-2.6 – SSP5-8.5</td>
+                <td class="fwco">SSP1-2.6 – SSP5-8.5</td>
+              </tr>
+              <tr>
+                <th scope="row">Processing</th>
+                <td>Local machine</td>
+                <td class="fwco">Cloud (typically &lt; 30 seconds/file)</td>
+              </tr>
+              <tr>
+                <th scope="row">Parametric sweeps</th>
+                <td>1 future year (2050 or 2080) × 4 climate scenarios × 23 individual models</td>
+                <td class="fwco">6 future years × 4 climate scenarios × 23 individual models (up to ~550 files, bundled)</td>
+              </tr>
+              <tr>
+                <th scope="row">Integrations</th>
+                <td>—</td>
+                <td class="fwco">Revit/Dynamo, Grasshopper, DesignBuilder, API</td>
+              </tr>
+              <tr>
+                <th scope="row">Analytics</th>
+                <td>Several charts generated as HTML files</td>
+                <td class="fwco">Built-in analytics dashboard</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-white py-12">
+    <div class="container-custom">
+      <div class="text-center mb-8">
+        <a href="https://radbridge.com" target="_blank" rel="noopener">
+          <img src="/assets/images/Radbridge_logo_white_PNG.png" alt="Radbridge Logo" class="h-10 mx-auto">
+        </a>
+      </div>
+      <div class="text-center text-gray-400">
+        © 2026 Radbridge Incorporated.
+      </div>
+    </div>
+  </footer>
+
+  <script type="module">
+    import { initAnalytics } from '../src/analytics.js';
+    import { initPartnerReferralTracking } from '../src/referral.js';
+
+    initAnalytics();
+    initPartnerReferralTracking();
+  </script>
+</body>
+</html>

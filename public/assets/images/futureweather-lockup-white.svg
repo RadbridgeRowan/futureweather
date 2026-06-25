@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="340" height="60" viewBox="0 0 340 60">
+  <g transform="translate(0 6.04) scale(0.7013)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 6 36 C 8.17 34.53 14.67 27.20 19.00 27.20 C 23.33 27.20 27.67 33.07 32.00 36.00 C 36.33 38.93 40.67 44.80 45.00 44.80 C 49.33 44.80 55.83 37.47 58.00 36.00" stroke="#ffffff" stroke-width="4.6"></path>
+    <path d="M 6 26 C 8.17 24.53 14.67 17.20 19.00 17.20 C 23.33 17.20 27.67 23.07 32.00 26.00 C 36.33 28.93 40.67 34.80 45.00 34.80 C 49.33 34.80 55.83 27.47 58.00 26.00" stroke="#ffffff" stroke-width="4.6"></path>
+  </g>
+  <text x="60.9" y="40" font-family="Outfit, sans-serif" font-size="34" letter-spacing="-0.6">
+    <tspan font-weight="600" fill="#ffffff">Future</tspan><tspan font-weight="400" fill="#ffffff">Weather</tspan>
+  </text>
+</svg>

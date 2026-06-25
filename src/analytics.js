@@ -91,6 +91,7 @@ function trackLeadForms() {
   const trackedForms = [
     { selector: '#contact-form', formName: 'contact_form' },
     { selector: '#request-form', formName: 'request_form' },
+    { selector: '#pilot-form', formName: 'pilot_application' },
   ];
 
   trackedForms.forEach(({ selector, formName }) => {
@@ -122,6 +123,22 @@ export function initAnalytics() {
     },
     transport_type: 'beacon',
   });
+
+  // Home-page hero A/B test: attach the assigned variant so subsequent events
+  // (incl. sign-up CTA clicks) are segmentable by variant in GA4.
+  let heroVariant = null;
+  try {
+    heroVariant = localStorage.getItem('fw_hero_ab');
+  } catch (e) {
+    /* localStorage unavailable */
+  }
+  if (heroVariant === 'a' || heroVariant === 'b') {
+    window.gtag('set', 'user_properties', { hero_variant: heroVariant });
+    trackEvent('experiment_impression', {
+      experiment_id: 'home_hero_headline',
+      variant_id: heroVariant,
+    });
+  }
 
   trackCrossDomainCtas();
   trackDocsClicks();

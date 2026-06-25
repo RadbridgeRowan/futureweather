@@ -12,6 +12,8 @@ export default defineConfig({
         python: resolve(__dirname, 'python/index.html'),
         revit: resolve(__dirname, 'revit/index.html'),
         grasshopper: resolve(__dirname, 'grasshopper/index.html'),
+        pilot: resolve(__dirname, 'pilot/index.html'),
+        enhancements: resolve(__dirname, 'enhancements/index.html'),
       },
     },
   },

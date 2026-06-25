@@ -40,10 +40,68 @@ window.closeRequestModal = () => {
   document.body.style.overflow = '';
 };
 
+// Hero headline: cycle the highlighted word with a typewriter effect.
+function initHeroTypewriter() {
+  const elements = document.querySelectorAll('.hero-typewriter');
+  if (!elements.length) return;
+
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const TYPE_MS = 90;
+  const DELETE_MS = 50;
+  const HOLD_MS = 1800;
+
+  elements.forEach((el) => {
+    const words = (el.getAttribute('data-words') || '')
+      .split(',')
+      .map((w) => w.trim())
+      .filter(Boolean);
+
+    // Leave the static default word in place when there's nothing to animate.
+    if (prefersReducedMotion || words.length <= 1) return;
+
+    let wordIndex = 0;
+    let charCount = words[0].length;
+    let deleting = true;
+    let finalWord = false; // set once we've cycled back to the first word
+
+    const tick = () => {
+      const current = words[wordIndex];
+
+      if (deleting) {
+        charCount -= 1;
+        el.textContent = current.slice(0, charCount);
+        if (charCount === 0) {
+          deleting = false;
+          wordIndex = (wordIndex + 1) % words.length;
+          if (wordIndex === 0) finalWord = true; // back to the start; type it, then stop
+        }
+        window.setTimeout(tick, DELETE_MS);
+      } else {
+        charCount += 1;
+        el.textContent = current.slice(0, charCount);
+        if (charCount === current.length) {
+          if (finalWord) {
+            el.classList.add('hero-typewriter--done'); // settle on the first word, drop the caret
+            return;
+          }
+          deleting = true;
+          window.setTimeout(tick, HOLD_MS);
+        } else {
+          window.setTimeout(tick, TYPE_MS);
+        }
+      }
+    };
+
+    window.setTimeout(tick, HOLD_MS);
+  });
+}
+
 // Simple smooth scrolling for navigation links
 document.addEventListener('DOMContentLoaded', function() {
   initAnalytics();
   initPartnerReferralTracking();
+  initHeroTypewriter();
   console.log('DOM Content Loaded');
   
   // Parkbeat modal functionality

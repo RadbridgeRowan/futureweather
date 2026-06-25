@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/png" href="/favicon-512.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FutureWeather.co Pilot Program</title>
+  <meta
+    name="description"
+    content="A three-month FutureWeather.co pilot program offering complimentary Firm-plan access to architecture, engineering, and building-performance practitioners. Apply by July 10, 2026."
+  >
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="/src/style.css">
+  <style>
+    h1, h2, h3, h4, h5, h6 { font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif; }
+
+    :root {
+      --nav-bg: #0B1F3F;
+      --hero-bg: #F8FAFB;
+      --hero-heading: #0B1F3F;
+      --hero-text: #4A5568;
+      --btn-primary-bg: #1E5A8E;
+      --btn-primary-hover: #164670;
+      --btn-primary-text: #FFFFFF;
+      --soft-border: #D8E3EE;
+    }
+
+    .pilot-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 7px 14px;
+      background: white;
+      border: 1px solid var(--soft-border);
+      border-radius: 9999px;
+      color: #334155;
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    .pilot-form-input {
+      margin-top: 0.25rem;
+      display: block;
+      width: 100%;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      padding: 0.55rem 0.75rem;
+      font-size: 0.95rem;
+      background: white;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+    .pilot-form-input:hover { border-color: #93c5fd; }
+    .pilot-form-input:focus {
+      outline: none;
+      border-color: #1E5A8E;
+      box-shadow: 0 0 0 3px rgba(30, 90, 142, 0.12);
+    }
+    .pilot-form-input::placeholder { color: #94a3b8; }
+
+  </style>
+</head>
+<body class="font-ibm">
+  <div class="bg-white">
+
+    <!-- Header -->
+    <header class="sticky top-0 left-0 right-0 z-30 shadow-md bg-nav-bg">
+      <div class="container-custom flex items-center justify-between py-4">
+        <div>
+          <a href="/">
+            <img src="/assets/images/futureweather-lockup-white.svg" alt="Future Weather Logo" class="h-8">
+          </a>
+        </div>
+        <div class="flex items-center space-x-4">
+          <a href="https://app.futureweather.co/" target="_blank" rel="noopener" data-analytics-label="nav_sign_in"
+            class="hidden sm:inline-flex items-center justify-center text-sm font-medium px-4 py-2 rounded border transition duration-300 bg-btn-secondary-bg text-btn-secondary-text border-btn-secondary-border hover:bg-btn-secondary-hover-bg hover:text-btn-secondary-hover-text">
+            Sign In
+          </a>
+          <a href="#apply"
+            class="flex items-center gap-2 rounded px-3 py-2 font-semibold text-sm transition duration-300 bg-btn-primary-bg text-btn-primary-text hover:bg-btn-primary-hover">
+            <i class="fas fa-paper-plane text-base"></i>
+            <span>Apply for the Pilot</span>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="relative overflow-hidden bg-hero-bg border-b border-gray-200">
+      <div class="container-custom py-12 lg:py-16">
+        <div class="max-w-3xl">
+          <div class="inline-flex items-center gap-2 rounded-full border border-gray-200 bg-white px-4 py-2 text-sm text-gray-600 mb-5">
+            <i class="fas fa-flask text-btn-primary-bg"></i>
+            Pilot Program &middot; July&ndash;September 2026
+          </div>
+          <h1 class="text-3xl lg:text-5xl mb-5 leading-snug font-medium font-open-sans text-hero-heading">
+            Stress test your facilities under <span class="text-btn-primary-bg font-semibold">future climate conditions</span>
+          </h1>
+          <p class="text-base mb-6 leading-relaxed font-open-sans text-hero-text max-w-2xl">
+            We are inviting architecture, engineering, and building-performance practitioners to a
+            three-month FutureWeather.co pilot. Selected organizations receive three months of complimentary access to
+            the <strong>Firm</strong> plan: 50 future weather generation jobs per month
+            (normally $749/month).
+          </p>
+          <div class="flex flex-col sm:flex-row gap-3">
+            <a href="#apply"
+              class="inline-flex items-center justify-center gap-2 font-semibold px-5 py-2.5 rounded transition duration-300 bg-btn-primary-bg text-btn-primary-text hover:bg-btn-primary-hover">
+              <i class="fas fa-paper-plane text-sm"></i>
+              Apply for the Pilot
+            </a>
+            <a href="#about-pilot"
+              class="inline-flex items-center justify-center font-medium px-5 py-2.5 rounded border transition duration-200 bg-btn-secondary-bg text-btn-secondary-text border-btn-secondary-border hover:bg-btn-secondary-hover-bg hover:text-btn-secondary-hover-text">
+              Learn More
+              <i class="fas fa-arrow-down text-sm ml-2"></i>
+            </a>
+          </div>
+          <div class="mt-4 flex items-center gap-2 text-sm text-gray-500">
+            <i class="fas fa-clock text-gray-400"></i>
+            Applications close <strong class="text-gray-700">July 10, 2026</strong>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="max-w-4xl mx-auto px-6 py-10 lg:px-8 lg:py-12">
+
+      <!-- About the pilot -->
+      <section id="about-pilot" class="mb-12 scroll-mt-20">
+        <h2 class="page-section-heading mb-4">About the pilot</h2>
+        <p class="text-gray-600 leading-relaxed mb-6">
+          The purpose of the pilot is to learn how future climate data can improve real-world design,
+          analysis, and planning decisions, and to keep improving FutureWeather.co based on what
+          we learn together. Participating organizations get full Firm-plan access at no cost for the
+          duration of the program.
+        </p>
+
+        <ul class="space-y-1.5 pl-5 list-disc marker:text-btn-primary-bg text-gray-600 leading-relaxed">
+          <li>3 months</li>
+          <li>50 jobs per month (complimentary Firm plan access)</li>
+          <li>$2,247 total value ($749/month)</li>
+        </ul>
+      </section>
+
+      <!-- What we're exploring -->
+      <section id="exploring" class="mb-12 scroll-mt-20">
+        <h2 class="page-section-heading mb-3">What we&rsquo;re exploring</h2>
+        <ul class="space-y-2 pl-5 list-disc marker:text-btn-primary-bg text-gray-600 leading-relaxed mb-4">
+          <li><span class="font-semibold text-gray-900">HVAC sizing &amp; equipment selection:</span> Evaluate equipment and system sizing under future design conditions, using climate-adjusted EPW and DDY files.</li>
+          <li><span class="font-semibold text-gray-900">Energy, cost &amp; capital planning:</span> Understand how energy use, operating cost, and capital planning needs shift as the climate changes.</li>
+          <li><span class="font-semibold text-gray-900">Overheating, comfort &amp; resilience:</span> Assess overheating risk, thermal comfort, and building resilience under a range of future climate scenarios.</li>
+          <li><span class="font-semibold text-gray-900">Comparing design alternatives:</span> Compare design options across multiple future years and climate scenarios to inform more robust decisions.</li>
+        </ul>
+        <div class="rounded-lg border border-gray-200 bg-gray-50 px-5 py-4 text-sm text-gray-600 leading-relaxed">
+          <i class="fas fa-circle-check text-btn-primary-bg mr-2"></i>
+          You&rsquo;ll be free to use any outputs for commercial, academic, research, or other purposes,
+          in EnergyPlus, OpenStudio, IES VE, DesignBuilder, TRACE 3D Plus, Ladybug/Honeybee, or any
+          workflow that accepts EPW and DDY files.
+        </div>
+      </section>
+
+      <!-- What participation involves -->
+      <section id="participation" class="mb-12 scroll-mt-20">
+        <h2 class="page-section-heading mb-3">What participation involves</h2>
+        <p class="text-gray-600 leading-relaxed mb-6">Light-touch by design: the main commitment is three short conversations.</p>
+
+        <ul class="space-y-2 pl-5 list-disc marker:text-btn-primary-bg text-gray-600 leading-relaxed">
+          <li><span class="font-semibold text-gray-900">Kickoff (30 to 60 minutes):</span> We&rsquo;ll discuss your projects, tools, and goals for the pilot. You&rsquo;ll get set up with full Firm-plan access.</li>
+          <li><span class="font-semibold text-gray-900">Midpoint review (30 to 60 minutes):</span> We&rsquo;ll check in on your experience using the platform and any preliminary results from your work.</li>
+          <li><span class="font-semibold text-gray-900">Closeout (30 to 60 minutes):</span> We&rsquo;ll discuss what you learned and what could be improved. Where work produces a shareable outcome, we may also explore a brief, co-branded case study.</li>
+        </ul>
+
+        <div class="mt-6 rounded-lg border border-gray-200 bg-gray-50 px-5 py-4 text-sm text-gray-600 leading-relaxed">
+          <i class="fas fa-handshake text-btn-primary-bg mr-2"></i>
+          We&rsquo;d like to recognize participating organizations on the FutureWeather.co website, but any use of a firm&rsquo;s name, logo, project information, or results is subject to mutual approval.
+        </div>
+      </section>
+
+      <!-- What is FutureWeather.co -->
+      <section id="about-platform" class="mb-12 scroll-mt-20">
+        <h2 class="page-section-heading mb-4">What is FutureWeather.co?</h2>
+        <p class="text-gray-600 leading-relaxed mb-4">
+          FutureWeather.co converts historical weather files into future climate-adjusted EPW, DDY, and
+          STAT files, typically in under 30 seconds. The platform is based on a peer-reviewed morphing
+          methodology and uses projections from 23 CMIP6 global climate models across multiple climate
+          scenarios.
+        </p>
+        <p class="text-gray-600 leading-relaxed mb-4">
+          <a href="/enhancements/" class="text-btn-primary-bg hover:underline font-medium">Platform enhancements</a> include sub-daily climate data for better representation of future extremes,
+          matching future DDY files to keep HVAC sizing conditions consistent with annual weather files,
+          and batch generation across multiple scenarios, time horizons, and locations at once. A parametric
+          mode is also in development for systematic exploration of climate uncertainty across design options.
+        </p>
+        <div class="flex flex-wrap gap-2">
+          <span class="pilot-pill"><i class="fas fa-globe text-btn-primary-bg"></i> Web interface</span>
+          <span class="pilot-pill"><i class="fas fa-code text-btn-primary-bg"></i> REST API</span>
+          <span class="pilot-pill"><i class="fab fa-python text-btn-primary-bg"></i> Python package</span>
+          <span class="pilot-pill"><i class="fas fa-cubes text-btn-primary-bg"></i> Revit / Dynamo</span>
+          <span class="pilot-pill"><i class="fas fa-bug text-btn-primary-bg"></i> Grasshopper</span>
+        </div>
+      </section>
+
+      <!-- Apply -->
+      <section id="apply" class="scroll-mt-20">
+        <div class="mb-6">
+          <h2 class="page-section-heading mb-3">Apply for the pilot</h2>
+          <p class="text-gray-600 leading-relaxed">
+            Fill out the short form below. Please apply by <strong>July 10, 2026</strong> to secure your spot.
+            Prefer email? Write to <a href="mailto:rowan@radbridge.com?subject=FutureWeather%20Pilot%20Application" class="text-btn-primary-bg hover:underline font-medium">rowan@radbridge.com</a> directly.
+          </p>
+        </div>
+
+        <div class="rounded-xl border border-gray-200 bg-white shadow-sm overflow-hidden">
+          <!-- Form card header -->
+          <div class="bg-nav-bg px-8 py-5">
+            <div class="text-white font-semibold text-lg">Pilot Application</div>
+            <div class="text-blue-200 text-sm mt-0.5">FutureWeather.co &middot; July&ndash;September 2026</div>
+          </div>
+
+          <div class="px-8 py-8">
+            <!-- TODO: replace REPLACE_WITH_PILOT_FORM_ID with the new Formspree form ID for pilot applications -->
+            <form id="pilot-form" action="https://formspree.io/f/xeebewlg" method="POST" class="space-y-5">
+              <input type="hidden" name="_subject" value="FutureWeather Pilot Application">
+              <p class="text-xs text-gray-500"><span class="text-red-500">*</span> indicates a required field</p>
+
+              <div class="grid sm:grid-cols-2 gap-5">
+                <div>
+                  <label for="pilot-name" class="block text-sm font-medium text-gray-700">Name <span class="text-red-500">*</span></label>
+                  <input type="text" name="name" id="pilot-name" required class="pilot-form-input">
+                </div>
+                <div>
+                  <label for="pilot-email" class="block text-sm font-medium text-gray-700">Email <span class="text-red-500">*</span></label>
+                  <input type="email" name="email" id="pilot-email" required class="pilot-form-input">
+                </div>
+              </div>
+
+              <div>
+                <label for="pilot-organization" class="block text-sm font-medium text-gray-700">Organization <span class="text-red-500">*</span></label>
+                <input type="text" name="organization" id="pilot-organization" required class="pilot-form-input">
+              </div>
+
+              <div>
+                <label for="pilot-tools" class="block text-sm font-medium text-gray-700">Primary simulation tools <span class="text-red-500">*</span></label>
+                <input type="text" name="primary_tools" id="pilot-tools" required
+                  placeholder="e.g. EnergyPlus, OpenStudio, IES VE, DesignBuilder, Ladybug/Honeybee"
+                  class="pilot-form-input">
+              </div>
+
+              <div>
+                <label for="pilot-projects" class="block text-sm font-medium text-gray-700">
+                  The types of projects or decisions you hope future weather data could inform <span class="text-red-500">*</span>
+                </label>
+                <textarea name="project_types" id="pilot-projects" rows="4" required class="pilot-form-input"></textarea>
+              </div>
+
+              <div>
+                <label for="pilot-use-cases" class="block text-sm font-medium text-gray-700">
+                  One or two potential pilot use cases <span class="text-gray-400 font-normal">(optional)</span>
+                </label>
+                <textarea name="potential_use_cases" id="pilot-use-cases" rows="3" class="pilot-form-input"></textarea>
+              </div>
+
+              <button type="submit"
+                class="w-full inline-flex items-center justify-center gap-2 bg-btn-primary-bg text-btn-primary-text font-semibold px-6 py-3 rounded-lg shadow-sm transition hover:bg-btn-primary-hover">
+                <i class="fas fa-paper-plane text-sm"></i>
+                Submit Application
+              </button>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-white py-12 mt-16">
+    <div class="container-custom">
+      <div class="text-center mb-6">
+        <a href="https://radbridge.com" target="_blank" rel="noopener">
+          <img src="/assets/images/Radbridge_logo_white_PNG.png" alt="Radbridge Logo" class="h-10 mx-auto">
+        </a>
+      </div>
+      <div class="text-center text-gray-400 text-sm">
+        &copy; 2026 Radbridge Incorporated.
+      </div>
+    </div>
+  </footer>
+
+  <script type="module">
+    import { initAnalytics } from '../src/analytics.js';
+    import { initPartnerReferralTracking } from '../src/referral.js';
+    initAnalytics();
+    initPartnerReferralTracking();
+  </script>
+
+  <script>
+    document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+      anchor.addEventListener('click', function (e) {
+        const targetId = this.getAttribute('href');
+        if (targetId === '#') return;
+        const target = document.querySelector(targetId);
+        if (!target) return;
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+  </script>
+</body>
+</html>

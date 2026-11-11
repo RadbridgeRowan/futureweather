@@ -1288,6 +1288,7 @@
         </button>
       </div>
       <form id="contact-form" action="https://formspree.io/f/xwpbkgyo" method="POST" class="space-y-4">
+        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none">
         <input type="hidden" name="_subject" id="contact-subject" value="">
         <div>
           <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
@@ -1304,107 +1305,6 @@
         <button type="submit" class="w-full bg-radbridge-blue text-white font-semibold px-6 py-3 rounded-lg shadow transition hover:bg-radbridge-blue/90">
           Send Message
         </button>
-      </form>
-    </div>
-  </div>
-
-  <!-- Request Form Modal -->
-    <style>
-        .form-input-new {
-            margin-top: 0.25rem;
-            display: block;
-            width: 100%;
-            border: 1px solid #e2e8f0;
-            border-radius: 6px;
-            box-shadow: none;
-            transition: all 0.2s;
-        }
-        .form-input-new:hover {
-            background-color: #ebf8ff;
-            border-color: #3182ce;
-        }
-        .form-input-new:focus {
-            outline: none;
-            border-color: #3182ce;
-            box-shadow: 0 0 0 1px #3182ce;
-        }
-        .form-input-new::placeholder {
-            color: #a0aec0;
-        }
-    </style>
-  <div id="requestModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
-    <div class="bg-white rounded-lg p-8 max-w-2xl w-full mx-4 max-h-[75vh] overflow-y-auto">
-      <div class="flex justify-between items-center mb-6">
-        <h3 class="text-2xl font-bold text-radbridge-blue">Submit Request</h3>
-        <button onclick="closeRequestModal()" class="text-gray-500 hover:text-gray-700" aria-label="Close request form">
-          <i class="fas fa-times text-xl"></i>
-        </button>
-      </div>
-      <form id="request-form" action="https://formspree.io/f/xwpbkgyo" method="POST" enctype="multipart/form-data">
-        <input type="hidden" name="_subject" value="New Future Weather Request">
-        <div class="grid grid-cols-1 gap-6">
-          <div class="block text-sm font-medium text-gray-700">
-          <span class="text-red-500">*</span> indicates a required field
-          </div>
-          <div>
-            <label for="request-name" class="block text-sm font-medium text-gray-700">Name <span class="text-red-500">*</span></label>
-            <input type="text" name="name" id="request-name" required class="form-input-new">
-          </div>
-          <div>
-            <label for="request-email" class="block text-sm font-medium text-gray-700">Email <span class="text-red-500">*</span></label>
-            <input type="email" name="email" id="request-email" required class="form-input-new">
-          </div>
-          <div>
-            <label for="request-organization" class="block text-sm font-medium text-gray-700">Organization</label>
-            <input type="text" name="organization" id="request-organization" class="form-input-new">
-          </div>
-          <div>
-            <label for="request-usage" class="block text-sm font-medium text-gray-700">Intended Use</label>
-            <select id="request-usage" name="usage" class="form-input-new">
-              <option selected></option>
-              <option>Single file</option>
-              <option>Batch (multiple files)</option>
-              <option>API access</option>
-              <option>Not sure / TBD</option>
-            </select>
-          </div>
-          <div>
-            <label for="request-location" class="block text-sm font-medium text-gray-700">Location(s)</label>
-            <input type="text" name="locations" id="request-location" class="form-input-new" placeholder="City/Station or lat,lon (comma-separated for multiples)">
-          </div>
-          <div>
-            <label for="request-scenario" class="block text-sm font-medium text-gray-700">Scenario</label>
-            <select id="request-scenario" name="scenario" class="form-input-new">
-              <option selected></option>
-              <option>SSP2-4.5</option>
-              <option>SSP3-7.0</option>
-              <option>SSP5-8.5</option>
-              <option>Not sure / TBD</option>
-            </select>
-          </div>
-          <div>
-            <label for="request-year" class="block text-sm font-medium text-gray-700">Target Year(s)</label>
-            <input type="text" name="target-years" id="request-year" class="form-input-new" placeholder="e.g., 2030, 2050">
-          </div>
-          <div>
-            <label for="request-file-types" class="block text-sm font-medium text-gray-700">File Types</label>
-            <select id="request-file-types" name="file-types" class="form-input-new">
-              <option selected></option>
-              <option>EPW only</option>
-              <option>EPW + DDY</option>
-              <option>EPW + DDY + STAT</option>
-            </select>
-          </div>
-          <div>
-            <label for="request-comments" class="block text-sm font-medium text-gray-700">Additional Comments / Questions</label>
-            <textarea name="comments" id="request-comments" rows="2" class="form-input-new" placeholder="Enter your comments or questions here..."></textarea>
-          </div>
-        </div>
-        <div class="mt-8">
-          <button type="submit" class="w-full bg-radbridge-blue text-white font-semibold px-6 py-3 rounded-lg shadow transition hover:bg-radbridge-blue/90">
-            Submit
-          </button>
-        </div>
       </form>
     </div>
   </div>

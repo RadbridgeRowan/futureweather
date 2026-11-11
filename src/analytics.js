@@ -90,7 +90,6 @@ function submitFormWithAnalytics(form, formName) {
 function trackLeadForms() {
   const trackedForms = [
     { selector: '#contact-form', formName: 'contact_form' },
-    { selector: '#request-form', formName: 'request_form' },
     { selector: '#pilot-form', formName: 'pilot_application' },
   ];
 

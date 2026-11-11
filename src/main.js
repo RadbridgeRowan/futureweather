@@ -21,25 +21,6 @@ window.closeContactModal = () => {
   document.body.style.overflow = '';
 };
 
-window.openRequestModal = (e) => {
-  if (e) e.preventDefault();
-  const modal = document.getElementById('requestModal');
-  modal.classList.remove('hidden');
-  modal.classList.add('flex');
-  document.body.style.overflow = 'hidden';
-  trackEvent('form_start', {
-    form_name: 'request_form',
-    form_destination: 'formspree',
-  });
-};
-
-window.closeRequestModal = () => {
-  const modal = document.getElementById('requestModal');
-  modal.classList.add('hidden');
-  modal.classList.remove('flex');
-  document.body.style.overflow = '';
-};
-
 // Hero headline: cycle the highlighted word with a typewriter effect.
 function initHeroTypewriter() {
   const elements = document.querySelectorAll('.hero-typewriter');
@@ -218,7 +199,6 @@ document.addEventListener('DOMContentLoaded', function() {
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
       closeContactModal();
-      closeRequestModal();
       // Also close mobile menu when pressing ESC
       if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
         mobileMenu.classList.add('hidden');
@@ -234,15 +214,6 @@ document.addEventListener('DOMContentLoaded', function() {
     contactModal.addEventListener('click', (e) => {
       if (e.target === contactModal) {
         closeContactModal();
-      }
-    });
-  }
-
-  const requestModal = document.getElementById('requestModal');
-  if (requestModal) {
-    requestModal.addEventListener('click', (e) => {
-      if (e.target === requestModal) {
-        closeRequestModal();
       }
     });
   }

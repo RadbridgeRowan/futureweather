@@ -4,10 +4,10 @@
   <meta charset="UTF-8" />
   <link rel="icon" type="image/png" href="/favicon-512.png" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Future Weather for Grasshopper</title>
+  <title>FutureWeather for Grasshopper | Future EPW, DDY &amp; STAT Files</title>
   <meta
     name="description"
-    content="Generate future climate-adjusted EPW, DDY, and STAT weather files directly in Grasshopper for Ladybug Tools and Honeybee workflows."
+    content="Generate future EPW, DDY and STAT weather files in Grasshopper for Rhino 7, 8 and 9 on Windows. Outputs wire straight into Ladybug and Honeybee components."
   >
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -208,6 +208,24 @@
       font-weight: 600;
     }
 
+    .gh-tip {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      background: white;
+      border: 1px solid var(--soft-border);
+      border-left: 4px solid #1E5A8E;
+      border-radius: 10px;
+      padding: 16px 18px;
+      color: #475569;
+      line-height: 1.6;
+    }
+
+    .gh-tip > i {
+      margin-top: 4px;
+      color: #1E5A8E;
+    }
+
     .gh-faq-answer.hidden {
       display: none;
     }
@@ -291,7 +309,7 @@
               </div>
               <div class="mt-4 flex items-center justify-center lg:justify-start gap-2">
                 <i class="fas fa-clock text-base text-promo-icon"></i>
-                <span class="text-sm text-promo-text">Async execution keeps the canvas responsive. Jobs typically finish in under a minute.</span>
+                <span class="text-sm text-promo-text">Async execution keeps the canvas responsive. Jobs usually take about 30 seconds per file.</span>
               </div>
             </div>
           </div>
@@ -344,6 +362,36 @@
           <p class="text-lg text-gray-600 leading-relaxed">
             This workflow is designed for building energy simulation, HVAC sizing, climate analysis, comfort studies, and resilience planning — anywhere you use weather files in Ladybug Tools.
           </p>
+          <div class="gh-highlight mt-8">
+            <h3 class="text-2xl font-semibold text-gray-900 mb-2">What's new in 1.1.0</h3>
+            <p class="text-gray-700 leading-relaxed mb-4">Released November 17, 2026 on the Rhino Package Manager.</p>
+            <div class="gh-list">
+              <div class="gh-list-item">
+                <i class="fas fa-clipboard-list"></i>
+                <div><strong>Job Info output.</strong> A text record of each file's provenance (job ID, year, scenario, baseline and generator version) to keep with your project records.</div>
+              </div>
+              <div class="gh-list-item">
+                <i class="fas fa-sliders"></i>
+                <div><strong>Optional Baseline input.</strong> Pin a historical baseline such as <code>1985-2014</code>, or leave it empty to use the baseline matched to your EPW.</div>
+              </div>
+              <div class="gh-list-item">
+                <i class="fas fa-shield-halved"></i>
+                <div><strong>Safer Run behavior.</strong> A job is submitted only when Run changes from False to True, and results are saved in the .gh file.</div>
+              </div>
+              <div class="gh-list-item">
+                <i class="fas fa-desktop"></i>
+                <div><strong>Rhino 9 support and a single .gha.</strong> Works in Rhino 7.13+, 8 and 9, with no extra DLLs.</div>
+              </div>
+              <div class="gh-list-item">
+                <i class="fas fa-key"></i>
+                <div><strong>Example files that check your key.</strong> Paste your key and the examples show your credit balance straight away.</div>
+              </div>
+              <div class="gh-list-item">
+                <i class="fas fa-layer-group"></i>
+                <div><strong>Batches up to 50 files</strong> with clearer error messages.</div>
+              </div>
+            </div>
+          </div>
         </section>
 
         <section id="install" class="mb-20 scroll-mt-20">
@@ -352,7 +400,8 @@
             <div class="gh-card">
               <i class="fas fa-download gh-card-icon"></i>
               <h3 class="text-xl font-semibold text-gray-900 mb-3">1. Install the plugin</h3>
-              <p class="text-gray-600 leading-relaxed">In Rhino, type <strong>PackageManager</strong>, search for <strong>FutureWeather</strong>, and click <strong>Install</strong>. Restart Rhino and Grasshopper.</p>
+              <!-- TODO: Food4Rhino link -->
+              <p class="text-gray-600 leading-relaxed">Works in Rhino 7 (7.13 or later), 8 or 9 on Windows. In Rhino, type <strong>PackageManager</strong>, search for <strong>FutureWeather</strong>, and click <strong>Install</strong>. Restart Rhino and Grasshopper.</p>
             </div>
             <div class="gh-card">
               <i class="fas fa-gift gh-card-icon"></i>
@@ -362,19 +411,43 @@
             <div class="gh-card">
               <i class="fas fa-key gh-card-icon"></i>
               <h3 class="text-xl font-semibold text-gray-900 mb-3">3. Create an API key</h3>
-              <p class="text-gray-600 leading-relaxed">Inside the app, open <strong>API Docs</strong> in the left navigation, switch to the <strong>API Keys</strong> tab, click <strong>Create Token</strong>, and save your PAT somewhere secure. It starts with <code>fw_</code> and gets pasted into the <strong>API Key</strong> input on the canvas.</p>
+              <p class="text-gray-600 leading-relaxed">Inside the app, open <strong>API Docs</strong> in the left navigation, switch to the <strong>API Keys</strong> tab, click <strong>Create Token</strong>, and save your PAT somewhere secure. It starts with <code>fw_</code>. Paste it over the placeholder in the yellow <strong>Key</strong> panel of an example file.</p>
             </div>
             <div class="gh-card">
               <i class="fas fa-play gh-card-icon"></i>
               <h3 class="text-xl font-semibold text-gray-900 mb-3">4. Open an example and run</h3>
-              <p class="text-gray-600 leading-relaxed">Open one of the included <strong>.gh</strong> example files. Replace the placeholder values with your token, file paths, year, and scenario. Right-click the Boolean toggle and set it to <strong>True</strong> to run.</p>
+              <p class="text-gray-600 leading-relaxed">Open one of the included <strong>.gh</strong> example files. Replace the placeholder values with your token, file paths, year, and scenario. Right-click the Boolean toggle and set it to <strong>True</strong> to run. To run again, set Run to False and back to True.</p>
             </div>
           </div>
           <div class="gh-highlight mt-8">
             <h3 class="text-2xl font-semibold text-gray-900 mb-4">Run toggle safety</h3>
-            <p class="text-gray-700 leading-relaxed">
-              Every component that spends credits has a <strong>Run</strong> boolean input that defaults to <strong>False</strong>. This prevents accidental credit spend when opening a file or changing upstream parameters. You must explicitly set it to True each time you want to run.
+            <p class="text-gray-700 leading-relaxed mb-4">
+              Every component that spends credits has a <strong>Run</strong> boolean input that defaults to <strong>False</strong>. A job is submitted <strong>only when Run changes from False to True</strong>.
             </p>
+            <div class="gh-list">
+              <div class="gh-list-item">
+                <i class="fas fa-rotate"></i>
+                <div><strong>No accidental resubmits.</strong> Holding Run at True doesn't resubmit after an error, after an input change, or when you open a file saved with Run = True. To submit again, set Run to False and then back to True. A Grasshopper <strong>Button</strong> also works.</div>
+              </div>
+              <div class="gh-list-item">
+                <i class="fas fa-floppy-disk"></i>
+                <div><strong>Results are saved in the .gh file.</strong> Reopening shows the generated paths without re-running. A file saved mid-run picks up the same job when reopened and never submits a second one.</div>
+              </div>
+              <div class="gh-list-item">
+                <i class="fas fa-list"></i>
+                <div><strong>One job per component.</strong> Sending a list or data tree into FW Future Weather or FW Submit Job gives an error instead of submitting one job per item. Use <strong>FW Future Weather Batch</strong> for several years or scenarios.</div>
+              </div>
+              <div class="gh-list-item">
+                <i class="fas fa-folder-open"></i>
+                <div><strong>Checked before submitting.</strong> The output folder is checked first, so an unusable folder costs no credit. Failed jobs are refunded.</div>
+              </div>
+            </div>
+          </div>
+          <div class="gh-tip mt-6">
+            <i class="fas fa-lightbulb"></i>
+            <div>
+              <strong class="text-gray-900">New to Grasshopper?</strong> Values such as the key, paths and years go in yellow <strong>Panels</strong> wired into the inputs. Make one by double-clicking the canvas and typing "Panel". A component dragged in from the toolbar has no values until something is wired into it. Typing into the box at the top of an input's right-click menu only renames the input; it doesn't set a value. The easiest start is an example file: paste your key over the placeholder in the Key panel.
+            </div>
           </div>
         </section>
 
@@ -389,14 +462,37 @@
               After installing from the Rhino Package Manager, the example .gh files are located in the package's <code>examples</code> folder:
             </p>
             <div class="rounded border border-gray-200 bg-white px-4 py-3 font-mono text-sm text-gray-800 mb-3">
-              %APPDATA%\McNeel\Rhinoceros\packages\8.0\futureweather\&lt;version&gt;\examples\
+              %APPDATA%\McNeel\Rhinoceros\packages\&lt;Rhino version&gt;\futureweather\&lt;plugin version&gt;\examples\
             </div>
             <p class="text-gray-700 leading-relaxed mb-2">
-              For example: <code>C:\Users\&lt;you&gt;\AppData\Roaming\McNeel\Rhinoceros\packages\8.0\futureweather\1.0.2\examples\</code>
+              For example, in Rhino 8: <code>C:\Users\&lt;you&gt;\AppData\Roaming\McNeel\Rhinoceros\packages\8.0\futureweather\1.1.0\examples\</code>
             </p>
             <p class="text-gray-700 leading-relaxed">
-              If you are using Rhino 7, replace <code>8.0</code> with <code>7.0</code>. <code>%APPDATA%</code> points to your Windows <strong>AppData\Roaming</strong> folder, not <strong>AppData\Local</strong>.
+              Use <code>7.0</code> for Rhino 7 and <code>9.0</code> for Rhino 9. The plugin version folder (<code>1.1.0</code> above) changes when the plugin updates. <code>%APPDATA%</code> points to your Windows <strong>AppData\Roaming</strong> folder, not <strong>AppData\Local</strong>.
             </p>
+          </div>
+          <h3 class="text-2xl font-semibold text-gray-900 mb-4">Every example includes</h3>
+          <div class="gh-list mb-8">
+            <div class="gh-list-item">
+              <i class="fas fa-key"></i>
+              <div>A yellow <strong>Key</strong> panel with the placeholder <code>fw_YOUR_TOKEN_HERE</code>. Paste your key over it.</div>
+            </div>
+            <div class="gh-list-item">
+              <i class="fas fa-coins"></i>
+              <div><strong>FW Authenticate</strong> wired to a <strong>Credits</strong> panel, which shows your balance as soon as a valid key is pasted.</div>
+            </div>
+            <div class="gh-list-item">
+              <i class="fas fa-sliders"></i>
+              <div>An empty <strong>Baseline</strong> panel. Leave it empty to use the baseline matched to your EPW.</div>
+            </div>
+            <div class="gh-list-item">
+              <i class="fas fa-clipboard-list"></i>
+              <div>A <strong>Job Info</strong> panel showing each file's provenance record.</div>
+            </div>
+            <div class="gh-list-item">
+              <i class="fas fa-note-sticky"></i>
+              <div>Short grey notes explaining each part of the canvas.</div>
+            </div>
           </div>
           <div class="grid md:grid-cols-2 xl:grid-cols-4 gap-6">
             <div class="gh-card">
@@ -421,35 +517,45 @@
         <section id="components" class="mb-20 scroll-mt-20">
           <h2 class="page-section-heading mb-8">Components</h2>
           <p class="text-lg text-gray-600 leading-relaxed mb-6">
-            All components appear under the <strong>FutureWeather</strong> tab in Grasshopper. The plugin includes both one-step async components for quick use and lower-level components for custom non-blocking workflows.
+            All components appear under the <strong>FutureWeather</strong> tab in Grasshopper, in three toolbar panels: <strong>Main</strong>, <strong>Utilities</strong>, and <strong>Advanced</strong>. Every component has its own icon. The plugin includes both one-step async components for quick use and lower-level components for custom non-blocking workflows.
           </p>
-          <div class="grid md:grid-cols-2 gap-6">
+          <h3 class="text-2xl font-semibold text-gray-900 mb-4">Main</h3>
+          <div class="grid md:grid-cols-2 gap-6 mb-8">
             <div class="gh-card">
-              <h3 class="text-xl font-semibold text-gray-900 mb-3">FW Future Weather</h3>
-              <p class="text-gray-600 leading-relaxed">Submit, poll, and download a future EPW in one step. Runs asynchronously so the canvas stays responsive. Best for straightforward single-file workflows.</p>
+              <h4 class="text-xl font-semibold text-gray-900 mb-3">FW Future Weather</h4>
+              <p class="text-gray-600 leading-relaxed mb-3">Submit, poll, and download a future EPW in one step. Runs asynchronously so the canvas stays responsive. Best for straightforward single-file workflows.</p>
+              <p class="text-gray-600 leading-relaxed">Outputs <code>EPW</code>, <code>DDY</code>, <code>STAT</code>, and <code>JobInfo</code>. Takes an optional <code>Base</code> input to pin a historical baseline.</p>
             </div>
             <div class="gh-card">
-              <h3 class="text-xl font-semibold text-gray-900 mb-3">FW Future Weather Batch</h3>
-              <p class="text-gray-600 leading-relaxed">Generate multiple year and scenario combinations in one run. Best for parametric studies, resilience testing, and multi-scenario comparisons.</p>
+              <h4 class="text-xl font-semibold text-gray-900 mb-3">FW Future Weather Batch</h4>
+              <p class="text-gray-600 leading-relaxed mb-3">Generate multiple year and scenario combinations in one run. Best for parametric studies, resilience testing, and multi-scenario comparisons.</p>
+              <p class="text-gray-600 leading-relaxed">Outputs <code>EPWs</code>, <code>DDYs</code>, <code>STATs</code>, <code>Info</code> (a summary, including any failed jobs), and <code>JobInfo</code>. Takes an optional <code>Base</code> input.</p>
+            </div>
+          </div>
+          <h3 class="text-2xl font-semibold text-gray-900 mb-4">Utilities</h3>
+          <div class="grid md:grid-cols-2 gap-6 mb-8">
+            <div class="gh-card">
+              <h4 class="text-xl font-semibold text-gray-900 mb-3">FW Authenticate</h4>
+              <p class="text-gray-600 leading-relaxed">Validate your API key and confirm your credit balance before launching a generation run. Outputs <code>Email</code>, <code>Credits</code>, and <code>ID</code>.</p>
             </div>
             <div class="gh-card">
-              <h3 class="text-xl font-semibold text-gray-900 mb-3">FW Authenticate</h3>
-              <p class="text-gray-600 leading-relaxed">Validate your API key and confirm your credit balance before launching a generation run.</p>
-            </div>
-            <div class="gh-card">
-              <h3 class="text-xl font-semibold text-gray-900 mb-3">FW List Projects</h3>
+              <h4 class="text-xl font-semibold text-gray-900 mb-3">FW List Projects</h4>
               <p class="text-gray-600 leading-relaxed">List your projects in the FutureWeather dashboard for organizing jobs by client or building.</p>
             </div>
+          </div>
+          <h3 class="text-2xl font-semibold text-gray-900 mb-4">Advanced</h3>
+          <p class="text-gray-600 leading-relaxed mb-4">Use these in order: <strong>FW Submit Job</strong> &rarr; <strong>FW Check Status</strong> &rarr; <strong>FW Download Results</strong>.</p>
+          <div class="grid md:grid-cols-2 gap-6">
             <div class="gh-card">
-              <h3 class="text-xl font-semibold text-gray-900 mb-3">FW Submit Job</h3>
-              <p class="text-gray-600 leading-relaxed">Submit a job without waiting for completion. Returns a job ID immediately. Useful for custom sequencing in advanced workflows.</p>
+              <h4 class="text-xl font-semibold text-gray-900 mb-3">FW Submit Job</h4>
+              <p class="text-gray-600 leading-relaxed">Submit a job without waiting for completion. Returns a job ID immediately. Useful for custom sequencing in advanced workflows. Takes an optional <code>Base</code> input.</p>
             </div>
             <div class="gh-card">
-              <h3 class="text-xl font-semibold text-gray-900 mb-3">FW Check Status</h3>
+              <h4 class="text-xl font-semibold text-gray-900 mb-3">FW Check Status</h4>
               <p class="text-gray-600 leading-relaxed">Poll a submitted job's status. Wire to a Grasshopper <strong>Timer</strong> component for auto-polling.</p>
             </div>
             <div class="gh-card">
-              <h3 class="text-xl font-semibold text-gray-900 mb-3">FW Download Results</h3>
+              <h4 class="text-xl font-semibold text-gray-900 mb-3">FW Download Results</h4>
               <p class="text-gray-600 leading-relaxed">Download generated EPW, DDY, and STAT files after a job completes.</p>
             </div>
           </div>
@@ -458,7 +564,7 @@
         <section id="inputs" class="mb-20 scroll-mt-20">
           <h2 class="page-section-heading mb-8">Input reference</h2>
           <p class="text-lg text-gray-600 leading-relaxed mb-6">
-            Every input used by the FutureWeather Grasshopper components is summarized below. All inputs accept text from Grasshopper Panels — no sliders or type conversions needed.
+            Every input used by the FutureWeather Grasshopper components is summarized below, by nickname and full name. All inputs accept text from Grasshopper Panels — no sliders or type conversions needed. Paths copied with Windows' <em>Copy as path</em> (wrapped in quotes) are accepted as-is.
           </p>
           <div class="gh-table-wrap mb-8">
             <table class="gh-table">
@@ -471,59 +577,64 @@
               </thead>
               <tbody>
                 <tr>
-                  <td><strong>Key</strong></td>
+                  <td><strong>Key</strong><br><span class="text-sm text-gray-500">API Key</span></td>
                   <td>Yes</td>
-                  <td>Your Personal Access Token. Starts with <code>fw_</code>. Create one in the app under API Docs > API Keys.</td>
+                  <td>Your Personal Access Token. Starts with <code>fw_</code>. Create one in the app under API Docs > API Keys. If nothing is connected, the component shows a message saying so.</td>
                 </tr>
                 <tr>
-                  <td><strong>EPW</strong></td>
+                  <td><strong>EPW</strong><br><span class="text-sm text-gray-500">EPW Path</span></td>
                   <td>Yes</td>
                   <td>Path to your historical EPW weather file. Type or paste a file path in a Panel.</td>
                 </tr>
                 <tr>
-                  <td><strong>Year</strong></td>
+                  <td><strong>Year</strong><br><span class="text-sm text-gray-500">Future Year</span></td>
                   <td>Yes</td>
                   <td>Target future year between 2035 and 2090 (e.g., <code>2050</code>). Uses a 30-year window around the target to reduce statistical noise. Enter as text in a Panel.</td>
                 </tr>
                 <tr>
-                  <td><strong>Years</strong></td>
+                  <td><strong>Years</strong><br><span class="text-sm text-gray-500">Future Years</span></td>
                   <td>Yes, batch</td>
-                  <td>List of target years for batch generation. Put each year on its own line in a Panel, or separate with commas (e.g., <code>2050, 2080</code>).</td>
+                  <td>List of target years for batch generation. Put each year on its own line in a Panel, or separate with commas (e.g., <code>2050, 2080</code>). Up to 50 year/scenario combinations per run; more is refused before anything is submitted.</td>
                 </tr>
                 <tr>
-                  <td><strong>SSP</strong></td>
+                  <td><strong>SSP</strong><br><span class="text-sm text-gray-500">Scenario</span></td>
                   <td>Yes</td>
-                  <td>CMIP6 climate scenario code. Options: <code>ssp126</code>, <code>ssp245</code>, <code>ssp370</code>, <code>ssp585</code>. See the scenario reference below.</td>
+                  <td>CMIP6 climate scenario code. Options: <code>ssp126</code>, <code>ssp245</code>, <code>ssp370</code>, <code>ssp585</code>. The long form, such as <code>SSP2-4.5</code>, also works. See the scenario reference below.</td>
                 </tr>
                 <tr>
-                  <td><strong>SSPs</strong></td>
+                  <td><strong>SSPs</strong><br><span class="text-sm text-gray-500">Scenarios</span></td>
                   <td>Yes, batch</td>
-                  <td>List of scenario codes for batch generation. One per line in a Panel, or comma-separated (e.g., <code>ssp245, ssp585</code>).</td>
+                  <td>List of scenario codes for batch generation. One per line in a Panel, or comma-separated (e.g., <code>ssp245, ssp585</code> or <code>SSP2-4.5, SSP5-8.5</code>). Up to 50 year/scenario combinations per run; more is refused before anything is submitted.</td>
                 </tr>
                 <tr>
-                  <td><strong>Dir</strong></td>
+                  <td><strong>Dir</strong><br><span class="text-sm text-gray-500">Output Dir</span></td>
                   <td>Yes</td>
                   <td>Output directory where generated files will be saved.</td>
                 </tr>
                 <tr>
-                  <td><strong>DDY</strong></td>
+                  <td><strong>DDY</strong><br><span class="text-sm text-gray-500">DDY Path</span></td>
                   <td>No</td>
                   <td>Path to a historical DDY file. When provided, a future-adjusted DDY is generated alongside the EPW.</td>
                 </tr>
                 <tr>
-                  <td><strong>Name</strong></td>
+                  <td><strong>Base</strong><br><span class="text-sm text-gray-500">Baseline</span></td>
+                  <td>No</td>
+                  <td>Pins a historical baseline, written as <code>1985-2014</code>. Leave it empty (recommended) to use the baseline matched to the EPW's own period of record. Periods shorter than 15 years are widened to 15 years; files with no period fall back to 1985-2014. Available on FW Future Weather, FW Future Weather Batch, and FW Submit Job.</td>
+                </tr>
+                <tr>
+                  <td><strong>Name</strong><br><span class="text-sm text-gray-500">Job Name</span></td>
                   <td>No</td>
                   <td>Friendly label for the job (e.g., <code>Chicago Office 2050</code>) to help identify it in the dashboard.</td>
                 </tr>
                 <tr>
-                  <td><strong>Project</strong></td>
+                  <td><strong>Proj</strong><br><span class="text-sm text-gray-500">Project Name</span></td>
                   <td>No</td>
                   <td>Project label for organization. If the project does not exist yet, it is created automatically.</td>
                 </tr>
                 <tr>
-                  <td><strong>Run</strong></td>
+                  <td><strong>Run</strong><br><span class="text-sm text-gray-500">Run</span></td>
                   <td>Yes</td>
-                  <td>Boolean toggle. Defaults to <strong>False</strong>. Set to True to start the job. Prevents accidental credit spend.</td>
+                  <td>Boolean toggle. Defaults to <strong>False</strong>. A job starts only when Run changes from False to True; to run again, set it to False and back to True. Prevents accidental credit spend.</td>
                 </tr>
               </tbody>
             </table>
@@ -581,7 +692,7 @@
 
         <section id="outputs" class="mb-20 scroll-mt-20">
           <h2 class="page-section-heading mb-8">What you get</h2>
-          <div class="grid md:grid-cols-3 gap-6 mb-8">
+          <div class="grid md:grid-cols-2 xl:grid-cols-4 gap-6 mb-8">
             <div class="gh-card">
               <i class="fas fa-file-waveform gh-card-icon"></i>
               <h3 class="text-xl font-semibold text-gray-900 mb-3">Future EPW</h3>
@@ -597,6 +708,11 @@
               <h3 class="text-xl font-semibold text-gray-900 mb-3">STAT report</h3>
               <p class="text-gray-600 leading-relaxed">Climate statistics summary generated alongside the EPW output for quick review and reporting.</p>
             </div>
+            <div class="gh-card">
+              <i class="fas fa-clipboard-list gh-card-icon"></i>
+              <h3 class="text-xl font-semibold text-gray-900 mb-3">Job Info</h3>
+              <p class="text-gray-600 leading-relaxed">A text record of each file's provenance to keep with project records: job ID, year and scenario, future window, the historical baseline used and how it was chosen (for example "from the EPW header"), and the generator version (currently Future Weather Generator 1.0.0). Output by FW Future Weather and FW Future Weather Batch.</p>
+            </div>
           </div>
 
           <div class="grid lg:grid-cols-2 gap-8 items-start">
@@ -608,8 +724,17 @@
               <p class="text-gray-600 leading-relaxed mb-4">
                 Example: <code>[2050, 2080]</code> &times; <code>[ssp245, ssp585]</code> creates four future weather files in a single run, using four credits.
               </p>
-              <p class="text-gray-600 leading-relaxed">
+              <p class="text-gray-600 leading-relaxed mb-4">
                 Results are organized into subdirectories by year and scenario, such as <code>output_dir/2050_ssp245/</code> and <code>output_dir/2080_ssp585/</code>.
+              </p>
+              <p class="text-gray-600 leading-relaxed mb-4">
+                Each run takes up to <strong>50</strong> year/scenario combinations. More is refused before anything is submitted. Duplicate years and scenarios are dropped, so they aren't charged twice.
+              </p>
+              <p class="text-gray-600 leading-relaxed mb-4">
+                The output lists line up by index: item <em>i</em> of each belongs to the same job. <code>Info</code> gives a summary, including any failed jobs.
+              </p>
+              <p class="text-gray-600 leading-relaxed">
+                If a batch runs long, files from finished jobs are kept. Unfinished jobs are listed by ID so you can download them later with <strong>FW Download Results</strong>.
               </p>
             </div>
           </div>
@@ -715,6 +840,12 @@
 
             <div class="gh-highlight">
               <h3 class="text-2xl font-semibold text-gray-900 mb-4">The science</h3>
+              <p class="text-gray-700 leading-relaxed mb-3">
+                FutureWeather builds on the peer-reviewed EPW morphing method developed by the University of Coimbra's CURA Lab, FutureWeather's technical advisors (Rodrigues et al., 2023, <em>Building and Environment</em> 233:110104, <a href="https://doi.org/10.1016/j.buildenv.2023.110104" target="_blank" rel="noopener" class="text-radbridge-blue hover:underline">doi:10.1016/j.buildenv.2023.110104</a>).
+              </p>
+              <p class="text-gray-700 leading-relaxed mb-4">
+                It adds <a href="/enhancements/" class="text-radbridge-blue hover:underline">a range of enhancements</a>, including future DDY files, sub-daily climate data to better capture extremes, and an analytics dashboard in the web app.
+              </p>
               <div class="gh-list">
                 <div class="gh-list-item">
                   <i class="fas fa-flask"></i>
@@ -808,22 +939,23 @@
           <div class="grid lg:grid-cols-2 gap-8 items-start">
             <div class="gh-highlight">
               <h3 class="text-2xl font-semibold text-gray-900 mb-4">Environments</h3>
+              <!-- TODO: Food4Rhino link -->
               <div class="gh-list">
                 <div class="gh-list-item">
                   <i class="fas fa-desktop"></i>
-                  <div><strong>Rhino</strong><br>7 and 8 (Rhino 8 uses a .NET Framework 4.8 compatibility layer)</div>
+                  <div><strong>Rhino</strong><br>7 (7.13 or later), 8 and 9. Tested in Rhino 9.1.</div>
                 </div>
                 <div class="gh-list-item">
                   <i class="fas fa-bug"></i>
-                  <div><strong>Grasshopper</strong><br>Included with Rhino 7+ and Rhino 8</div>
+                  <div><strong>Grasshopper</strong><br>Grasshopper 1, built into Rhino</div>
                 </div>
                 <div class="gh-list-item">
                   <i class="fas fa-window-maximize"></i>
-                  <div><strong>Windows</strong><br>10 and 11</div>
+                  <div><strong>Windows</strong><br>10 and 11. Mac is untested.</div>
                 </div>
                 <div class="gh-list-item">
                   <i class="fas fa-code"></i>
-                  <div><strong>Package type</strong><br>Compiled C# .gha plugin — no Python dependencies or pip installs needed</div>
+                  <div><strong>Package type</strong><br>A single compiled <code>FutureWeather.gha</code>, with no extra DLLs and no Python or pip. The nine .NET support DLLs that 1.0.x shipped are gone, which avoids conflicts with Rhino 8/9 and other plugins.</div>
                 </div>
               </div>
             </div>
@@ -858,7 +990,7 @@
                 <i class="fas fa-plus text-lg text-gray-700 transition-transform transform flex-shrink-0" id="faq-icon-2"></i>
               </button>
               <div id="faq-content-2" class="gh-faq-answer hidden pt-4">
-                <p class="text-gray-600 leading-relaxed">Typically under a minute. The component polls automatically and downloads results when the job completes.</p>
+                <p class="text-gray-600 leading-relaxed">Usually about 30 seconds per file. Batches take longer. The component polls automatically and downloads results when the job completes.</p>
               </div>
             </div>
             <div class="border-b border-gray-200 py-6">
@@ -885,7 +1017,8 @@
                 <i class="fas fa-plus text-lg text-gray-700 transition-transform transform flex-shrink-0" id="faq-icon-5"></i>
               </button>
               <div id="faq-content-5" class="gh-faq-answer hidden pt-4">
-                <p class="text-gray-600 leading-relaxed">No. The component hashes its inputs. If nothing has changed since the last run, it uses the cached results instead of submitting a new job. You will not be double-charged.</p>
+                <p class="text-gray-600 leading-relaxed mb-3">No. A job is submitted only when <strong>Run</strong> changes from False to True. Holding Run at True doesn't resubmit after an error, after an input change, or when you open a file saved with Run = True. To submit again, set Run to False and then back to True. A Grasshopper Button also works.</p>
+                <p class="text-gray-600 leading-relaxed">Results are saved in the .gh file, so reopening shows the generated paths without re-running. A file saved mid-run picks up the same job when reopened and never submits a second one.</p>
               </div>
             </div>
             <div class="border-b border-gray-200 py-6">
@@ -895,6 +1028,43 @@
               </button>
               <div id="faq-content-6" class="gh-faq-answer hidden pt-4">
                 <p class="text-gray-600 leading-relaxed">Sign in at <a href="https://app.futureweather.co" target="_blank" rel="noopener" class="text-radbridge-blue hover:underline">app.futureweather.co</a>, go to <strong>API Docs > API Keys</strong>, and create a new key. The key starts with <code>fw_</code>.</p>
+              </div>
+            </div>
+            <div class="border-b border-gray-200 py-6">
+              <button onclick="toggleFaq(7)" class="w-full text-left flex justify-between items-center gap-4">
+                <span class="font-medium text-gray-900">I dragged a component onto the canvas: where does my key go?</span>
+                <i class="fas fa-plus text-lg text-gray-700 transition-transform transform flex-shrink-0" id="faq-icon-7"></i>
+              </button>
+              <div id="faq-content-7" class="gh-faq-answer hidden pt-4">
+                <p class="text-gray-600 leading-relaxed mb-3">Into a yellow <strong>Panel</strong> wired to the component's <strong>Key</strong> input. Values such as the key, paths and years all go in Panels wired into the inputs. Make one by double-clicking the canvas and typing "Panel".</p>
+                <p class="text-gray-600 leading-relaxed">A component dragged in from the toolbar has no values until something is wired into it. Typing into the box at the top of an input's right-click menu only renames the input; it doesn't set a value. The easiest start is an example file: paste your key over the placeholder in the Key panel.</p>
+              </div>
+            </div>
+            <div class="border-b border-gray-200 py-6">
+              <button onclick="toggleFaq(8)" class="w-full text-left flex justify-between items-center gap-4">
+                <span class="font-medium text-gray-900">How do I record which baseline and method version produced a file?</span>
+                <i class="fas fa-plus text-lg text-gray-700 transition-transform transform flex-shrink-0" id="faq-icon-8"></i>
+              </button>
+              <div id="faq-content-8" class="gh-faq-answer hidden pt-4">
+                <p class="text-gray-600 leading-relaxed">Use the <strong>JobInfo</strong> output on FW Future Weather and FW Future Weather Batch. It gives a text record of each file's job ID, year and scenario, future window, the historical baseline used and how it was chosen, and the generator version. Keep it with your project records. Each EPW also names the generator version that produced it in its <code>COMMENTS 1</code> line.</p>
+              </div>
+            </div>
+            <div class="border-b border-gray-200 py-6">
+              <button onclick="toggleFaq(9)" class="w-full text-left flex justify-between items-center gap-4">
+                <span class="font-medium text-gray-900">Will my 1.0.x Grasshopper files still work?</span>
+                <i class="fas fa-plus text-lg text-gray-700 transition-transform transform flex-shrink-0" id="faq-icon-9"></i>
+              </button>
+              <div id="faq-content-9" class="gh-faq-answer hidden pt-4">
+                <p class="text-gray-600 leading-relaxed">Yes. Canvases made with 1.0.x open unchanged and all wires stay connected. The new <strong>Base</strong> input and <strong>JobInfo</strong> output appear unconnected.</p>
+              </div>
+            </div>
+            <div class="border-b border-gray-200 py-6">
+              <button onclick="toggleFaq(10)" class="w-full text-left flex justify-between items-center gap-4">
+                <span class="font-medium text-gray-900">Why do files I generate now differ from ones made before September 2026?</span>
+                <i class="fas fa-plus text-lg text-gray-700 transition-transform transform flex-shrink-0" id="faq-icon-10"></i>
+              </button>
+              <div id="faq-content-10" class="gh-faq-answer hidden pt-4">
+                <p class="text-gray-600 leading-relaxed">Since September 16, 2026, the historical baseline is matched to the EPW's own period of record instead of a fixed 1985-2014 window. Setting <strong>Base</strong> to <code>1985-2014</code> reproduces the old behavior. See <a href="/enhancements/#methodology" class="text-radbridge-blue hover:underline">Platform enhancements</a> for details.</p>
               </div>
             </div>
           </div>

@@ -1,0 +1,52 @@
+<!doctype html>
+<!--
+  Source for the 1200x630 social preview image (public/assets/images/og/futureweather-og.png).
+  Not part of the site build. To regenerate after editing, run from the repo root (PowerShell):
+    & "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" --headless=new --disable-gpu `
+      --hide-scrollbars --force-device-scale-factor=1 --window-size=1200,630 --virtual-time-budget=8000 `
+      --screenshot="$PWD\public\assets\images\og\futureweather-og.png" "file:///$($PWD -replace '\\','/')/templates/og-image.html"
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FutureWeather social preview image</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600&family=IBM+Plex+Sans:wght@400;500&display=block" rel="stylesheet">
+<style>
+  html, body { margin: 0; padding: 0; }
+  body {
+    width: 1200px; height: 630px; overflow: hidden;
+    background: radial-gradient(120% 140% at 85% 10%, #1E5A8E 0%, #0B1F3F 55%, #081732 100%);
+    color: #fff; font-family: 'IBM Plex Sans', 'Segoe UI', sans-serif;
+    position: relative;
+  }
+  .waves { position: absolute; right: -60px; bottom: -40px; opacity: 0.10; }
+  .wrap { position: absolute; left: 88px; top: 96px; right: 88px; }
+  .lockup { display: flex; align-items: center; gap: 22px; }
+  .lockup svg { width: 104px; height: 104px; }
+  .word { font-family: 'Outfit', sans-serif; font-size: 84px; letter-spacing: -1.5px; line-height: 1; }
+  .word b { font-weight: 600; } .word span { font-weight: 400; }
+  .tag { margin-top: 64px; font-size: 46px; font-weight: 500; line-height: 1.2; max-width: 1024px; white-space: nowrap; }
+  .sub { margin-top: 22px; font-size: 26px; color: #C9D8E8; }
+  .url { position: absolute; left: 88px; bottom: 64px; font-size: 26px; color: #9FB8D1; letter-spacing: 0.3px; }
+</style>
+</head>
+<body>
+  <svg class="waves" width="760" height="420" viewBox="0 0 64 36" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="2.4">
+    <path d="M 6 26 C 8.17 24.53 14.67 17.2 19 17.2 C 23.33 17.2 27.67 23.07 32 26 C 36.33 28.93 40.67 34.8 45 34.8 C 49.33 34.8 55.83 27.47 58 26"/>
+    <path d="M 6 16 C 8.17 14.53 14.67 7.2 19 7.2 C 23.33 7.2 27.67 13.07 32 16 C 36.33 18.93 40.67 24.8 45 24.8 C 49.33 24.8 55.83 17.47 58 16"/>
+  </svg>
+  <div class="wrap">
+    <div class="lockup">
+      <svg viewBox="0 0 64 64" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="4.6">
+        <path d="M 6 36 C 8.17 34.53 14.67 27.2 19 27.2 C 23.33 27.2 27.67 33.07 32 36 C 36.33 38.93 40.67 44.8 45 44.8 C 49.33 44.8 55.83 37.47 58 36"/>
+        <path d="M 6 26 C 8.17 24.53 14.67 17.2 19 17.2 C 23.33 17.2 27.67 23.07 32 26 C 36.33 28.93 40.67 34.8 45 34.8 C 49.33 34.8 55.83 27.47 58 26"/>
+      </svg>
+      <div class="word"><b>Future</b><span>Weather</span></div>
+    </div>
+    <div class="tag">Future climate EPW, DDY &amp; STAT weather files</div>
+    <div class="sub">23 CMIP6 climate models &middot; SSP1-2.6 to SSP5-8.5 &middot; 2035&ndash;2090</div>
+  </div>
+  <div class="url">futureweather.co</div>
+</body>
+</html>

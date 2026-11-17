@@ -3,6 +3,7 @@ export default {
   content: [
     "./*.html",
     "./*/*.html",
+    "./blog/**/*.html",
     "./src/**/*.{js,ts,jsx,tsx,html}",
   ],
   theme: {

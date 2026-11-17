@@ -1,21 +1,12 @@
 import { defineConfig } from 'vite';
-import { resolve } from 'path';
+import sitePlugin from './scripts/site-plugin.js';
 
 // https://vitejs.dev/config/
+//
+// Pages are found automatically by scripts/site-plugin.js (every folder index.html plus root .html
+// files), which also adds canonical/Open Graph tags and writes sitemap.xml and llms.txt.
+// See SEO.md.
 export default defineConfig({
   base: '/',
-  build: {
-    rollupOptions: {
-      input: {
-        main: resolve(__dirname, 'index.html'),
-        publicApiPage: resolve(__dirname, 'publicApiPage.html'),
-        python: resolve(__dirname, 'python/index.html'),
-        revit: resolve(__dirname, 'revit/index.html'),
-        grasshopper: resolve(__dirname, 'grasshopper/index.html'),
-        pilot: resolve(__dirname, 'pilot/index.html'),
-        enhancements: resolve(__dirname, 'enhancements/index.html'),
-      },
-    },
-  },
-  // You can add other Vite options here if needed
-}); 
+  plugins: [sitePlugin()],
+});

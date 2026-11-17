@@ -4,8 +4,8 @@
   <meta charset="UTF-8" />
   <link rel="icon" type="image/png" href="/favicon-512.png" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Future Weather</title>
-  <meta name="description" content="Generate climate-adjusted EPW/DDY weather files and API for building performance modeling.">
+  <title>Future Climate EPW &amp; DDY Weather Files | FutureWeather</title>
+  <meta name="description" content="Create climate-adjusted EPW, DDY and STAT weather files in under 30 seconds from 23 CMIP6 models. Works with EnergyPlus, OpenStudio, Ladybug and Revit.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap" rel="stylesheet">
@@ -214,6 +214,117 @@
       }
     })();
   </script>
+  <!--
+    Structured data for search engines and AI assistants.
+    The offers below must match the #pricing section exactly; `npm run check` fails if they drift.
+  -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://radbridge.com/#organization",
+        "name": "Radbridge Incorporated",
+        "alternateName": "Radbridge",
+        "url": "https://radbridge.com",
+        "logo": "https://futureweather.co/assets/images/Radbridge_logo_black_PNG_cropped.png",
+        "address": { "@type": "PostalAddress", "addressRegion": "CA", "addressCountry": "US" },
+        "sameAs": ["https://www.linkedin.com/company/radbridge"],
+        "description": "Radbridge Incorporated, headquartered in California, develops and operates the FutureWeather platform."
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://futureweather.co/#website",
+        "name": "FutureWeather",
+        "alternateName": ["FutureWeather.co", "Future Weather"],
+        "url": "https://futureweather.co/",
+        "inLanguage": "en",
+        "publisher": { "@id": "https://radbridge.com/#organization" }
+      },
+      {
+        "@type": "SoftwareApplication",
+        "@id": "https://futureweather.co/#software",
+        "name": "FutureWeather",
+        "alternateName": ["FutureWeather.co", "Future Weather"],
+        "url": "https://futureweather.co/",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Web browser",
+        "description": "FutureWeather turns historical EPW weather files into future climate-adjusted EPW, DDY and STAT files in under 30 seconds, using CMIP6 projections from 23 global climate models across SSP scenarios. It is available as a web app, REST API, Python package, Revit/Dynamo package and Grasshopper plugin.",
+        "featureList": [
+          "Future climate-adjusted EPW weather files, with optional DDY design day and STAT files",
+          "CMIP6 projections from 23 global climate models, as an ensemble or individually selected models",
+          "Climate scenarios SSP1-2.6, SSP2-4.5, SSP3-7.0 and SSP5-8.5",
+          "Target years from 2035 to 2090",
+          "Batch generation across multiple years and scenarios",
+          "Analytics dashboard comparing historical and future weather",
+          "REST API with webhooks, Python package, Revit/Dynamo package and Grasshopper plugin"
+        ],
+        "image": "https://futureweather.co/assets/images/og/futureweather-og.png",
+        "screenshot": [
+          "https://futureweather.co/assets/images/appAnalytics.png",
+          "https://futureweather.co/assets/images/appNewJob.png",
+          "https://futureweather.co/assets/images/appSavedJobs.png"
+        ],
+        "publisher": { "@id": "https://radbridge.com/#organization" },
+        "creator": { "@id": "https://radbridge.com/#organization" },
+        "offers": [
+          {
+            "@type": "Offer",
+            "name": "Starter",
+            "description": "Monthly subscription: 8 credits per month. 1 credit = 1 job (future EPW and STAT, optional DDY).",
+            "price": "149",
+            "priceCurrency": "USD",
+            "priceSpecification": { "@type": "UnitPriceSpecification", "price": "149", "priceCurrency": "USD", "billingDuration": "P1M" },
+            "url": "https://futureweather.co/#pricing"
+          },
+          {
+            "@type": "Offer",
+            "name": "Studio",
+            "description": "Monthly subscription: 20 credits per month. 1 credit = 1 job (future EPW and STAT, optional DDY).",
+            "price": "349",
+            "priceCurrency": "USD",
+            "priceSpecification": { "@type": "UnitPriceSpecification", "price": "349", "priceCurrency": "USD", "billingDuration": "P1M" },
+            "url": "https://futureweather.co/#pricing"
+          },
+          {
+            "@type": "Offer",
+            "name": "Firm",
+            "description": "Monthly subscription: 50 credits per month. 1 credit = 1 job (future EPW and STAT, optional DDY).",
+            "price": "749",
+            "priceCurrency": "USD",
+            "priceSpecification": { "@type": "UnitPriceSpecification", "price": "749", "priceCurrency": "USD", "billingDuration": "P1M" },
+            "url": "https://futureweather.co/#pricing"
+          },
+          {
+            "@type": "Offer",
+            "name": "1 credit",
+            "description": "Pay as you go: 1 credit. 1 credit = 1 job (future EPW and STAT, optional DDY).",
+            "price": "50",
+            "priceCurrency": "USD",
+            "url": "https://futureweather.co/#pricing"
+          },
+          {
+            "@type": "Offer",
+            "name": "4-credit pack",
+            "description": "Pay as you go: 4 credits ($30.00 per credit).",
+            "price": "120",
+            "priceCurrency": "USD",
+            "url": "https://futureweather.co/#pricing"
+          },
+          {
+            "@type": "Offer",
+            "name": "10 credits",
+            "description": "Pay as you go: 10 credits ($20.00 per credit).",
+            "price": "200",
+            "priceCurrency": "USD",
+            "url": "https://futureweather.co/#pricing"
+          }
+        ]
+      }
+    ]
+  }
+  </script>
 </head>
 <body class="font-ibm">
   <!-- Main Content Area -->
@@ -268,10 +379,12 @@
         <div class="lg:w-3/5 relative">
           <div class="container-custom pt-12 pb-8 lg:py-16 h-full flex flex-col justify-center">
             <div class="text-center lg:text-left">
-              <h1 class="text-3xl/[1.25] lg:text-5xl/[1.25] mb-4 mt-2 font-medium font-open-sans text-hero-heading">
+              <h1 class="text-sm font-semibold uppercase tracking-wider text-btn-primary-bg mt-2 mb-3">Future weather files for building performance modeling</h1>
+              <!-- A/B headline (variant chosen by the inline script in <head>). Styled as a headline but not the H1, so search engines see one stable H1 above. -->
+              <p class="text-3xl/[1.25] lg:text-5xl/[1.25] mb-4 font-medium font-open-sans text-hero-heading">
                 <span class="hero-variant hero-variant--a">Stress-test your<br><span class="text-btn-primary-bg font-semibold hero-typewriter" data-words="building,data center,solar project,grid">building</span><br>against tomorrow's climate</span>
                 <span class="hero-variant hero-variant--b">How will your<br><span class="text-btn-primary-bg font-semibold hero-typewriter" data-words="building,data center,solar project,grid">building</span><br>perform under future climate conditions?</span>
-              </h1>
+              </p>
               <p class="text-lg mb-6 leading-snug font-open-sans text-hero-text">
                 Generate future weather files (EPW, DDY, STAT) for building, solar, and data center modeling in under 30 seconds.
               </p>
@@ -1326,9 +1439,19 @@
   <!-- Footer -->
   <footer class="bg-gray-900 text-white py-12">
     <div class="container-custom">
+      <nav aria-label="Footer" class="mb-8">
+        <ul class="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm text-gray-300">
+          <li><a href="/#pricing" class="hover:text-white transition">Pricing</a></li>
+          <li><a href="/publicApiPage.html" class="hover:text-white transition">API</a></li>
+          <li><a href="/python/" class="hover:text-white transition">Python Package</a></li>
+          <li><a href="/revit/" class="hover:text-white transition">Revit / Dynamo</a></li>
+          <li><a href="/grasshopper/" class="hover:text-white transition">Grasshopper</a></li>
+          <li><a href="/enhancements/" class="hover:text-white transition">Platform Enhancements</a></li>
+        </ul>
+      </nav>
       <div class="text-center mb-8">
         <a href="https://radbridge.com" target="_blank" rel="noopener">
-          <img src="assets\images\Radbridge_logo_white_PNG.png" alt="Radbridge Logo" class="h-10 mx-auto">
+          <img src="/assets/images/Radbridge_logo_white_PNG.png" alt="Radbridge Logo" class="h-10 mx-auto">
         </a>
       </div>
       <div class="text-center text-gray-400">

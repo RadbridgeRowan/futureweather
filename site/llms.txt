@@ -1,0 +1,41 @@
+# FutureWeather
+
+> FutureWeather (futureweather.co) generates future climate-adjusted weather files for building performance simulation. It morphs a historical EPW weather file with CMIP6 climate projections to produce a future EPW file, plus STAT and optional DDY (design day) files, typically in under 30 seconds. FutureWeather is a SaaS tool developed and operated by Radbridge Incorporated.
+
+FutureWeather is for engineers, architects, energy modelers and researchers who need future weather data for HVAC sizing and load calculations, whole-building energy modeling, thermal comfort and resilience studies, renewable energy (PV, wind, solar thermal) and data center cooling design.
+
+Key facts:
+
+- Method: morphing of a baseline EPW with CMIP6 climate change signals, adjusting temperature, humidity, solar radiation and other variables while keeping realistic hourly weather patterns. Based on the peer-reviewed Future Weather Generator methodology (Rodrigues et al., 2023) by Dr. Eugénio Rodrigues and the CURA Lab at the University of Coimbra, who are technical advisors to FutureWeather.
+- Climate models: 23 CMIP6 global climate models, used as an ensemble average or individually selected (web app and API).
+- Scenarios: SSP1-2.6, SSP2-4.5, SSP3-7.0 and SSP5-8.5.
+- Target years: 2035 to 2090, each using a 30-year window around the target year.
+- Baseline: matched to the uploaded EPW's own period of record (periods shorter than 15 years are widened to 15 years; files with no stated period use 1985-2014).
+- Outputs: a future EPW file, a STAT file and an optional future DDY file generated to stay statistically consistent with the morphed EPW.
+- Compatible with EnergyPlus, OpenStudio, Ladybug and Honeybee, DesignBuilder, IES VE, TRACE 3D Plus and other tools that read EPW, DDY or STAT files.
+- Access: web app, REST API with webhooks, Python package (`pip install futureweather`), a free Revit/Dynamo package and a free Grasshopper plugin (Rhino 7, 8 and 9 on Windows).
+- Pricing: credit-based, where 1 credit = 1 job. Monthly plans and pay-as-you-go packs are available, and new accounts get 5 free credits. Current prices: https://futureweather.co/#pricing
+
+## Pages
+
+- [Home](https://futureweather.co/): What FutureWeather does, how it works, common use cases, pricing and FAQ.
+- [Platform enhancements and methodology](https://futureweather.co/enhancements/): How FutureWeather extends the Future Weather Generator method (future DDY files, sub-daily extremes, EPW-matched baselines, radiation handling, batch and parametric runs) and how it compares with the desktop tool.
+- [API](https://futureweather.co/publicApiPage.html): Public overview of the REST API: authentication, an example request, outputs and webhooks.
+- [Python package](https://futureweather.co/python/): Install and use the `futureweather` Python client for scripts, notebooks, OpenStudio and CI workflows.
+- [Revit / Dynamo](https://futureweather.co/revit/): Generate future EPW and DDY files from Dynamo inside Autodesk Revit.
+- [Grasshopper](https://futureweather.co/grasshopper/): Generate future EPW, DDY and STAT files on the Grasshopper canvas and use them in Ladybug and Honeybee.
+- [Pilot program](https://futureweather.co/pilot/): The three-month pilot for practitioners (applications closed; register interest in a second cohort).
+
+## Resources
+
+- [Sign up for the web app](https://app.futureweather.co/signup): New accounts get 5 free credits.
+- [ASHRAE TC 4.2 presentation (PDF, February 2026)](https://futureweather.co/assets/documents/ASHRAE%20TC%204.2_Future%20Weather_Rowan%20Schmidt_20260203.pdf): Technical presentation of the methodology and workflow to ASHRAE Technical Committee 4.2 (Climatic Conditions).
+- [Future Weather Generator paper](https://www.sciencedirect.com/science/article/pii/S0360132323001312): The peer-reviewed paper describing the original morphing methodology.
+- [futureweather on PyPI](https://pypi.org/project/futureweather/): The Python package.
+- [FutureWeather on Food4Rhino](https://www.food4rhino.com/en/app/futureweather): The Grasshopper plugin.
+
+{{BLOG_SECTION}}
+
+## Optional
+
+- Historical EPW baselines can be obtained from [Oikolab](https://downloader.oikolab.com/app?section=epw) (a FutureWeather data partner), [Climate.OneBuilding.org](https://climate.onebuilding.org/), the [Ladybug Tools EPW Map](https://www.ladybug.tools/epwmap/) and [EnergyPlus Weather](https://energyplus.net/weather).

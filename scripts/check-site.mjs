@@ -8,6 +8,9 @@
 // must have headline, datePublished, author), and that every internal link/image/#anchor resolves.
 // Also checks sitemap.xml, robots.txt and llms.txt, and that the prices in the homepage's
 // SoftwareApplication JSON-LD exactly match the prices shown in the #pricing section.
+// Blog: fails on unfilled {{PLACEHOLDERS}} or [CHECK: ...] notes anywhere, requires each post
+// (/blog/<slug>/) to have BlogPosting JSON-LD, og:type "article" and a matching
+// article:published_time, to be listed on /blog/, and refuses an empty blog.
 
 import { readFileSync, existsSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
@@ -22,6 +25,7 @@ import {
   decodeEntities,
   getJsonLdBlocks,
   hasNoindex,
+  blankComments,
 } from './html-utils.js';
 
 const DIST = 'dist';
@@ -29,6 +33,7 @@ const errors = [];
 const warnings = [];
 const err = (where, msg) => errors.push(`${where}: ${msg}`);
 const warn = (where, msg) => warnings.push(`${where}: ${msg}`);
+const cut = (s, n) => (s.length > n ? s.slice(0, n - 1) + '…' : s);
 
 if (!existsSync(DIST)) {
   console.error('dist/ not found. Run `npm run build` first.');
@@ -118,7 +123,15 @@ for (const rel of htmlFiles) {
   const html = read(rel);
   const urlPath = urlPathFor(rel);
   const expectedUrl = SITE_ORIGIN + urlPath;
-  const info = { rel, urlPath, noindex: hasNoindex(html), types: [] };
+  const info = { rel, urlPath, noindex: hasNoindex(html), types: [], blogPostings: [] };
+  const isPost = /^\/blog\/[^/]+\/$/.test(urlPath);
+
+  // Unfinished drafts (text inside HTML comments is ignored)
+  const visible = blankComments(html);
+  const placeholders = [...new Set([...visible.matchAll(/\{\{[A-Z0-9_]+\}\}/g)].map((m) => m[0]))];
+  if (placeholders.length) err(rel, `unfilled placeholder(s): ${placeholders.join(', ')}`);
+  const checks = [...visible.matchAll(/\[CHECK[^\]]*\]/g)].map((m) => m[0]);
+  if (checks.length) err(rel, `${checks.length} [CHECK] note(s) still to verify, e.g. ${cut(textOf(checks[0]), 90)}`);
 
   // Title
   const titles = getTitles(html);
@@ -174,12 +187,27 @@ for (const rel of htmlFiles) {
       const types = typesOf(node);
       info.types.push(...types);
       if (types.includes('BlogPosting')) {
+        info.blogPostings.push(node);
         for (const f of ['headline', 'datePublished', 'author']) if (!node[f]) err(rel, `BlogPosting is missing "${f}"`);
       }
       if (types.includes('SoftwareApplication') && node.offers && rel === 'index.html') {
         info.offerPrices = [].concat(node.offers).map((o) => normPrice(o.price ?? o.priceSpecification?.price ?? ''));
       }
     }
+  }
+
+  // Blog posts
+  if (isPost) {
+    if (getMetaContent(html, 'og:type') !== 'article') err(rel, 'blog post should set <meta property="og:type" content="article">');
+    const published = getMetaContent(html, 'article:published_time') || '';
+    if (!/^\d{4}-\d{2}-\d{2}/.test(published) || Number.isNaN(Date.parse(published))) {
+      err(rel, `blog post needs article:published_time as YYYY-MM-DD (got "${published}")`);
+    }
+    if (info.blogPostings.length !== 1) err(rel, `blog post should have 1 BlogPosting in its JSON-LD, found ${info.blogPostings.length}`);
+    else if (String(info.blogPostings[0].datePublished).slice(0, 10) !== published.slice(0, 10)) {
+      err(rel, `BlogPosting datePublished "${info.blogPostings[0].datePublished}" does not match article:published_time "${published}"`);
+    }
+    info.isPost = true;
   }
 
   // Pricing drift (homepage)
@@ -225,6 +253,17 @@ for (const field of ['title', 'description']) {
     if (seen.has(key)) err(p.rel, `${field} duplicates ${seen.get(key)}`);
     else seen.set(key, p.rel);
   }
+}
+
+// Blog index lists every post, and is never published empty
+const blogIndex = pages.find((p) => p.urlPath === '/blog/');
+const posts = pages.filter((p) => p.isPost && !p.noindex);
+if (blogIndex) {
+  const indexHtml = read(blogIndex.rel);
+  if (!posts.length) err(blogIndex.rel, 'the blog has no posts yet. Add the first post before deploying /blog/.');
+  for (const p of posts) if (!indexHtml.includes(`href="${p.urlPath}"`)) err(blogIndex.rel, `does not link to post ${p.urlPath}`);
+} else if (posts.length) {
+  err('blog/index.html', 'blog posts exist but there is no /blog/ index page');
 }
 
 // ---------------------------------------------------------------- sitemap.xml
@@ -276,7 +315,6 @@ else {
 }
 
 // ---------------------------------------------------------------- report
-const cut = (s, n) => (s.length > n ? s.slice(0, n - 1) + '…' : s);
 console.log('\nPages in dist/\n');
 for (const p of pages) {
   console.log(`${p.urlPath}${p.noindex ? '  [noindex]' : ''}`);

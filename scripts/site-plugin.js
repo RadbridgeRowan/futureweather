@@ -13,11 +13,23 @@
 //      (omitted if git has no date for it, e.g. an uncommitted new page).
 //   4. Writes dist/llms.txt from site/llms.txt, replacing the {{BLOG_SECTION}} line with a list of
 //      blog posts (or removing it when there is no blog yet).
+//   5. Fills the post list on blog/index.html (the <!-- blog:posts --> marker) from each post's
+//      <h1>, description and article:published_time, newest first.
 
 import { readFileSync, readdirSync, existsSync } from 'node:fs';
 import { join, sep } from 'node:path';
 import { execFileSync } from 'node:child_process';
-import { findMeta, findTags, getMetaContent, getTitles, hasNoindex, decodeEntities } from './html-utils.js';
+import {
+  findMeta,
+  findTags,
+  getMetaContent,
+  getTitles,
+  getElementsInner,
+  textOf,
+  hasNoindex,
+  decodeEntities,
+  stripComments,
+} from './html-utils.js';
 
 export const SITE_ORIGIN = 'https://futureweather.co';
 export const SITE_NAME = 'FutureWeather';
@@ -88,12 +100,44 @@ function readPageInfo(page) {
     ...page,
     title,
     description,
+    h1: textOf(getElementsInner(html, 'h1')[0] || ''),
     noindex: hasNoindex(html),
     published: getMetaContent(html, 'article:published_time'),
   };
 }
 
 const escapeXml = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+const escapeHtml = escapeXml;
+
+/** "2026-11-20" -> "November 20, 2026" (empty string if not a valid date). */
+function humanDate(iso) {
+  const d = new Date(`${(iso || '').slice(0, 10)}T00:00:00Z`);
+  return Number.isNaN(d.getTime())
+    ? ''
+    : d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
+}
+
+/** HTML for the post list on blog/index.html (replaces the <!-- blog:posts --> marker). */
+function renderBlogList(posts) {
+  if (!posts.length) return '<p class="text-gray-600">New guides are on the way.</p>';
+  return posts
+    .map((p) => {
+      const date = p.published ? p.published.slice(0, 10) : '';
+      return [
+        '<article>',
+        `  <a href="${p.urlPath}" class="blog-card">`,
+        date ? `    <div class="text-sm text-gray-500 mb-2"><time datetime="${date}">${humanDate(date)}</time></div>` : '',
+        `    <h2 class="text-xl font-semibold text-gray-900 mb-2">${escapeHtml(p.h1 || p.title)}</h2>`,
+        `    <p class="text-gray-600 leading-relaxed">${escapeHtml(p.description)}</p>`,
+        '    <span class="inline-flex items-center gap-2 mt-4 text-sm font-semibold text-btn-primary-bg">Read the guide <i class="fas fa-arrow-right"></i></span>',
+        '  </a>',
+        '</article>',
+      ]
+        .filter(Boolean)
+        .join('\n');
+    })
+    .join('\n');
+}
 const escapeAttr = (s) => s.replace(/"/g, '&quot;');
 
 /** Head tags to add to one page (only the ones it doesn't already have). */
@@ -156,7 +200,7 @@ function buildSitemap(root, pages) {
 export function blogPosts(pages) {
   return pages
     .filter((p) => p.urlPath.startsWith('/blog/') && p.urlPath !== '/blog/' && !p.noindex)
-    .sort((a, b) => (b.published || '').localeCompare(a.published || ''));
+    .sort((a, b) => (b.published || '').localeCompare(a.published || '') || a.urlPath.localeCompare(b.urlPath));
 }
 
 function buildLlmsTxt(root, pages) {
@@ -167,7 +211,7 @@ function buildLlmsTxt(root, pages) {
   let section = '';
   if (blogIndex) {
     const lines = [`## Blog`, '', `- [FutureWeather blog](${SITE_ORIGIN}/blog/): ${blogIndex.description}`];
-    for (const post of blogPosts(pages)) lines.push(`- [${post.title}](${SITE_ORIGIN}${post.urlPath}): ${post.description}`);
+    for (const post of blogPosts(pages)) lines.push(`- [${post.h1 || post.title}](${SITE_ORIGIN}${post.urlPath}): ${post.description}`);
     section = lines.join('\n') + '\n';
   }
   text = text.replace(/^\{\{BLOG_SECTION\}\}\n?/m, section);
@@ -197,7 +241,14 @@ export default function sitePlugin() {
           const rel = ctx.path.replace(/^\//, '');
           page = { urlPath: urlPathFor(rel.endsWith('/') ? rel + 'index.html' : rel) };
         }
-        return page ? injectHeadTags(html, page.urlPath) : html;
+        if (!page) return html;
+        if (page.urlPath === '/blog/' && html.includes('<!-- blog:posts -->')) {
+          const posts = blogPosts(discoverPages(root).map(readPageInfo));
+          html = html.replace('<!-- blog:posts -->', renderBlogList(posts));
+        }
+        // Blog pages carry writing-guidance comments from the template; never publish them.
+        if (page.urlPath.startsWith('/blog/')) html = stripComments(html);
+        return injectHeadTags(html, page.urlPath);
       },
     },
 

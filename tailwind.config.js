@@ -4,6 +4,7 @@ export default {
     "./*.html",
     "./*/*.html",
     "./blog/**/*.html",
+    "./scripts/site-plugin.js", // generates the blog post cards
     "./src/**/*.{js,ts,jsx,tsx,html}",
   ],
   theme: {

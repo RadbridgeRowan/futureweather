@@ -1,0 +1,220 @@
+<!doctype html>
+<!-- Blog post template. How to use it: see "Writing a blog post" in SEO.md. Comments are removed from built blog pages. -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/png" href="/favicon-512.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{SEO_TITLE}}</title>
+  <meta name="description" content="{{DESCRIPTION}}">
+  <meta property="og:type" content="article">
+  <meta property="article:published_time" content="{{DATE_PUBLISHED}}">
+  <meta property="article:modified_time" content="{{DATE_MODIFIED}}">
+  <meta name="author" content="Rowan Schmidt">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="/src/style.css">
+  <style>
+    h1, h2, h3, h4, h5, h6 { font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif; }
+    :root {
+      --nav-bg: #0B1F3F;
+      --hero-bg: #F8FAFB;
+      --hero-heading: #0B1F3F;
+      --hero-text: #4A5568;
+      --btn-primary-bg: #1E5A8E;
+      --btn-primary-hover: #164670;
+      --btn-primary-text: #FFFFFF;
+    }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BlogPosting",
+        "@id": "https://futureweather.co/blog/{{SLUG}}/#post",
+        "mainEntityOfPage": "https://futureweather.co/blog/{{SLUG}}/",
+        "headline": "{{HEADLINE}}",
+        "description": "{{DESCRIPTION}}",
+        "datePublished": "{{DATE_PUBLISHED}}",
+        "dateModified": "{{DATE_MODIFIED}}",
+        "inLanguage": "en",
+        "image": "https://futureweather.co/assets/images/og/futureweather-og.png",
+        "author": {
+          "@type": "Person",
+          "name": "Rowan Schmidt",
+          "jobTitle": "Head of Product, FutureWeather",
+          "worksFor": { "@type": "Organization", "name": "Radbridge Incorporated", "url": "https://radbridge.com" }
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Radbridge Incorporated",
+          "url": "https://radbridge.com",
+          "logo": { "@type": "ImageObject", "url": "https://futureweather.co/assets/images/Radbridge_logo_black_PNG_cropped.png" }
+        },
+        "isPartOf": { "@id": "https://futureweather.co/#website" },
+        "about": { "@id": "https://futureweather.co/#software" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://futureweather.co/" },
+          { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://futureweather.co/blog/" },
+          { "@type": "ListItem", "position": 3, "name": "{{HEADLINE}}", "item": "https://futureweather.co/blog/{{SLUG}}/" }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+<body class="font-ibm">
+  <div class="bg-white">
+    <!-- Header (same as the other pages) -->
+    <header class="sticky top-0 left-0 right-0 z-30 shadow-md bg-nav-bg">
+      <div class="container-custom flex items-center justify-between py-4">
+        <div>
+          <a href="/">
+            <img src="/assets/images/futureweather-lockup-white.svg" alt="Future Weather Logo" class="h-8">
+          </a>
+        </div>
+        <div class="flex items-center space-x-4">
+          <a href="https://app.futureweather.co/" target="_blank" rel="noopener" data-analytics-label="nav_sign_in" class="inline-flex items-center justify-center text-sm font-medium px-4 py-2 rounded border transition duration-300 bg-btn-secondary-bg text-btn-secondary-text border-btn-secondary-border hover:bg-btn-secondary-hover-bg hover:text-btn-secondary-hover-text">
+            Sign In
+          </a>
+          <a href="https://app.futureweather.co/signup" target="_blank" rel="noopener" data-analytics-label="nav_sign_up" class="flex items-center gap-2 rounded px-3 py-2 font-semibold text-sm transition duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 bg-btn-primary-bg text-btn-primary-text hover:bg-btn-primary-hover">
+            <span>Sign Up · 5 Free Credits</span>
+          </a>
+          <div class="integrations-dropdown">
+            <a href="/#integrations" class="inline-flex items-center justify-center text-sm font-medium px-4 py-2 rounded border transition duration-300 bg-btn-secondary-bg text-btn-secondary-text border-btn-secondary-border hover:bg-btn-secondary-hover-bg hover:text-btn-secondary-hover-text" data-analytics-label="nav_integrations">
+              <i class="fas fa-puzzle-piece text-base mr-2"></i>
+              Integrations
+              <i class="fas fa-chevron-down text-xs ml-2 hidden md:inline"></i>
+            </a>
+            <div class="integrations-dropdown-panel hidden md:block">
+              <a href="/publicApiPage.html" class="integrations-dropdown-item">
+                <i class="fas fa-code"></i>
+                API Documentation
+              </a>
+              <a href="/python/" class="integrations-dropdown-item">
+                <i class="fab fa-python"></i>
+                Python Package
+              </a>
+              <a href="/revit/" class="integrations-dropdown-item">
+                <i class="fas fa-cubes"></i>
+                Revit / Dynamo
+              </a>
+              <a href="/grasshopper/" class="integrations-dropdown-item">
+                <i class="fas fa-bug"></i>
+                Grasshopper
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="max-w-3xl mx-auto px-6 py-10 lg:py-14">
+      <nav aria-label="Breadcrumb" class="text-sm text-gray-500 mb-6">
+        <a href="/" class="hover:underline">Home</a>
+        <span aria-hidden="true" class="mx-1">›</span>
+        <a href="/blog/" class="hover:underline">Blog</a>
+      </nav>
+
+      <article>
+        <header class="mb-8">
+          <h1 class="text-3xl lg:text-4xl leading-snug font-medium font-open-sans text-hero-heading mb-4">{{HEADLINE}}</h1>
+          <p class="text-sm text-gray-500">
+            By Rowan Schmidt, Head of Product, FutureWeather
+            <span aria-hidden="true" class="mx-1">·</span>
+            <time datetime="{{DATE_PUBLISHED}}">{{DATE_PUBLISHED_HUMAN}}</time>
+            <!-- When updating a post later, add: · Updated <time datetime="YYYY-MM-DD">Month D, YYYY</time> -->
+          </p>
+        </header>
+
+        <div class="blog-prose">
+          <!-- 1. SHORT ANSWER. The first paragraph answers the headline's question directly, in 2-4 plain
+                  sentences. Search engines and AI assistants quote this paragraph. -->
+          <p class="blog-lead">{{SHORT_ANSWER}}</p>
+
+          <!-- 2. EXPLANATION. Two to four H2 sections, each answering one sub-question in its heading
+                  (e.g. "How is a future EPW made?"). Cite sources inline as [1], [2] linking to #sources. -->
+          <h2>{{SECTION_HEADING}}</h2>
+          <p>{{SECTION_TEXT}}</p>
+
+          <!-- 3. WORKED EXAMPLE with real FutureWeather output only (from the fact sheet). Name the
+                  location, baseline file, future year, scenario and models used. Example table:
+          <h2>Worked example: {{LOCATION}}, 2050, SSP2-4.5</h2>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Metric</th><th>Baseline EPW</th><th>Future EPW</th><th>Change</th></tr></thead>
+              <tbody><tr><td>...</td><td>...</td><td>...</td><td>...</td></tr></tbody>
+            </table>
+          </div>
+          <p>Source: FutureWeather job run on YYYY-MM-DD (generator version X).</p>
+          -->
+
+          <!-- 4. TRY IT. Link to the most relevant integration page and to signup. -->
+          <h2>Try it on your own project</h2>
+          <p>
+            Generate a future EPW, STAT and optional DDY file for your site in the
+            <a href="https://app.futureweather.co/signup" target="_blank" rel="noopener" data-analytics-label="blog_post_sign_up">FutureWeather web app</a>
+            (new accounts get 5 free credits), or straight from your workflow with the
+            <a href="{{INTEGRATION_URL}}">{{INTEGRATION_NAME}}</a>.
+          </p>
+
+          <!-- 5. SOURCES. Numbered; link each one. Prefer primary sources (papers, standards, official docs). -->
+          <h2 id="sources">Sources</h2>
+          <ol class="blog-sources">
+            <li>{{SOURCE_1}}</li>
+          </ol>
+        </div>
+      </article>
+
+      <div class="mt-14 rounded-xl border border-gray-200 bg-gray-50 p-8">
+        <h2 class="text-xl font-semibold text-gray-900 mb-2">More future weather file guides</h2>
+        <p class="text-gray-600 leading-relaxed mb-5">Explainers on scenarios, design days, morphing and tool workflows.</p>
+        <a href="/blog/" class="inline-flex items-center gap-2 font-semibold text-btn-primary-bg hover:underline">
+          <span>All guides</span>
+          <i class="fas fa-arrow-right"></i>
+        </a>
+      </div>
+    </main>
+  </div>
+
+  <!-- Footer (same as the other pages) -->
+  <footer class="bg-gray-900 text-white py-12">
+    <div class="container-custom">
+      <nav aria-label="Footer" class="mb-8">
+        <ul class="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm text-gray-300">
+          <li><a href="/#pricing" class="hover:text-white transition">Pricing</a></li>
+          <li><a href="/publicApiPage.html" class="hover:text-white transition">API</a></li>
+          <li><a href="/python/" class="hover:text-white transition">Python Package</a></li>
+          <li><a href="/revit/" class="hover:text-white transition">Revit / Dynamo</a></li>
+          <li><a href="/grasshopper/" class="hover:text-white transition">Grasshopper</a></li>
+          <li><a href="/enhancements/" class="hover:text-white transition">Platform Enhancements</a></li>
+          <li><a href="/blog/" class="hover:text-white transition">Blog</a></li>
+        </ul>
+      </nav>
+      <div class="text-center mb-8">
+        <a href="https://radbridge.com" target="_blank" rel="noopener">
+          <img src="/assets/images/Radbridge_logo_white_PNG.png" alt="Radbridge Logo" class="h-10 mx-auto">
+        </a>
+      </div>
+      <div class="text-center text-gray-400">
+        © 2026 Radbridge Incorporated.
+      </div>
+    </div>
+  </footer>
+
+  <script type="module">
+    import { initAnalytics } from '/src/analytics.js';
+    import { initPartnerReferralTracking } from '/src/referral.js';
+
+    initAnalytics();
+    initPartnerReferralTracking();
+  </script>
+</body>
+</html>

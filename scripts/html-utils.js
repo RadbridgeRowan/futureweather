@@ -4,6 +4,19 @@
 
 const ATTR_RE = /([^\s=\/>"']+)(?:\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s>"']+)))?/g;
 
+/**
+ * Replace every <!-- comment --> with spaces of the same length (newlines kept), so text inside
+ * comments is never mistaken for tags while character positions stay identical to the original.
+ */
+export function blankComments(html) {
+  return html.replace(/<!--[\s\S]*?-->/g, (c) => c.replace(/[^\n]/g, ' '));
+}
+
+/** Remove HTML comments entirely (used on built blog pages). */
+export function stripComments(html) {
+  return html.replace(/[ \t]*<!--[\s\S]*?-->[ \t]*\r?\n?/g, '');
+}
+
 /** Parse the attributes of a single opening tag string, e.g. `<meta name="x" content="y">`. */
 export function parseAttrs(tag) {
   const attrs = {};
@@ -22,8 +35,9 @@ export function parseAttrs(tag) {
 export function findTags(html, tagName) {
   const re = new RegExp(`<${tagName}\\b[^>]*>`, 'gi');
   const out = [];
+  const src = blankComments(html);
   let m;
-  while ((m = re.exec(html))) {
+  while ((m = re.exec(src))) {
     out.push({ tag: m[0], attrs: parseAttrs(m[0]), index: m.index, end: m.index + m[0].length });
   }
   return out;
@@ -44,13 +58,13 @@ export function getMetaContent(html, key) {
 
 /** Raw inner HTML of every <title> element. */
 export function getTitles(html) {
-  return [...html.matchAll(/<title\b[^>]*>([\s\S]*?)<\/title>/gi)].map((m) => m[1]);
+  return [...blankComments(html).matchAll(/<title\b[^>]*>([\s\S]*?)<\/title>/gi)].map((m) => m[1]);
 }
 
 /** Inner HTML of every element with the given tag name (non-nested elements only). */
 export function getElementsInner(html, tagName) {
   const re = new RegExp(`<${tagName}\\b[^>]*>([\\s\\S]*?)<\\/${tagName}>`, 'gi');
-  return [...html.matchAll(re)].map((m) => m[1]);
+  return [...blankComments(html).matchAll(re)].map((m) => m[1]);
 }
 
 const ENTITIES = { amp: '&', lt: '<', gt: '>', quot: '"', apos: "'", nbsp: ' ', middot: '·', ndash: '–', mdash: '—', rsquo: '’', lsquo: '‘', rdquo: '”', ldquo: '“', deg: '°', times: '×', plusmn: '±', copy: '©', hellip: '…' };
@@ -80,7 +94,7 @@ export function textOf(fragment) {
 
 /** Bodies of every <script type="application/ld+json"> block. */
 export function getJsonLdBlocks(html) {
-  return [...html.matchAll(/<script\b[^>]*type\s*=\s*["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi)].map(
+  return [...blankComments(html).matchAll(/<script\b[^>]*type\s*=\s*["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi)].map(
     (m) => m[1]
   );
 }

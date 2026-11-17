@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/png" href="/favicon-512.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Future Weather File Guides &amp; Blog | FutureWeather</title>
+  <meta name="description" content="Practical guides to future climate weather files for building simulation: morphed EPWs, emissions scenarios, future design days and tool workflows.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="/src/style.css">
+  <style>
+    h1, h2, h3, h4, h5, h6 { font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif; }
+
+    /* Deep Ocean Blue (matches the home page) */
+    :root {
+      --nav-bg: #0B1F3F;
+      --hero-bg: #F8FAFB;
+      --hero-heading: #0B1F3F;
+      --hero-text: #4A5568;
+      --btn-primary-bg: #1E5A8E;
+      --btn-primary-hover: #164670;
+      --btn-primary-text: #FFFFFF;
+    }
+  </style>
+</head>
+<body class="font-ibm">
+  <div class="bg-white">
+    <!-- Header -->
+    <header class="sticky top-0 left-0 right-0 z-30 shadow-md bg-nav-bg">
+      <div class="container-custom flex items-center justify-between py-4">
+        <div>
+          <a href="/">
+            <img src="/assets/images/futureweather-lockup-white.svg" alt="Future Weather Logo" class="h-8">
+          </a>
+        </div>
+        <div class="flex items-center space-x-4">
+          <a href="https://app.futureweather.co/" target="_blank" rel="noopener" data-analytics-label="nav_sign_in" class="inline-flex items-center justify-center text-sm font-medium px-4 py-2 rounded border transition duration-300 bg-btn-secondary-bg text-btn-secondary-text border-btn-secondary-border hover:bg-btn-secondary-hover-bg hover:text-btn-secondary-hover-text">
+            Sign In
+          </a>
+          <a href="https://app.futureweather.co/signup" target="_blank" rel="noopener" data-analytics-label="nav_sign_up" class="flex items-center gap-2 rounded px-3 py-2 font-semibold text-sm transition duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 bg-btn-primary-bg text-btn-primary-text hover:bg-btn-primary-hover">
+            <span>Sign Up · 5 Free Credits</span>
+          </a>
+          <div class="integrations-dropdown">
+            <a href="/#integrations" class="inline-flex items-center justify-center text-sm font-medium px-4 py-2 rounded border transition duration-300 bg-btn-secondary-bg text-btn-secondary-text border-btn-secondary-border hover:bg-btn-secondary-hover-bg hover:text-btn-secondary-hover-text" data-analytics-label="nav_integrations">
+              <i class="fas fa-puzzle-piece text-base mr-2"></i>
+              Integrations
+              <i class="fas fa-chevron-down text-xs ml-2 hidden md:inline"></i>
+            </a>
+            <div class="integrations-dropdown-panel hidden md:block">
+              <a href="/publicApiPage.html" class="integrations-dropdown-item">
+                <i class="fas fa-code"></i>
+                API Documentation
+              </a>
+              <a href="/python/" class="integrations-dropdown-item">
+                <i class="fab fa-python"></i>
+                Python Package
+              </a>
+              <a href="/revit/" class="integrations-dropdown-item">
+                <i class="fas fa-cubes"></i>
+                Revit / Dynamo
+              </a>
+              <a href="/grasshopper/" class="integrations-dropdown-item">
+                <i class="fas fa-bug"></i>
+                Grasshopper
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="relative overflow-hidden bg-hero-bg border-b border-gray-200">
+      <div class="container-custom py-12 lg:py-16">
+        <div class="max-w-3xl">
+          <div class="inline-flex items-center gap-2 rounded-full border border-gray-200 bg-white px-4 py-2 text-sm text-gray-600 mb-5">
+            <i class="fas fa-book-open text-btn-primary-bg"></i>
+            FutureWeather blog
+          </div>
+          <h1 class="text-3xl lg:text-5xl mb-5 leading-snug font-medium font-open-sans text-hero-heading">
+            Future weather file guides
+          </h1>
+          <p class="text-lg leading-snug font-open-sans text-hero-text">
+            Practical, sourced explainers on future climate weather files for building performance simulation: how they're made, how to choose a scenario and future year, future design days for HVAC sizing, and how to use them in the tools you already work with.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Posts -->
+    <main class="max-w-4xl mx-auto px-6 py-12 lg:px-8 lg:py-16">
+      <div class="space-y-6">
+        <!-- blog:posts -->
+      </div>
+
+      <div class="mt-16 rounded-xl border border-gray-200 bg-gray-50 p-8">
+        <h2 class="text-xl font-semibold text-gray-900 mb-2">Generate a future weather file</h2>
+        <p class="text-gray-600 leading-relaxed mb-5">
+          Turn a historical EPW into a future climate-adjusted EPW, STAT and optional DDY file in under 30 seconds. New accounts get 5 free credits.
+        </p>
+        <a href="https://app.futureweather.co/signup" target="_blank" rel="noopener" data-analytics-label="blog_index_sign_up" class="inline-flex items-center justify-center gap-2 font-semibold px-5 py-2 rounded bg-btn-primary-bg text-btn-primary-text hover:bg-btn-primary-hover transition duration-300">
+          <span>Sign Up · 5 Free Credits</span>
+        </a>
+      </div>
+    </main>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-white py-12">
+    <div class="container-custom">
+      <nav aria-label="Footer" class="mb-8">
+        <ul class="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm text-gray-300">
+          <li><a href="/#pricing" class="hover:text-white transition">Pricing</a></li>
+          <li><a href="/publicApiPage.html" class="hover:text-white transition">API</a></li>
+          <li><a href="/python/" class="hover:text-white transition">Python Package</a></li>
+          <li><a href="/revit/" class="hover:text-white transition">Revit / Dynamo</a></li>
+          <li><a href="/grasshopper/" class="hover:text-white transition">Grasshopper</a></li>
+          <li><a href="/enhancements/" class="hover:text-white transition">Platform Enhancements</a></li>
+          <li><a href="/blog/" class="hover:text-white transition">Blog</a></li>
+        </ul>
+      </nav>
+      <div class="text-center mb-8">
+        <a href="https://radbridge.com" target="_blank" rel="noopener">
+          <img src="/assets/images/Radbridge_logo_white_PNG.png" alt="Radbridge Logo" class="h-10 mx-auto">
+        </a>
+      </div>
+      <div class="text-center text-gray-400">
+        © 2026 Radbridge Incorporated.
+      </div>
+    </div>
+  </footer>
+
+  <script type="module">
+    import { initAnalytics } from '/src/analytics.js';
+    import { initPartnerReferralTracking } from '/src/referral.js';
+
+    initAnalytics();
+    initPartnerReferralTracking();
+  </script>
+</body>
+</html>

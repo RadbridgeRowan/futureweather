@@ -23,6 +23,9 @@ It is not published on the site.
    the date of that file's last git commit.
 4. **Write `llms.txt`** from `site/llms.txt`. The `{{BLOG_SECTION}}` line is replaced with the
    list of blog posts.
+5. **Fill the blog post list** on `blog/index.html` (the `<!-- blog:posts -->` marker) from
+   each post's `<h1>`, description and `article:published_time`, newest first. HTML comments
+   are removed from built blog pages.
 
 `public/robots.txt` is copied as is.
 
@@ -45,6 +48,43 @@ npm run check
 - **the prices in the homepage JSON-LD no longer match the #pricing section.**
 
 The GitHub Action runs the same check, and a failing check stops the deploy.
+
+## Writing a blog post
+
+1. Copy `templates/blog-post.html` to `blog/<slug>/index.html`. The slug is
+   lowercase-words-with-hyphens, e.g. `blog/what-is-a-future-weather-file/index.html`, which
+   becomes `https://futureweather.co/blog/what-is-a-future-weather-file/`.
+2. Replace every `{{PLACEHOLDER}}`, including those inside the JSON-LD:
+
+   | Placeholder | What to put |
+   |---|---|
+   | `{{SEO_TITLE}}` | About 60 characters or fewer, ending ` \| FutureWeather` |
+   | `{{DESCRIPTION}}` | 50-160 characters; says what the reader learns |
+   | `{{HEADLINE}}` | The on-page H1: the question or topic, in natural wording |
+   | `{{SLUG}}` | Same as the folder name |
+   | `{{DATE_PUBLISHED}}`, `{{DATE_MODIFIED}}` | `YYYY-MM-DD` (both the same at first) |
+   | `{{DATE_PUBLISHED_HUMAN}}` | e.g. `November 20, 2026` |
+   | `{{INTEGRATION_URL}}`, `{{INTEGRATION_NAME}}` | The most relevant page, e.g. `/grasshopper/` and `Grasshopper plugin` |
+   | `{{SHORT_ANSWER}}`, `{{SECTION_...}}`, `{{SOURCE_1}}` | The body (see below) |
+
+   The author is preset to Rowan Schmidt, Head of Product, FutureWeather (in the byline,
+   `<meta name="author">` and the JSON-LD). Change all three if a post has a different author.
+3. Follow the body structure in the template's comments:
+   - a short-answer first paragraph that answers the headline's question in 2-4 sentences;
+   - 2-4 explanatory H2 sections;
+   - a worked example using **real FutureWeather output only**;
+   - a "Try it" section linking to the relevant integration page and to signup;
+   - a numbered Sources list.
+4. **No invented numbers.** Every figure comes from real FutureWeather output (the fact sheet)
+   or a cited source. Mark anything Rowan must verify with
+   `<span class="check-note">[CHECK: what to verify]</span>`.
+5. Don't add canonical or `og:title`/`og:description`/`og:url`/`og:image` tags; the build adds
+   them.
+6. Run `npm run build` then `npm run check`.
+   - The post appears on `/blog/`, in `sitemap.xml` and in `llms.txt` automatically.
+   - **The check fails while any `{{...}}` or `[CHECK` remains**, so unfinished or unverified
+     posts can't be deployed.
+   - It also refuses to publish `/blog/` with no posts.
 
 ## Common tasks
 

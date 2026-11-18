@@ -211,14 +211,16 @@
                 <tr><th>July dry-bulb temperature</th><th>Baseline file</th><th>2050, SSP2-4.5</th><th>Change</th></tr>
               </thead>
               <tbody>
-                <tr><td>Monthly mean</td><td><span class="check-note">[CHECK: Seattle run]</span></td><td><span class="check-note">[CHECK: Seattle run]</span></td><td><span class="check-note">[CHECK: Seattle run]</span></td></tr>
-                <tr><td>Mean daily range</td><td><span class="check-note">[CHECK: Seattle run]</span></td><td><span class="check-note">[CHECK: Seattle run]</span></td><td><span class="check-note">[CHECK: Seattle run]</span></td></tr>
-                <tr><td>Hottest hour</td><td><span class="check-note">[CHECK: Seattle run]</span></td><td><span class="check-note">[CHECK: Seattle run]</span></td><td><span class="check-note">[CHECK: Seattle run]</span></td></tr>
-                <tr><td>Coolest hour</td><td><span class="check-note">[CHECK: Seattle run]</span></td><td><span class="check-note">[CHECK: Seattle run]</span></td><td><span class="check-note">[CHECK: Seattle run]</span></td></tr>
+                <tr><td>Monthly mean</td><td>20.0&nbsp;°C</td><td>21.2&nbsp;°C</td><td>+1.2&nbsp;°C</td></tr>
+                <tr><td>Mean daily range</td><td>11.4&nbsp;°C</td><td>11.1&nbsp;°C</td><td>−0.3&nbsp;°C</td></tr>
+                <tr><td>Hottest hour</td><td>34.4&nbsp;°C</td><td>35.0&nbsp;°C</td><td>+0.6&nbsp;°C</td></tr>
+                <tr><td>Coolest hour</td><td>10.6&nbsp;°C</td><td>12.5&nbsp;°C</td><td>+1.9&nbsp;°C</td></tr>
               </tbody>
             </table>
           </div>
-          <p><span class="check-note">[CHECK: one or two sentences reading the table, e.g. whether the hottest hour warmed more than the mean, once the numbers are in]</span></p>
+          <p>In Seattle's July, the cool hours warm more than the warm ones: the coolest hour rises by 1.9&nbsp;°C, the monthly mean by 1.2&nbsp;°C and the hottest hour by only 0.6&nbsp;°C, so the average daily range narrows slightly. That is the shift-and-stretch and extremes steps at work: the change is not one number added to every hour.</p>
+          <p>The hottest and coolest hours also fall at exactly the same times in both files, in the afternoon of 30 July and early on 4 July. Morphing keeps the baseline's weather sequence and changes how warm each hour is, not when the warm and cool spells happen.</p>
+          <p>Values are from the hourly dry-bulb data in the baseline EPW and in the future EPW generated on 18 November 2026 with generator version 1.0.0.</p>
 
           <h2>What morphing can and can't do</h2>
           <ul>
@@ -228,8 +230,8 @@
             <li><strong>An ensemble average smooths over disagreement between models.</strong> To see the range of possible outcomes, generate files for several scenarios or for individual models.</li>
           </ul>
 
-          <h2>How we check the output</h2>
-          <p><span class="check-note">[CHECK: OK to publish this validation summary? See fact sheet §6.1 and questions 9–10.]</span> We compared FutureWeather's core morph with the original Future Weather Generator, hour by hour and field by field, for 184 combinations of model, scenario and year (23 models, 4 scenarios, 2050 and 2080) at each of three sites: north-west Missouri, Auckland and San Francisco. Median differences were below 1% of the annual mean for temperature, humidity, pressure, solar radiation and wind at every site. These comparisons used the original method's fixed 1985–2014 baseline and no extremes step, so they confirm the core morph rather than every production setting. Every file also records the generator version that produced it in its COMMENTS line.</p>
+          <h2>How we tested it</h2>
+          <p>As we built FutureWeather, we compared its core morph with the original Future Weather Generator across 184 combinations of climate model, scenario and year. Results for temperature, humidity, pressure, solar radiation and wind were typically within 1% of the original. Every file also records the generator version that produced it in its COMMENTS line, so you can always trace which version of the method made it.</p>
 
           <h2>Try it on your own project</h2>
           <p>Generate a future EPW, STAT and optional DDY for your site in the <a href="https://app.futureweather.co/signup" target="_blank" rel="noopener" data-analytics-label="blog_post_sign_up">FutureWeather web app</a> (new accounts get 5 free credits), or script it with the <a href="/python/">Python package</a> or the <a href="/publicApiPage.html">API</a>. The full list of method changes is on the <a href="/enhancements/">platform enhancements</a> page.</p>

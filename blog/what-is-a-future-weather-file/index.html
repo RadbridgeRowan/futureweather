@@ -139,7 +139,7 @@
 
           <h2>What's in a weather file?</h2>
           <p>An EPW file holds 8,760 hourly records, one for every hour of a year. Each record includes dry-bulb temperature, dew point, relative humidity, air pressure, global, direct and diffuse solar radiation, longwave (infrared) radiation, wind speed and direction, sky cover and precipitation. A header adds the location, ground temperatures and a summary of design conditions [<a href="#sources">1</a>].</p>
-          <p>The weather files most people download, such as TMY3 or TMYx files, are <em>typical</em> years. Each one is assembled from the most representative months of a multi-year historical record [<a href="#sources">2</a>, <a href="#sources">3</a>]. The Seattle-Tacoma TMYx file in the example below, for instance, is built from weather recorded between 2011 and 2025.</p>
+          <p>The weather files most people download, such as TMY3 or TMYx files, are <em>typical</em> years. Each one is assembled from the most representative months of a multi-year historical record [<a href="#sources">2</a>, <a href="#sources">3</a>]. The Seattle-Tacoma TMYx file in the example below, for instance, is built from weather recorded between 2011 and 2025, and its header records which year each month came from: January from 2023, July from 2022, and so on.</p>
 
           <h2>Why isn't a historical weather file enough?</h2>
           <p>A typical year describes the climate of the period it was built from, and that climate is not standing still. The IPCC estimates that global surface temperature in 2011–2020 was already 1.09&nbsp;°C higher than in 1850–1900, and projects that it will keep rising until at least the middle of the century under all the emissions scenarios it considered [<a href="#sources">4</a>]. Older files, such as TMY3, are built from even earlier decades.</p>
@@ -179,15 +179,16 @@
                 <tr><th>Metric</th><th>Baseline (2011–2025)</th><th>2050, SSP2-4.5</th><th>Change</th></tr>
               </thead>
               <tbody>
-                <tr><td>Annual mean dry-bulb temperature</td><td>12.1&nbsp;°C</td><td><span class="check-note">[CHECK: Seattle run]</span></td><td><span class="check-note">[CHECK: Seattle run]</span></td></tr>
-                <tr><td>Heating design dry-bulb (99.6%)</td><td>−2.9&nbsp;°C</td><td><span class="check-note">[CHECK: Seattle run]</span></td><td><span class="check-note">[CHECK: Seattle run]</span></td></tr>
-                <tr><td>Cooling design dry-bulb (0.4%)</td><td>30.4&nbsp;°C</td><td><span class="check-note">[CHECK: Seattle run]</span></td><td><span class="check-note">[CHECK: Seattle run]</span></td></tr>
-                <tr><td>Heating degree-days (18&nbsp;°C base)</td><td>2,339</td><td><span class="check-note">[CHECK: Seattle run]</span></td><td><span class="check-note">[CHECK: Seattle run]</span></td></tr>
-                <tr><td>Cooling degree-days (18&nbsp;°C base)</td><td>194</td><td><span class="check-note">[CHECK: Seattle run]</span></td><td><span class="check-note">[CHECK: Seattle run]</span></td></tr>
+                <tr><td>Annual mean dry-bulb temperature</td><td>12.1&nbsp;°C</td><td>13.3&nbsp;°C</td><td>+1.2&nbsp;°C</td></tr>
+                <tr><td>Heating design dry-bulb (99.6%)</td><td>−2.9&nbsp;°C</td><td>−1.2&nbsp;°C</td><td>+1.7&nbsp;°C</td></tr>
+                <tr><td>Cooling design dry-bulb (0.4%)</td><td>30.4&nbsp;°C</td><td>31.0&nbsp;°C</td><td>+0.6&nbsp;°C</td></tr>
+                <tr><td>Heating degree-days (18&nbsp;°C base)</td><td>2,340</td><td>2,025</td><td>−315 (−13%)</td></tr>
+                <tr><td>Cooling degree-days (18&nbsp;°C base)</td><td>193</td><td>304</td><td>+111 (+58%)</td></tr>
               </tbody>
             </table>
           </div>
-          <p>Baseline values: the annual mean is from the source EPW, the design temperatures from the source DDY, and the degree-days from FutureWeather's STAT generator run on the source EPW, so both columns are calculated the same way. Future values are from the generated EPW, DDY and STAT (<span class="check-note">[CHECK: job date and generator version]</span>).</p>
+          <p>Annual means are from the hourly EPW data and design temperatures from the DDY files. Degree-days are calculated the same way for both files, from daily mean temperatures; for the baseline this reproduces the values in the source STAT file. The future files were generated on 18 November 2026 with generator version 1.0.0.</p>
+          <p>For Seattle, the cold extreme warms more than the hot one: the 99.6% heating design temperature rises by 1.7&nbsp;°C, but the 0.4% cooling design temperature by only 0.6&nbsp;°C. Cooling degree-days, meanwhile, rise by more than half from a low base. Peak sizing conditions and annual heating and cooling demand can change by very different amounts, so it's worth checking both.</p>
           <p>One thing to watch: the DESIGN CONDITIONS line in the header of a morphed EPW still holds the historical values. Take future design conditions from the future DDY instead.</p>
 
           <h2>Try it on your own project</h2>

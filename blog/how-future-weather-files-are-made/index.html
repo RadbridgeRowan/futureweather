@@ -1,0 +1,292 @@
+<!doctype html>
+<!-- Blog post template. How to use it: see "Writing a blog post" in SEO.md. Comments are removed from built blog pages. -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/png" href="/favicon-512.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How Future EPW Files Are Made: Morphing Explained | FutureWeather</title>
+  <meta name="description" content="How morphing turns a historical EPW into a future one: baseline and future periods, CMIP6 change factors, which fields change, and its limits.">
+  <meta property="og:type" content="article">
+  <meta property="article:published_time" content="2026-11-18">
+  <meta property="article:modified_time" content="2026-11-18">
+  <meta name="author" content="Rowan Schmidt">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="/src/style.css">
+  <style>
+    h1, h2, h3, h4, h5, h6 { font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif; }
+    :root {
+      --nav-bg: #0B1F3F;
+      --hero-bg: #F8FAFB;
+      --hero-heading: #0B1F3F;
+      --hero-text: #4A5568;
+      --btn-primary-bg: #1E5A8E;
+      --btn-primary-hover: #164670;
+      --btn-primary-text: #FFFFFF;
+    }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BlogPosting",
+        "@id": "https://futureweather.co/blog/how-future-weather-files-are-made/#post",
+        "mainEntityOfPage": "https://futureweather.co/blog/how-future-weather-files-are-made/",
+        "headline": "How are future weather files made? Morphing explained",
+        "description": "How morphing turns a historical EPW into a future one: baseline and future periods, CMIP6 change factors, which fields change, and its limits.",
+        "datePublished": "2026-11-18",
+        "dateModified": "2026-11-18",
+        "inLanguage": "en",
+        "image": "https://futureweather.co/assets/images/og/futureweather-og.png",
+        "author": {
+          "@type": "Person",
+          "name": "Rowan Schmidt",
+          "jobTitle": "Head of Product, FutureWeather",
+          "worksFor": { "@type": "Organization", "name": "Radbridge Incorporated", "url": "https://radbridge.com" }
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Radbridge Incorporated",
+          "url": "https://radbridge.com",
+          "logo": { "@type": "ImageObject", "url": "https://futureweather.co/assets/images/Radbridge_logo_black_PNG_cropped.png" }
+        },
+        "isPartOf": { "@id": "https://futureweather.co/#website" },
+        "about": { "@id": "https://futureweather.co/#software" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://futureweather.co/" },
+          { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://futureweather.co/blog/" },
+          { "@type": "ListItem", "position": 3, "name": "How are future weather files made? Morphing explained", "item": "https://futureweather.co/blog/how-future-weather-files-are-made/" }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+<body class="font-ibm">
+  <div class="bg-white">
+    <!-- Header (same as the other pages) -->
+    <header class="sticky top-0 left-0 right-0 z-30 shadow-md bg-nav-bg">
+      <div class="container-custom flex items-center justify-between py-4">
+        <div>
+          <a href="/">
+            <img src="/assets/images/futureweather-lockup-white.svg" alt="Future Weather Logo" class="h-8">
+          </a>
+        </div>
+        <div class="flex items-center space-x-4">
+          <a href="https://app.futureweather.co/" target="_blank" rel="noopener" data-analytics-label="nav_sign_in" class="inline-flex items-center justify-center text-sm font-medium px-4 py-2 rounded border transition duration-300 bg-btn-secondary-bg text-btn-secondary-text border-btn-secondary-border hover:bg-btn-secondary-hover-bg hover:text-btn-secondary-hover-text">
+            Sign In
+          </a>
+          <a href="https://app.futureweather.co/signup" target="_blank" rel="noopener" data-analytics-label="nav_sign_up" class="flex items-center gap-2 rounded px-3 py-2 font-semibold text-sm transition duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 bg-btn-primary-bg text-btn-primary-text hover:bg-btn-primary-hover">
+            <span>Sign Up · 5 Free Credits</span>
+          </a>
+          <div class="integrations-dropdown">
+            <a href="/#integrations" class="inline-flex items-center justify-center text-sm font-medium px-4 py-2 rounded border transition duration-300 bg-btn-secondary-bg text-btn-secondary-text border-btn-secondary-border hover:bg-btn-secondary-hover-bg hover:text-btn-secondary-hover-text" data-analytics-label="nav_integrations">
+              <i class="fas fa-puzzle-piece text-base mr-2"></i>
+              Integrations
+              <i class="fas fa-chevron-down text-xs ml-2 hidden md:inline"></i>
+            </a>
+            <div class="integrations-dropdown-panel hidden md:block">
+              <a href="/publicApiPage.html" class="integrations-dropdown-item">
+                <i class="fas fa-code"></i>
+                API Documentation
+              </a>
+              <a href="/python/" class="integrations-dropdown-item">
+                <i class="fab fa-python"></i>
+                Python Package
+              </a>
+              <a href="/revit/" class="integrations-dropdown-item">
+                <i class="fas fa-cubes"></i>
+                Revit / Dynamo
+              </a>
+              <a href="/grasshopper/" class="integrations-dropdown-item">
+                <i class="fas fa-bug"></i>
+                Grasshopper
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="max-w-3xl mx-auto px-6 py-10 lg:py-14">
+      <nav aria-label="Breadcrumb" class="text-sm text-gray-500 mb-6">
+        <a href="/" class="hover:underline">Home</a>
+        <span aria-hidden="true" class="mx-1">›</span>
+        <a href="/blog/" class="hover:underline">Blog</a>
+      </nav>
+
+      <article>
+        <header class="mb-8">
+          <h1 class="text-3xl lg:text-4xl leading-snug font-medium font-open-sans text-hero-heading mb-4">How are future weather files made? Morphing explained</h1>
+          <p class="text-sm text-gray-500">
+            By Rowan Schmidt, Head of Product, FutureWeather
+            <span aria-hidden="true" class="mx-1">·</span>
+            <time datetime="2026-11-18">November 18, 2026</time>
+            <!-- When updating a post later, add: · Updated <time datetime="YYYY-MM-DD">Month D, YYYY</time> -->
+          </p>
+        </header>
+
+        <div class="blog-prose">
+          <p class="blog-lead">Most future weather files for building simulation are made by morphing. You start from a real historical weather file and adjust every hour by the change that climate models project between a baseline period and a future period. Temperatures are shifted and stretched, quantities such as wind speed and precipitation are scaled, and the original file's hour-by-hour sequence of weather is kept. FutureWeather does this with 23 CMIP6 climate models, building on the open-source Future Weather Generator method.</p>
+
+          <h2>The idea behind morphing</h2>
+          <p>Belcher, Hacker and Powell set out morphing for building design weather in 2005 [<a href="#sources">1</a>]. Rather than generating weather from scratch, it takes an observed weather file and applies the climate change signal from climate models to each hour, using three basic operations:</p>
+          <ul>
+            <li><strong>Shift:</strong> add the projected change to every value (used for air pressure, for example).</li>
+            <li><strong>Stretch:</strong> multiply every value by a projected ratio (used for wind speed and precipitation).</li>
+            <li><strong>Shift and stretch:</strong> move the average and widen or narrow the spread around it (used for dry-bulb temperature, where daily highs and lows can change by different amounts).</li>
+          </ul>
+          <p>The same approach underpins tools such as CCWeatherGen [<a href="#sources">2</a>] and the open-source Future Weather Generator, whose peer-reviewed method FutureWeather builds on [<a href="#sources">3</a>]. If you're new to weather files, start with <a href="/blog/what-is-a-future-weather-file/">what a future weather file is and when you need one</a>.</p>
+
+          <h2>Step 1: Start with a real weather file</h2>
+          <p>Everything begins with a historical EPW for the site: 8,760 hourly records of temperature, humidity, pressure, solar radiation, wind, sky cover and precipitation. FutureWeather reads the site's latitude and longitude from the file's LOCATION line. If the file covers a leap year, the 29 February rows are removed so that every file has 8,760 hours. You can also upload the site's DDY design-day file if you want future design days.</p>
+
+          <h2>Step 2: Fix the baseline and future periods</h2>
+          <p>Morphing measures the change between two climates: the <strong>baseline</strong> that the historical file represents, and the <strong>future window</strong> you are targeting.</p>
+          <ul>
+            <li><strong>Future window.</strong> Each target year stands for 30 years, from 14 years before it to 15 years after. A 2050 file represents 2036–2065. The FutureWeather app offers target years from 2035 to 2090.</li>
+            <li><strong>Baseline.</strong> FutureWeather matches the baseline to the file's own period of record. It reads that from the file header (for example <code>Period of Record=2011-2025</code> in TMYx files) or, failing that, from the file name. Periods shorter than 15 years are widened to 15 years around their midpoint, and files that state no period use 1985–2014. You can also pin a baseline yourself, for example with the Grasshopper plugin's Base input. Every job records the baseline it used and how it was chosen.</li>
+          </ul>
+          <p>The baseline matters because a mismatch counts part of the warming twice, or misses it. Across eight US cities, a fixed 1985–2014 baseline over-corrected TMYx 2011–2025 files by about 0.7&nbsp;°C on average, roughly 38% of the projected 2050 change under SSP2-4.5, and under-corrected older TMY3 files by about 0.3&nbsp;°C. That is why FutureWeather moved to matched baselines in September 2026 (see <a href="/enhancements/#methodology">platform enhancements</a>).</p>
+          <p>One practical detail: CMIP6 historical simulations end in 2014 [<a href="#sources">4</a>]. For baselines that run past 2014, each model's historical run is joined to that model's run of the chosen scenario from 2015 onwards.</p>
+
+          <h2>Step 3: Get the climate change signal from the models</h2>
+          <p>The changes come from CMIP6, the latest coordinated set of global climate model experiments [<a href="#sources">4</a>], run under the Shared Socioeconomic Pathway scenarios SSP1-2.6, SSP2-4.5, SSP3-7.0 and SSP5-8.5 [<a href="#sources">5</a>].</p>
+          <ul>
+            <li>For each model, FutureWeather takes monthly values at the site, combining the four nearest grid cells weighted by distance, and averages each calendar month over the baseline and the future window.</li>
+            <li>With the default ensemble of 23 models, those monthly averages are averaged across the models first, and one change per calendar month is taken from the result.</li>
+            <li>The change is a <strong>difference</strong> for mean, daily maximum and daily minimum temperature, specific humidity, sea-level pressure, cloud cover, and shortwave and longwave radiation. It is a <strong>ratio</strong> for precipitation, wind speed and snow depth.</li>
+          </ul>
+          <p>If you pick specific models instead, the same steps use only those models. Parametric runs go further and produce one file per individual model, so you can see the spread between them.</p>
+
+          <h2>Step 4: Apply the changes to every hour</h2>
+          <p>Each hour of the file is then adjusted using its month's changes:</p>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th>EPW field</th><th>What happens</th><th>Driven by (CMIP6)</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Dry-bulb temperature</td><td>Shift and stretch (below), then the extremes step (Step 5)</td><td>Mean, maximum and minimum temperature</td></tr>
+                <tr><td>Relative humidity</td><td>Converted to specific humidity, shifted, then converted back at the new temperature and pressure</td><td>Specific humidity</td></tr>
+                <tr><td>Dew point</td><td>Recalculated from the new temperature, humidity and pressure</td><td>Derived</td></tr>
+                <tr><td>Atmospheric pressure</td><td>Shift</td><td>Sea-level pressure</td></tr>
+                <tr><td>Global horizontal radiation</td><td>Scaled so the month's average changes by the projected amount</td><td>Surface shortwave radiation</td></tr>
+                <tr><td>Direct normal and diffuse radiation</td><td>Scaled by the same factor as global radiation, keeping the direct/diffuse split</td><td>Surface shortwave radiation</td></tr>
+                <tr><td>Horizontal infrared radiation</td><td>Shift</td><td>Surface longwave radiation</td></tr>
+                <tr><td>Wind speed</td><td>Stretch</td><td>Surface wind speed</td></tr>
+                <tr><td>Wind direction, present weather</td><td>Unchanged</td><td>None</td></tr>
+                <tr><td>Total and opaque sky cover</td><td>Total cover shifted; opaque cover recalculated to keep its share of the total</td><td>Cloud cover</td></tr>
+                <tr><td>Precipitation depth, snow depth</td><td>Stretch</td><td>Precipitation, snow depth</td></tr>
+                <tr><td>Illuminance</td><td>Recalculated from the new radiation and humidity</td><td>Derived</td></tr>
+                <tr><td>Visibility, ceiling height, precipitable water, aerosol optical depth, days since snow, albedo</td><td>Set to the EPW "missing" value</td><td>None</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>For dry-bulb temperature, each hour's value <em>T</em> becomes <em>T</em>&nbsp;+&nbsp;ΔT&nbsp;+&nbsp;α(<em>T</em>&nbsp;−&nbsp;<em>T̄</em>). Here <em>T̄</em> is that month's mean in the original file and ΔT is the projected change in mean temperature. The stretch factor α is the projected change in the daily temperature range (the change in daily maximum minus the change in daily minimum) divided by the file's mean daily range. When daily highs are projected to warm more than daily lows, α is positive and warm hours move further than cool ones.</p>
+
+          <h2>Step 5: Let the extremes respond</h2>
+          <p>Standard morphing adjusts every hour using rules built from monthly averages. The hottest and coldest hours, however, don't necessarily change by the same amount as the average, and extremes are often what drive peak loads and overheating. FutureWeather adds a step after the temperature morph. It reshapes each month's distribution of hourly temperatures so that the warming at each percentile follows the pattern in 3-hourly temperature data from one CMIP6 model, GFDL-ESM4. The monthly mean is left unchanged, and the adjustment to any single hour is capped at 5&nbsp;°C. This step is on by default for every job (see <a href="/enhancements/#methodology">platform enhancements</a>).</p>
+
+          <h2>Step 6: Write the output files</h2>
+          <ul>
+            <li><strong>EPW.</strong> The year field is set to the target year. The ground temperatures and the typical and extreme periods in the header are recalculated from the new data. The COMMENTS lines record the generator version, models, scenario, and the baseline and future periods. The DESIGN CONDITIONS line is carried over unchanged, so it still describes the baseline climate.</li>
+            <li><strong>STAT.</strong> Always produced from the future EPW, including heating and cooling degree-days at 10&nbsp;°C and 18&nbsp;°C bases.</li>
+            <li><strong>DDY.</strong> If you upload the site's historical DDY, FutureWeather calculates design statistics (heating 99.6% and 99%, cooling 0.4%, 1% and 2%) from both the historical and the future EPW. It then applies the difference to the design values in your DDY, so the design days move consistently with the morphed EPW.</li>
+          </ul>
+
+          <h2>Worked example: Seattle-Tacoma in July</h2>
+          <p>For the Seattle-Tacoma TMYx file (baseline 2011–2025, read from its header) morphed to 2050 under SSP2-4.5 with the 23-model average (future window 2036–2065), here is what happened to July's hourly dry-bulb temperatures:</p>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th>July dry-bulb temperature</th><th>Baseline file</th><th>2050, SSP2-4.5</th><th>Change</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Monthly mean</td><td><span class="check-note">[CHECK: Seattle run]</span></td><td><span class="check-note">[CHECK: Seattle run]</span></td><td><span class="check-note">[CHECK: Seattle run]</span></td></tr>
+                <tr><td>Mean daily range</td><td><span class="check-note">[CHECK: Seattle run]</span></td><td><span class="check-note">[CHECK: Seattle run]</span></td><td><span class="check-note">[CHECK: Seattle run]</span></td></tr>
+                <tr><td>Hottest hour</td><td><span class="check-note">[CHECK: Seattle run]</span></td><td><span class="check-note">[CHECK: Seattle run]</span></td><td><span class="check-note">[CHECK: Seattle run]</span></td></tr>
+                <tr><td>Coolest hour</td><td><span class="check-note">[CHECK: Seattle run]</span></td><td><span class="check-note">[CHECK: Seattle run]</span></td><td><span class="check-note">[CHECK: Seattle run]</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p><span class="check-note">[CHECK: one or two sentences reading the table, e.g. whether the hottest hour warmed more than the mean, once the numbers are in]</span></p>
+
+          <h2>What morphing can and can't do</h2>
+          <ul>
+            <li><strong>It keeps the original weather sequence.</strong> Storms, heatwaves and cloudy spells happen on the same days as in the baseline file, just shifted or scaled. Morphing doesn't create new kinds of events.</li>
+            <li><strong>Changes are applied month by month.</strong> Each calendar month gets one set of changes. That captures seasonal differences, but not changes in how weather varies within a month, apart from the temperature extremes step.</li>
+            <li><strong>The result is only as good as the baseline.</strong> Start from a recent, good-quality file for a station near your site.</li>
+            <li><strong>An ensemble average smooths over disagreement between models.</strong> To see the range of possible outcomes, generate files for several scenarios or for individual models.</li>
+          </ul>
+
+          <h2>How we check the output</h2>
+          <p><span class="check-note">[CHECK: OK to publish this validation summary? See fact sheet §6.1 and questions 9–10.]</span> We compared FutureWeather's core morph with the original Future Weather Generator, hour by hour and field by field, for 184 combinations of model, scenario and year (23 models, 4 scenarios, 2050 and 2080) at each of three sites: north-west Missouri, Auckland and San Francisco. Median differences were below 1% of the annual mean for temperature, humidity, pressure, solar radiation and wind at every site. These comparisons used the original method's fixed 1985–2014 baseline and no extremes step, so they confirm the core morph rather than every production setting. Every file also records the generator version that produced it in its COMMENTS line.</p>
+
+          <h2>Try it on your own project</h2>
+          <p>Generate a future EPW, STAT and optional DDY for your site in the <a href="https://app.futureweather.co/signup" target="_blank" rel="noopener" data-analytics-label="blog_post_sign_up">FutureWeather web app</a> (new accounts get 5 free credits), or script it with the <a href="/python/">Python package</a> or the <a href="/publicApiPage.html">API</a>. The full list of method changes is on the <a href="/enhancements/">platform enhancements</a> page.</p>
+
+          <h2 id="sources">Sources</h2>
+          <ol class="blog-sources">
+            <li>Belcher SE, Hacker JN, Powell DS. Constructing design weather data for future climates. <em>Building Services Engineering Research and Technology</em>, 2005; 26(1): 49–61. <a href="https://doi.org/10.1191/0143624405bt112oa" target="_blank" rel="noopener">doi:10.1191/0143624405bt112oa</a>.</li>
+            <li>University of Southampton, <a href="https://energy.soton.ac.uk/?p=10503" target="_blank" rel="noopener">What is CCWeatherGen?</a></li>
+            <li>Rodrigues E, Fernandes MS, Carvalho D. Future weather generator for building performance research: An open-source morphing tool and an application. <em>Building and Environment</em>, 2023; 233: 110104. <a href="https://doi.org/10.1016/j.buildenv.2023.110104" target="_blank" rel="noopener">doi:10.1016/j.buildenv.2023.110104</a>.</li>
+            <li>Eyring V, Bony S, Meehl GA, Senior CA, Stevens B, Stouffer RJ, Taylor KE. Overview of the Coupled Model Intercomparison Project Phase 6 (CMIP6) experimental design and organization. <em>Geoscientific Model Development</em>, 2016; 9: 1937–1958. <a href="https://doi.org/10.5194/gmd-9-1937-2016" target="_blank" rel="noopener">doi:10.5194/gmd-9-1937-2016</a>.</li>
+            <li>O'Neill BC, Tebaldi C, van Vuuren DP, et al. The Scenario Model Intercomparison Project (ScenarioMIP) for CMIP6. <em>Geoscientific Model Development</em>, 2016; 9: 3461–3482. <a href="https://doi.org/10.5194/gmd-9-3461-2016" target="_blank" rel="noopener">doi:10.5194/gmd-9-3461-2016</a>.</li>
+          </ol>
+        </div>
+      </article>
+
+      <div class="mt-14 rounded-xl border border-gray-200 bg-gray-50 p-8">
+        <h2 class="text-xl font-semibold text-gray-900 mb-2">More future weather file guides</h2>
+        <p class="text-gray-600 leading-relaxed mb-5">Explainers on scenarios, design days, morphing and tool workflows.</p>
+        <a href="/blog/" class="inline-flex items-center gap-2 font-semibold text-btn-primary-bg hover:underline">
+          <span>All guides</span>
+          <i class="fas fa-arrow-right"></i>
+        </a>
+      </div>
+    </main>
+  </div>
+
+  <!-- Footer (same as the other pages) -->
+  <footer class="bg-gray-900 text-white py-12">
+    <div class="container-custom">
+      <nav aria-label="Footer" class="mb-8">
+        <ul class="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm text-gray-300">
+          <li><a href="/#pricing" class="hover:text-white transition">Pricing</a></li>
+          <li><a href="/publicApiPage.html" class="hover:text-white transition">API</a></li>
+          <li><a href="/python/" class="hover:text-white transition">Python Package</a></li>
+          <li><a href="/revit/" class="hover:text-white transition">Revit / Dynamo</a></li>
+          <li><a href="/grasshopper/" class="hover:text-white transition">Grasshopper</a></li>
+          <li><a href="/enhancements/" class="hover:text-white transition">Platform Enhancements</a></li>
+          <li><a href="/blog/" class="hover:text-white transition">Blog</a></li>
+        </ul>
+      </nav>
+      <div class="text-center mb-8">
+        <a href="https://radbridge.com" target="_blank" rel="noopener">
+          <img src="/assets/images/Radbridge_logo_white_PNG.png" alt="Radbridge Logo" class="h-10 mx-auto">
+        </a>
+      </div>
+      <div class="text-center text-gray-400">
+        © 2026 Radbridge Incorporated.
+      </div>
+    </div>
+  </footer>
+
+  <script type="module">
+    import { initAnalytics } from '/src/analytics.js';
+    import { initPartnerReferralTracking } from '/src/referral.js';
+
+    initAnalytics();
+    initPartnerReferralTracking();
+  </script>
+</body>
+</html>

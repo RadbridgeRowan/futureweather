@@ -1,0 +1,252 @@
+<!doctype html>
+<!-- Blog post template. How to use it: see "Writing a blog post" in SEO.md. Comments are removed from built blog pages. -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/png" href="/favicon-512.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>What Is a Future Weather File? When to Use One | FutureWeather</title>
+  <meta name="description" content="A future weather file is an hourly EPW adjusted to a projected future climate. What it contains, how it differs from TMY files, and when to use one.">
+  <meta property="og:type" content="article">
+  <meta property="article:published_time" content="2026-11-18">
+  <meta property="article:modified_time" content="2026-11-18">
+  <meta name="author" content="Rowan Schmidt">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="/src/style.css">
+  <style>
+    h1, h2, h3, h4, h5, h6 { font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif; }
+    :root {
+      --nav-bg: #0B1F3F;
+      --hero-bg: #F8FAFB;
+      --hero-heading: #0B1F3F;
+      --hero-text: #4A5568;
+      --btn-primary-bg: #1E5A8E;
+      --btn-primary-hover: #164670;
+      --btn-primary-text: #FFFFFF;
+    }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BlogPosting",
+        "@id": "https://futureweather.co/blog/what-is-a-future-weather-file/#post",
+        "mainEntityOfPage": "https://futureweather.co/blog/what-is-a-future-weather-file/",
+        "headline": "What is a future weather file, and when do you need one?",
+        "description": "A future weather file is an hourly EPW adjusted to a projected future climate. What it contains, how it differs from TMY files, and when to use one.",
+        "datePublished": "2026-11-18",
+        "dateModified": "2026-11-18",
+        "inLanguage": "en",
+        "image": "https://futureweather.co/assets/images/og/futureweather-og.png",
+        "author": {
+          "@type": "Person",
+          "name": "Rowan Schmidt",
+          "jobTitle": "Head of Product, FutureWeather",
+          "worksFor": { "@type": "Organization", "name": "Radbridge Incorporated", "url": "https://radbridge.com" }
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Radbridge Incorporated",
+          "url": "https://radbridge.com",
+          "logo": { "@type": "ImageObject", "url": "https://futureweather.co/assets/images/Radbridge_logo_black_PNG_cropped.png" }
+        },
+        "isPartOf": { "@id": "https://futureweather.co/#website" },
+        "about": { "@id": "https://futureweather.co/#software" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://futureweather.co/" },
+          { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://futureweather.co/blog/" },
+          { "@type": "ListItem", "position": 3, "name": "What is a future weather file, and when do you need one?", "item": "https://futureweather.co/blog/what-is-a-future-weather-file/" }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+<body class="font-ibm">
+  <div class="bg-white">
+    <!-- Header (same as the other pages) -->
+    <header class="sticky top-0 left-0 right-0 z-30 shadow-md bg-nav-bg">
+      <div class="container-custom flex items-center justify-between py-4">
+        <div>
+          <a href="/">
+            <img src="/assets/images/futureweather-lockup-white.svg" alt="Future Weather Logo" class="h-8">
+          </a>
+        </div>
+        <div class="flex items-center space-x-4">
+          <a href="https://app.futureweather.co/" target="_blank" rel="noopener" data-analytics-label="nav_sign_in" class="inline-flex items-center justify-center text-sm font-medium px-4 py-2 rounded border transition duration-300 bg-btn-secondary-bg text-btn-secondary-text border-btn-secondary-border hover:bg-btn-secondary-hover-bg hover:text-btn-secondary-hover-text">
+            Sign In
+          </a>
+          <a href="https://app.futureweather.co/signup" target="_blank" rel="noopener" data-analytics-label="nav_sign_up" class="flex items-center gap-2 rounded px-3 py-2 font-semibold text-sm transition duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 bg-btn-primary-bg text-btn-primary-text hover:bg-btn-primary-hover">
+            <span>Sign Up · 5 Free Credits</span>
+          </a>
+          <div class="integrations-dropdown">
+            <a href="/#integrations" class="inline-flex items-center justify-center text-sm font-medium px-4 py-2 rounded border transition duration-300 bg-btn-secondary-bg text-btn-secondary-text border-btn-secondary-border hover:bg-btn-secondary-hover-bg hover:text-btn-secondary-hover-text" data-analytics-label="nav_integrations">
+              <i class="fas fa-puzzle-piece text-base mr-2"></i>
+              Integrations
+              <i class="fas fa-chevron-down text-xs ml-2 hidden md:inline"></i>
+            </a>
+            <div class="integrations-dropdown-panel hidden md:block">
+              <a href="/publicApiPage.html" class="integrations-dropdown-item">
+                <i class="fas fa-code"></i>
+                API Documentation
+              </a>
+              <a href="/python/" class="integrations-dropdown-item">
+                <i class="fab fa-python"></i>
+                Python Package
+              </a>
+              <a href="/revit/" class="integrations-dropdown-item">
+                <i class="fas fa-cubes"></i>
+                Revit / Dynamo
+              </a>
+              <a href="/grasshopper/" class="integrations-dropdown-item">
+                <i class="fas fa-bug"></i>
+                Grasshopper
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="max-w-3xl mx-auto px-6 py-10 lg:py-14">
+      <nav aria-label="Breadcrumb" class="text-sm text-gray-500 mb-6">
+        <a href="/" class="hover:underline">Home</a>
+        <span aria-hidden="true" class="mx-1">›</span>
+        <a href="/blog/" class="hover:underline">Blog</a>
+      </nav>
+
+      <article>
+        <header class="mb-8">
+          <h1 class="text-3xl lg:text-4xl leading-snug font-medium font-open-sans text-hero-heading mb-4">What is a future weather file, and when do you need one?</h1>
+          <p class="text-sm text-gray-500">
+            By Rowan Schmidt, Head of Product, FutureWeather
+            <span aria-hidden="true" class="mx-1">·</span>
+            <time datetime="2026-11-18">November 18, 2026</time>
+            <!-- When updating a post later, add: · Updated <time datetime="YYYY-MM-DD">Month D, YYYY</time> -->
+          </p>
+        </header>
+
+        <div class="blog-prose">
+          <p class="blog-lead">A future weather file is a year of hourly weather data, usually in the EnergyPlus EPW format, that represents the climate expected at a site in a future period, such as the years around 2050, rather than the recent past. You use it exactly like a normal weather file in EnergyPlus, OpenStudio, Ladybug, IES VE and similar tools. Reach for one when a decision depends on how a building or system will perform over its life: HVAC sizing, energy and cost projections, and overheating or resilience checks.</p>
+
+          <h2>What's in a weather file?</h2>
+          <p>An EPW file holds 8,760 hourly records, one for every hour of a year. Each record includes dry-bulb temperature, dew point, relative humidity, air pressure, global, direct and diffuse solar radiation, longwave (infrared) radiation, wind speed and direction, sky cover and precipitation. A header adds the location, ground temperatures and a summary of design conditions [<a href="#sources">1</a>].</p>
+          <p>The weather files most people download, such as TMY3 or TMYx files, are <em>typical</em> years. Each one is assembled from the most representative months of a multi-year historical record [<a href="#sources">2</a>, <a href="#sources">3</a>]. The Seattle-Tacoma TMYx file in the example below, for instance, is built from weather recorded between 2011 and 2025.</p>
+
+          <h2>Why isn't a historical weather file enough?</h2>
+          <p>A typical year describes the climate of the period it was built from, and that climate is not standing still. The IPCC estimates that global surface temperature in 2011–2020 was already 1.09&nbsp;°C higher than in 1850–1900, and projects that it will keep rising until at least the middle of the century under all the emissions scenarios it considered [<a href="#sources">4</a>]. Older files, such as TMY3, are built from even earlier decades.</p>
+          <p>Buildings and the systems in them are designed now but operate for decades. If you size equipment or check comfort only against the past climate, you are testing the design against conditions it may rarely see later in its life. A future weather file lets you run the same simulation against the climate of the 2040s, 2050s or later and compare the results.</p>
+
+          <h2>How is a future weather file made?</h2>
+          <p>Most future weather files for building simulation are made by <em>morphing</em>: a real historical file is adjusted, hour by hour, by the change that global climate models project between a recent baseline period and a future period [<a href="#sources">5</a>]. Because each hour is adjusted rather than invented, the future file keeps realistic day-to-day weather patterns. FutureWeather uses 23 CMIP6 climate models and the peer-reviewed Future Weather Generator method [<a href="#sources">6</a>]. Our guide to <a href="/blog/how-future-weather-files-are-made/">how future weather files are made</a> walks through each step.</p>
+
+          <h2>When should you use one?</h2>
+          <ul>
+            <li><strong>HVAC sizing and equipment selection.</strong> Check heating and cooling capacity against future design conditions, using a future DDY design-day file alongside the EPW.</li>
+            <li><strong>Energy and cost over the building's life.</strong> Estimate how energy use and operating cost shift, for capital planning and operating budgets.</li>
+            <li><strong>Overheating, thermal comfort and resilience.</strong> Test passive and mechanical strategies against warmer summers.</li>
+            <li><strong>Comparing design options.</strong> Run the same alternatives against several future years and scenarios to see which ones hold up.</li>
+            <li><strong>Renewables and data centers.</strong> Model PV output with future irradiance and temperatures, or size cooling for future wet-bulb conditions.</li>
+          </ul>
+          <p>Keep the historical file wherever a code compliance path or rating system prescribes the weather data to use. Future-climate results then sit alongside the compliance model rather than replacing it.</p>
+
+          <h2>What do you need to choose?</h2>
+          <ul>
+            <li><strong>A baseline file.</strong> The historical EPW for your site, from a source such as <a href="https://climate.onebuilding.org/" target="_blank" rel="noopener">Climate.OneBuilding.org</a> or the <a href="https://energyplus.net/weather" target="_blank" rel="noopener">EnergyPlus weather library</a>. Add the site's DDY file too if you want future design days.</li>
+            <li><strong>A future year.</strong> FutureWeather offers 2035 to 2090. Each year stands for a 30-year window around it, so 2050 covers 2036–2065.</li>
+            <li><strong>An emissions scenario.</strong> One of four Shared Socioeconomic Pathways used in CMIP6, from SSP1-2.6 (low emissions) through SSP2-4.5 (intermediate) and SSP3-7.0 (high) to SSP5-8.5 (very high) [<a href="#sources">4</a>].</li>
+            <li><strong>Climate models.</strong> The average of all 23 models is the default. Individual models show how much the models disagree.</li>
+          </ul>
+
+          <h2>Worked example: Seattle-Tacoma, 2050, SSP2-4.5</h2>
+          <p>We took the free TMYx file for Seattle-Tacoma International Airport (<code>USA_WA_Seattle-Tacoma.Intl.AP.727930_TMYx.2011-2025</code>) and its DDY from Climate.OneBuilding.org, and generated a 2050 file under SSP2-4.5 using the average of all 23 models.</p>
+          <ul>
+            <li>FutureWeather read the baseline period, 2011–2025, from the file's header.</li>
+            <li>The future window for 2050 is 2036–2065.</li>
+            <li>The job returned a future EPW, STAT and DDY, each named <code>…_FUTURE_2050_ssp245</code>.</li>
+          </ul>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th>Metric</th><th>Baseline (2011–2025)</th><th>2050, SSP2-4.5</th><th>Change</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Annual mean dry-bulb temperature</td><td>12.1&nbsp;°C</td><td><span class="check-note">[CHECK: Seattle run]</span></td><td><span class="check-note">[CHECK: Seattle run]</span></td></tr>
+                <tr><td>Heating design dry-bulb (99.6%)</td><td>−2.9&nbsp;°C</td><td><span class="check-note">[CHECK: Seattle run]</span></td><td><span class="check-note">[CHECK: Seattle run]</span></td></tr>
+                <tr><td>Cooling design dry-bulb (0.4%)</td><td>30.4&nbsp;°C</td><td><span class="check-note">[CHECK: Seattle run]</span></td><td><span class="check-note">[CHECK: Seattle run]</span></td></tr>
+                <tr><td>Heating degree-days (18&nbsp;°C base)</td><td>2,339</td><td><span class="check-note">[CHECK: Seattle run]</span></td><td><span class="check-note">[CHECK: Seattle run]</span></td></tr>
+                <tr><td>Cooling degree-days (18&nbsp;°C base)</td><td>194</td><td><span class="check-note">[CHECK: Seattle run]</span></td><td><span class="check-note">[CHECK: Seattle run]</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>Baseline values: the annual mean is from the source EPW, the design temperatures from the source DDY, and the degree-days from FutureWeather's STAT generator run on the source EPW, so both columns are calculated the same way. Future values are from the generated EPW, DDY and STAT (<span class="check-note">[CHECK: job date and generator version]</span>).</p>
+          <p>One thing to watch: the DESIGN CONDITIONS line in the header of a morphed EPW still holds the historical values. Take future design conditions from the future DDY instead.</p>
+
+          <h2>Try it on your own project</h2>
+          <p>Generate a future EPW, STAT and optional DDY for your site in the <a href="https://app.futureweather.co/signup" target="_blank" rel="noopener" data-analytics-label="blog_post_sign_up">FutureWeather web app</a> (new accounts get 5 free credits), or from your own workflow with the <a href="/revit/">Revit/Dynamo package</a>, the <a href="/grasshopper/">Grasshopper plugin</a>, the <a href="/python/">Python package</a> or the <a href="/publicApiPage.html">API</a>.</p>
+
+          <h2 id="sources">Sources</h2>
+          <ol class="blog-sources">
+            <li>U.S. Department of Energy, EnergyPlus documentation, Auxiliary Programs: <a href="https://bigladdersoftware.com/epx/docs/9-0/auxiliary-programs/energyplus-weather-file-epw-data-dictionary.html" target="_blank" rel="noopener">EnergyPlus Weather File (EPW) Data Dictionary</a>.</li>
+            <li><a href="https://climate.onebuilding.org/" target="_blank" rel="noopener">Climate.OneBuilding.org</a>: climate data for building simulation, including TMYx files derived from NOAA's Integrated Surface Database using the TMY and ISO 15927-4:2005 methods.</li>
+            <li>IBPSA-USA, <a href="https://www.ibpsa.us/ask-a-modeler/ask-a-modeler-what-is-tmyx-and-how-does-it-differ-from-tmy3-weather-data/" target="_blank" rel="noopener">Ask a Modeler: What is TMYx and how does it differ from TMY3 weather data?</a></li>
+            <li>IPCC, 2021: <a href="https://www.ipcc.ch/report/ar6/wg1/chapter/summary-for-policymakers/" target="_blank" rel="noopener">Summary for Policymakers</a>. In: Climate Change 2021: The Physical Science Basis. Contribution of Working Group I to the Sixth Assessment Report of the Intergovernmental Panel on Climate Change.</li>
+            <li>Belcher SE, Hacker JN, Powell DS. Constructing design weather data for future climates. <em>Building Services Engineering Research and Technology</em>, 2005; 26(1): 49–61. <a href="https://doi.org/10.1191/0143624405bt112oa" target="_blank" rel="noopener">doi:10.1191/0143624405bt112oa</a>.</li>
+            <li>Rodrigues E, Fernandes MS, Carvalho D. Future weather generator for building performance research: An open-source morphing tool and an application. <em>Building and Environment</em>, 2023; 233: 110104. <a href="https://doi.org/10.1016/j.buildenv.2023.110104" target="_blank" rel="noopener">doi:10.1016/j.buildenv.2023.110104</a>.</li>
+          </ol>
+        </div>
+      </article>
+
+      <div class="mt-14 rounded-xl border border-gray-200 bg-gray-50 p-8">
+        <h2 class="text-xl font-semibold text-gray-900 mb-2">More future weather file guides</h2>
+        <p class="text-gray-600 leading-relaxed mb-5">Explainers on scenarios, design days, morphing and tool workflows.</p>
+        <a href="/blog/" class="inline-flex items-center gap-2 font-semibold text-btn-primary-bg hover:underline">
+          <span>All guides</span>
+          <i class="fas fa-arrow-right"></i>
+        </a>
+      </div>
+    </main>
+  </div>
+
+  <!-- Footer (same as the other pages) -->
+  <footer class="bg-gray-900 text-white py-12">
+    <div class="container-custom">
+      <nav aria-label="Footer" class="mb-8">
+        <ul class="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm text-gray-300">
+          <li><a href="/#pricing" class="hover:text-white transition">Pricing</a></li>
+          <li><a href="/publicApiPage.html" class="hover:text-white transition">API</a></li>
+          <li><a href="/python/" class="hover:text-white transition">Python Package</a></li>
+          <li><a href="/revit/" class="hover:text-white transition">Revit / Dynamo</a></li>
+          <li><a href="/grasshopper/" class="hover:text-white transition">Grasshopper</a></li>
+          <li><a href="/enhancements/" class="hover:text-white transition">Platform Enhancements</a></li>
+          <li><a href="/blog/" class="hover:text-white transition">Blog</a></li>
+        </ul>
+      </nav>
+      <div class="text-center mb-8">
+        <a href="https://radbridge.com" target="_blank" rel="noopener">
+          <img src="/assets/images/Radbridge_logo_white_PNG.png" alt="Radbridge Logo" class="h-10 mx-auto">
+        </a>
+      </div>
+      <div class="text-center text-gray-400">
+        © 2026 Radbridge Incorporated.
+      </div>
+    </div>
+  </footer>
+
+  <script type="module">
+    import { initAnalytics } from '/src/analytics.js';
+    import { initPartnerReferralTracking } from '/src/referral.js';
+
+    initAnalytics();
+    initPartnerReferralTracking();
+  </script>
+</body>
+</html>
